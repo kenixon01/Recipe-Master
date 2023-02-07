@@ -3,6 +3,7 @@ import { View, Button, Text, TextInput, StyleSheet,
     TouchableOpacity } from 'react-native'
 
 export class Login extends Component {
+  
     constructor(props) {
         super(props);
 
@@ -21,22 +22,38 @@ export class Login extends Component {
       <View style = {style.inputView}>
         <TextInput 
             style = {style.inputText}
-            placeholder = "Email"
+            placeholder = "Username or Email"
             placeholderTextColor="#003f5c"
             onChangeText = {(email) => this.setState({email})}
             />
             </View> 
         <View style = {style.inputView}>
          <TextInput
-            //style = {StyleSheet.TextInput}
+            style = {StyleSheet.TextInput}
             placeholder = "Password"
             placeholderTextColor="#003f5c"
             onChangeText = {(password) => this.setState({password})}
             />
           </View> 
-        <TouchableOpacity style={style.loginBtn}>
+        <View>
+          <Button
+            title='Forgot Password'
+            onPress={() => this.props.navigation.navigate("ForgotPassword")}
+            titleStyle = {{color: '#039BE5'}}
+            type = 'clear'
+          />
+        </View>
+
+        <TouchableOpacity style={style.loginBtn} 
+          onPress = {() => this.props.navigation.navigate('Main')}>
             <Text style={style.loginText}>LOGIN</Text> 
         </TouchableOpacity>
+        <View style = {{flexDirection: 'row'}}>
+          <Text>No Account </Text>
+          <Text onPress={() => this.props.navigation.navigate("Register")} style = {style.SignUpText}> Sign up </Text>
+          
+        </View>
+
       </View>
     )
   }
@@ -73,7 +90,7 @@ const style = StyleSheet.create({
         },
         loginBtn:{
         width:"80%",
-        backgroundColor:"#fb5b5a",
+        backgroundColor:"#7fff00",
         borderRadius:25,
         height:50,
         alignItems:"center",
@@ -81,6 +98,11 @@ const style = StyleSheet.create({
         marginTop:40,
         marginBottom:10
         },
+        SignUpText: {
+          fontWeight: 'bold',
+          fontStyle: 'italic',
+          textDecorationLine: 'underline'
+        }
 });
 
 
