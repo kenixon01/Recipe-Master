@@ -7,7 +7,7 @@
     "icon": "./assets/recipeIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/cookingPot.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
