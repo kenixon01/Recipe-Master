@@ -5,14 +5,15 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
+import NavigationBar from './components/auth/NavigationBar';
+
 
 // imports Screens form components 
 import LandingScreen from './components/auth/Landing'
 import RegisterScreen from './components/auth/Register';
 import LoginScreen from './components/auth/Login';
-import MainPage from './components/auth/MainScreen';
 import ForgotPasswordScreen from './components/auth/ForgotPassword';
-
+import MainScreen from './components/auth/MainScreen';
 const Stack = createStackNavigator();
 
 const Auth = () => {
@@ -28,25 +29,16 @@ const Auth = () => {
 
 const App = () => {
   return(
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Auth">
-        {/* SplashScreen which will come once for 5 Seconds */}
-        <Stack.Screen name="SplashScreen" component={LandingScreen}
-          // Hiding header for Splash Screen
-          options={{headerShown: false}}
-        />
         {/* Auth Navigator: Include Login and Signup */}
-        <Stack.Screen name="Auth" component={Auth} options={{headerShown: false}}
-        />
-        {/* Navigation Drawer as a landing page */}
-        {/* <Stack.Screen
-          name="DrawerNavigationRoutes"
-          component={DrawerNavigationRoutes}
-          // Hiding header for Navigation Drawer
-          options={{headerShown: false}}
-        /> */}
+        <Stack.Screen name="Auth" component={Auth} options={{headerShown: false}}/>
+        <Stack.Screen name = "Main" component={MainScreen} options = {{headerShown: false}} />
+        
       </Stack.Navigator>
+      <NavigationBar independent={true}/>
     </NavigationContainer>
+    
   )
 }
 

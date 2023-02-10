@@ -13,7 +13,7 @@ export class Login extends Component {
         }
         
     }
-
+   
 
   render() {
     return ( 
@@ -45,9 +45,10 @@ export class Login extends Component {
         </View>
 
         <TouchableOpacity style={style.loginBtn} 
-          onPress = {() => this.props.navigation.navigate('Main')}>
+          onPress = {() => this.props.navigation.navigate("Main")}>
             <Text style={style.loginText}>LOGIN</Text> 
         </TouchableOpacity>
+
         <View style = {{flexDirection: 'row'}}>
           <Text>No Account </Text>
           <Text onPress={() => this.props.navigation.navigate("Register")} style = {style.SignUpText}> Sign up </Text>

@@ -1,64 +1,59 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-// export class MainScreen extends Component {
+import { Text, View, StyleSheet, TextInput } from 'react-native';
 
 
-//   render(){
-//     <View>
-//       <Text>Hello</Text>
-//     </View>
-//   }
-// }
+ export default function MainScreen ({navigation}) {
 
-// export default function MainScreen () {
 
-// function HomeScreen () {
-//   return (
-//     <View style = {styles.HomeTab}>
-//       <Text>Home!</Text>
-//     </View>
-//   )
-// }
+  
+    return(
+    <View style = {styles.container} >
+      <Text style = {styles.title}>Welcome, User</Text>
 
-// function SettingsScreen () {
-//   return (
-//     <View style = {styles.SettingsTab}>
-//       <Text>Settings!</Text>
-//     </View>
-//   )
-// }
-
-// const Tab = createBottomTabNavigator();
-
-//   return (
-//     <View>
-//       <Text>Hello </Text>
-//     <NavigationContainer>
-//         <Tab.Navigator>
-//           <Tab.Screen name="Home" component={HomeScreen} />
-//           <Tab.Screen name="Settings" component={SettingsScreen} />
-//         </Tab.Navigator>
-//       </NavigationContainer>
-//       </View>
-//   );
-
-// }
-
+     
+        <View style = {styles.inputView}>
+          <TextInput 
+              style = {styles.inputText}
+              placeholder = "Search for a Recipe"
+              placeholderTextColor="#003f5c"
+              />
+        
+      </View>
+    </View>
+    )
+  
+}
+ 
 const styles = StyleSheet.create({
-  HomeTab: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#4FD3DA',
     alignItems: 'center',
-  },
-  SettingsTab:{
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    },
+  title:{
+    fontWeight: "bold",
+    fontSize:50,
+    color:'black',
+    marginBottom: 40,
+    },
+  inputView:{
+    width:"80%",
+    backgroundColor:"#3AB4BA",
+    borderRadius:25,
+    height:50,
+    marginBottom:20,
+    justifyContent:"center",
+    padding:20
+    },
+  rentangle: {
+    width: 100 *2,
+    height: 100,
+    backgroundColor: '#7fff00'
   },
+      
+  
 
 });
 
-
+//export default MainScreen;
