@@ -12,8 +12,8 @@ import ProfileScreen from './Profile';
 import { color } from 'react-native-reanimated';
 
 // Screen names
-const homeName = 'Main';;
-const detailName = 'Details';
+const homeName = 'Home';;
+const detailName = 'List';
 const settingsName = 'Settings';
 
 const Tab = createBottomTabNavigator();
@@ -29,10 +29,10 @@ export default function NavigationBar() {
                     if (rn == homeName){
                         iconName = focused ? 'home' : 'home-outline'
                     }
-                    else if (rn == detailName){
+                    else if (rn == settingsName){
                         iconName = focused ? 'settings' : 'settings-outline'
                     }
-                    else if (rn == settingsName){
+                    else if (rn == detailName){
                         iconName = focused ? 'list' : 'list-outline'
                     }
 
@@ -40,8 +40,9 @@ export default function NavigationBar() {
                 },
             })}>
 
-                <Tab.Screen name = {homeName} component={HomeScreen}/>
+              
                 <Tab.Screen name = {detailName} component={ProfileScreen}/>
+                <Tab.Screen name = {homeName} component={HomeScreen} />
                 <Tab.Screen name = {settingsName} component={SettingsScreen}/>
 
                </Tab.Navigator>
