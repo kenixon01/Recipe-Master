@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View, Text} from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -8,8 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 //Screens
 import HomeScreen from './MainScreen';
 import SettingsScreen from './Setting';
-import ProfileScreen from './Profile';
-import { color } from 'react-native-reanimated';
+import ListScreen from './ListEditor';
 
 // Screen names
 const homeName = 'Home';;
@@ -41,7 +39,7 @@ export default function NavigationBar() {
             })}>
 
               
-                <Tab.Screen name = {detailName} component={ProfileScreen}/>
+                <Tab.Screen name = {detailName} component={ListScreen}/>
                 <Tab.Screen name = {homeName} component={HomeScreen} />
                 <Tab.Screen name = {settingsName} component={SettingsScreen}/>
 

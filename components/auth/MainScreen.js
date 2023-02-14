@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Keyboard,Button } from 'react-native';
 
 
  export default function MainScreen ({navigation}) {
-
-
-  
-    return(
+  return(
     <View style = {styles.container} >
       <Text style = {styles.title}>Welcome, User</Text>
 
