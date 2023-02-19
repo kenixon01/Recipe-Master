@@ -10,7 +10,7 @@ export default function ListEditor({navigation}){
         <View style = {styles.inputView}>
             <TextInput
                 //style = {StyleSheet.TextInput}
-                placeholder = "Search"
+                placeholder = "Click to add"
                 placeholderTextColor="#003f5c"
                 />
         </View> 
@@ -63,5 +63,6 @@ const styles = StyleSheet.create({
         top: 35,
         right: 0,
     },
+    
     
 });

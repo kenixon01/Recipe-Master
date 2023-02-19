@@ -5,9 +5,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 //Screens
-import HomeScreen from './MainScreen';
-import SettingsScreen from './Setting';
-import ListScreen from './ListEditor';
+import HomeScreen from './Screens/MainScreen';
+import SettingsScreen from './Screens/Setting';
+import ListScreen from './Screens/ListEditor';
 
 // Screen names
 const homeName = 'Home';;
@@ -39,7 +39,7 @@ export default function NavigationBar() {
             })}>
 
               
-                <Tab.Screen name = {detailName} component={ListScreen}/>
+                <Tab.Screen name = {detailName} component={ListScreen} />
                 <Tab.Screen name = {homeName} component={HomeScreen} />
                 <Tab.Screen name = {settingsName} component={SettingsScreen}/>
 

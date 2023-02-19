@@ -6,9 +6,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 // imports Screens form components 
-import RegisterScreen from './components/auth/Register';
-import LoginScreen from './components/auth/Login';
-import ForgotPasswordScreen from './components/auth/ForgotPassword';
+import RegisterScreen from './components/auth/Screens/Register';
+import LoginScreen from './components/auth/Screens/Login';
+import ForgotPasswordScreen from './components/auth/Screens/ForgotPassword';
 import NavigationBar from './components/auth/NavigationBar';
 
 const Stack = createStackNavigator();

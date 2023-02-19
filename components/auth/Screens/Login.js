@@ -26,23 +26,24 @@ export class Login extends Component {
             placeholderTextColor="#003f5c"
             onChangeText = {(email) => this.setState({email})}
             />
-            </View> 
-        <View style = {style.inputView}>
+      </View> 
+      <View style = {style.inputView}>
          <TextInput
             style = {StyleSheet.TextInput}
             placeholder = "Password"
             placeholderTextColor="#003f5c"
             onChangeText = {(password) => this.setState({password})}
             />
-          </View> 
-        <View>
+      </View> 
+
+      <View>
           <Button
             title='Forgot Password'
             onPress={() => this.props.navigation.navigate("ForgotPassword")}
-            titleStyle = {{color: '#039BE5'}}
+            titleStyle = {{color: '#039BE5', }}
             type = 'clear'
           />
-        </View>
+      </View>
 
         <TouchableOpacity style={style.loginBtn} 
           onPress = {() => this.props.navigation.navigate("Main")}>
@@ -50,7 +51,7 @@ export class Login extends Component {
         </TouchableOpacity>
 
         <View style = {{flexDirection: 'row'}}>
-          <Text>No Account </Text>
+          <Text >No Account </Text>
           <Text onPress={() => this.props.navigation.navigate("Register")} style = {style.SignUpText}> Sign up </Text>
           
         </View>
@@ -69,7 +70,7 @@ const style = StyleSheet.create({
         title:{
         fontWeight: "bold",
         fontSize:50,
-        color:"#fb5b5a",
+        color:"black",
         marginBottom: 40,
         },
         inputView:{

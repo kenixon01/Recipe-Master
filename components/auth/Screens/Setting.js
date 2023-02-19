@@ -16,7 +16,7 @@ export default function SettingsScreen ({navigation}){
 
     return (
         <View style = {styles.container}>
-            <Text style = {styles.title}>Settings</Text>
+            <Text style = {styles.title}>User Settings</Text>
         
         <TouchableOpacity onPress={() => setshouldShow(!shouldshow)}> 
         <Text style = {styles.headerText}>{'                 '}
@@ -117,7 +117,7 @@ export default function SettingsScreen ({navigation}){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#4FD3DA',
+        backgroundColor: '#f0f8ff',
         
         },
     title:{
@@ -128,12 +128,13 @@ const styles = StyleSheet.create({
         textAlign:'center',
         },
     inputView:{
-        backgroundColor:"#3AB4BA",
+        backgroundColor:"white",
         borderRadius:25,
         height:50,
         marginBottom:20,
         justifyContent:"center",
-        padding:20
+        padding:20,
+        alignItems:'center'
         },
     inputText:{
         height:50,
