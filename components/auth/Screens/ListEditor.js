@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { IconButton } from "@react-native-material/core";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function ListEditor({navigation}){
     return (
@@ -17,12 +18,15 @@ export default function ListEditor({navigation}){
 
         <IconButton
             icon = {props => <Icon name = "account-settings"{...props} />}
-            onPress = {() => this.props.navigation.navigate("Main")}
+            onPress = {() => navigation.navigate("Settings")}
             style= {styles.AccountBtn}
             />
 
+      
+
         <IconButton
             icon={props => <Icon name="magnify" {...props}  />}
+            onPress = {() => navigation.navigate("Results")}
             color="red"
             style = {styles.SearchButton}
             />

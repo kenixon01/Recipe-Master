@@ -13,22 +13,8 @@ export class Register extends Component {
             firstName: '',
             lastname: '',
             userName: '',
-        }
-
-        //this.onSignUp = this.onSignUp.bind(this)
-        
+        };
     }
-
-    //onSignUp(){
-       // const {email, password, name} = this.state;
-        //firebase.auth().createUserWithEmailAndPassword(email,password)
-        //.then((result) => {
-        //  console.log(result)
-        //})
-        //.catch((error)=> {console.log(result)})
-
-
-    //}
 
   render() {
     return (

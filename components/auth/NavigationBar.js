@@ -8,11 +8,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './Screens/MainScreen';
 import SettingsScreen from './Screens/Setting';
 import ListScreen from './Screens/ListEditor';
+import Results from './Screens/Results';
 
 // Screen names
 const homeName = 'Home';;
 const detailName = 'List';
 const settingsName = 'Settings';
+const resultName = 'Results'
 
 const Tab = createBottomTabNavigator();
 
@@ -33,6 +35,10 @@ export default function NavigationBar() {
                     else if (rn == detailName){
                         iconName = focused ? 'list' : 'list-outline'
                     }
+                    else if (rn == resultName){
+                        iconName = focused ? 'restaurant' : 'restaurant-outline'
+                    }
+                    
 
                     return <Ionicons name = {iconName} size = {size} color={color}/>
                 },
@@ -40,8 +46,10 @@ export default function NavigationBar() {
 
               
                 <Tab.Screen name = {detailName} component={ListScreen} />
+                <Tab.Screen name ={resultName} component = {Results} />
                 <Tab.Screen name = {homeName} component={HomeScreen} />
                 <Tab.Screen name = {settingsName} component={SettingsScreen}/>
+                
 
                </Tab.Navigator>
         </NavigationContainer>
