@@ -77,7 +77,9 @@ export default function SettingsScreen ({navigation}){
         </View>
         ) :null } 
 
-<TouchableOpacity onPress={() => setIsShowing(!isShowing)}> 
+        <Text>{'\n'}  </Text>
+
+        <TouchableOpacity onPress={() => setIsShowing(!isShowing)}> 
         <Text style = {styles.headerText}>{'                 '}
             Accessibility</Text>
          </TouchableOpacity>
@@ -162,7 +164,7 @@ const styles = StyleSheet.create({
     },
     headerText:{
         fontSize: 20,
-
+        fontWeight:'bold'
     },
     deleteText: {
         fontSize: 20,
