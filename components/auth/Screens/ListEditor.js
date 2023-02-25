@@ -26,7 +26,7 @@ export default function ListEditor({navigation}){
 
         <IconButton
             icon={props => <Icon name="magnify" {...props}  />}
-            onPress = {() => navigation.navigate("Results")}
+            onPress = {() => navigation.navigate("Result")}
             color="red"
             style = {styles.SearchButton}
             />
