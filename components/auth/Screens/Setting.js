@@ -2,9 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Switch, Alert } from 'react-native';
 
-
-
-
 export default function SettingsScreen ({navigation}){
     const [shouldshow, setshouldShow] = useState(false);
     //const [darkMode, setDarkMode] = useState(false);
@@ -206,7 +203,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight:'bold'
       },
-      button_Delete: {
+    button_Delete: {
         color: 'red',
         fontSize: 15,
         fontWeight:'bold'

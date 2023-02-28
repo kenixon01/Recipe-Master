@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react'
-import { View, Button, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native'
+import { View, Button, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground, Image, Alert } from 'react-native'
 
 
   
@@ -26,11 +26,11 @@ export class Register extends Component {
     checkInput = () =>{
       const {firstName, password, lastname, email, userName} = this.state;
       if (!firstName.trim() || !lastname.trim() || !email.trim() || !userName.trim() || !password.trim()){
-        alert('No fields can remain blank')
+        Alert.alert('Field Error','No fields can remain blank')
         return;
       }
-      else if (password.length >= 8){
-        alert('Password must be at least 8 characters')
+      else if (password.length <= 8){
+        Alert.alert('Password Error','Password must be at least 8 characters')
       }
 
     }

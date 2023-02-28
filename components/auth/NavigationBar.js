@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -59,10 +58,6 @@ export default function NavigationBar() {
                     else if (rn === 'List Editor'){
                         iconName = focused ? 'list' : 'list-outline'
                     }
-                    else if (rn === 'Result'){
-                        iconName = focused ? 'restaurant' : 'restaurant-outline'
-                    }
-                    
 
                     return (<Ionicons name = {iconName} size = {size} color={color}/>);
                 },
@@ -74,15 +69,11 @@ export default function NavigationBar() {
                 
             // }}
             >
-
-              
                 <Tab.Screen name = 'List Editor' component={ListEditorStackScreen} options={{headerShown: false}}/>
                 <Tab.Screen name = 'Home ' component={HomeStackScreen} options={{headerShown: false}}/>
                 <Tab.Screen name = 'Setting' component={SettingStackScreen} options={{headerShown: false}}/>
-                
 
                </Tab.Navigator>
         </NavigationContainer>
-    )
-    
+    )    
 }
