@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import { View, Button, Text, TextInput, StyleSheet,
-  TouchableOpacity } from 'react-native'
+import React, { Component, useState } from 'react'
+import { View, Button, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground, Image, Alert } from 'react-native'
 
 
+  
 export class Register extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             email: '',
             password: '',
@@ -16,16 +15,41 @@ export class Register extends Component {
         };
     }
 
+    componentDidMount(){
+
+    }
+  
+    // SetStates() {
+    //   const [firstName, setFirstName] = useState('')
+    // }
+    
+    checkInput = () =>{
+      const {firstName, password, lastname, email, userName} = this.state;
+      if (!firstName.trim() || !lastname.trim() || !email.trim() || !userName.trim() || !password.trim()){
+        Alert.alert('Field Error','No fields can remain blank')
+        return;
+      }
+      else if (password.length <= 8){
+        Alert.alert('Password Error','Password must be at least 8 characters')
+      }
+
+    }
   render() {
+    const {navigation} = this.props;
+  
     return (
-      <View style = {style.container}> 
+      <View style = {style.container}>
+         
+        <ImageBackground 
+         style = {style.image}>
+    
       <Text style={style.title}> Recipe Generator</Text>
       <View style = {style.inputView}>
          <TextInput
-            //style = {StyleSheet.TextInput}
+            style = {style.inputText}
             placeholder = "First Name"
             placeholderTextColor="#003f5c"
-            onChangeText = {(firstname) => this.setState({firstname})}
+            onChangeText = {(firstName) => this.setState({firstName})}
             />
           </View>
 
@@ -56,7 +80,7 @@ export class Register extends Component {
             </View>  
         <View style = {style.inputView}>
          <TextInput
-            //style = {StyleSheet.TextInput}
+            style = {style.inputText}
             placeholder = "Password"
             placeholderTextColor="#003f5c"
             onChangeText = {(password) => this.setState({password})}
@@ -67,14 +91,15 @@ export class Register extends Component {
               character
             </Text>
           </View>
-        <TouchableOpacity style={style.SignupBtn}>
-            <Text style={style.loginText}>Sign Up</Text> 
+        <TouchableOpacity style={style.SignupBtn} onPress = {this.checkInput}>
+            <Text>Sign Up</Text> 
         </TouchableOpacity>
         <View style = {{flexDirection: 'row'}}>
           <Text>Already have an account ?</Text>
           <Text onPress={() => this.props.navigation.navigate("Login")} style = {style.LoginText}> Login </Text>
           
         </View>
+        </ImageBackground>
       </View>
     )
   }
@@ -82,7 +107,7 @@ export class Register extends Component {
 const style = StyleSheet.create({
   container: {
       flex: 1,
-      backgroundColor: '#4FD3DA',
+      backgroundColor: 'white',
       alignItems: 'center',
       justifyContent: 'center',
       },
@@ -94,7 +119,7 @@ const style = StyleSheet.create({
     },
   inputView:{
     width:"80%",
-    backgroundColor:"#3AB4BA",
+    backgroundColor:"#EFEFEF",
     borderRadius:25,
     height:50,
     marginBottom:20,
@@ -103,7 +128,7 @@ const style = StyleSheet.create({
     },
   inputText:{
     height:50,
-    color:"white"
+    color:"black"
     },
   forgotAndSignUpText:{
     color:"white",
@@ -129,6 +154,18 @@ const style = StyleSheet.create({
     fontWeight: 'bold',
     fontStyle: 'italic',
     textDecorationLine: 'underline'
-    }
+    },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    alignItems:'center',
+    
+  },
+  overlay: {
+    backgroundColor:'transparent',
+    opacity: 0.6
+},
 });
 export default Register

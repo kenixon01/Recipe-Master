@@ -10,8 +10,6 @@ import RegisterScreen from './components/auth/Screens/Register';
 import LoginScreen from './components/auth/Screens/Login';
 import ForgotPasswordScreen from './components/auth/Screens/ForgotPassword';
 import NavigationBar from './components/auth/NavigationBar';
-import Settings from './components/auth/Screens/Setting';
-import Results from './components/auth/Screens/Results';
 
 const Stack = createStackNavigator();
 
@@ -32,11 +30,9 @@ const App = () => {
       <Stack.Navigator initialRouteName="Auth">
         {/* Auth Navigator: Include Login and Signup */}
         <Stack.Screen name="Auth" component={Auth} options={{headerShown: false}}/>
-        {/* Creates Screen to be called by icons*/}
-        <Stack.Screen name = 'Settings' component={Settings} options={{headerShown: false}} />
-        <Stack.Screen name = 'Results' component={Results} options={{headerShown: false}} />
         {/* Creates and establishes Home screen along with bottom navigation */}
         <Stack.Screen name = "Main" component={NavigationBar} options = {{headerShown: false}} />
+       
       </Stack.Navigator>
     </NavigationContainer>
   

@@ -4,16 +4,23 @@ import { View, Button, Text, TextInput, StyleSheet,
 
 export class Login extends Component {
   
-    // constructor(props) {
-    //     super(props);
+    constructor(props) {
+        super(props);
 
-    //     this.state = {
-    //         email: '',
-    //         password: '',
-    //     }
+        this.state = {
+            email: '',
+            password: '',
+        }
         
-    // }
-   
+    }
+
+  validateFields = () => {
+    const { email, password} = this.state;
+    if ( !email.trim() || !password.trim()){
+      alert('No fields can remain blank')
+      return;
+    }
+  }
 
   render() {
     return ( 
@@ -63,7 +70,7 @@ export class Login extends Component {
 const style = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#4FD3DA',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
         },
@@ -75,7 +82,7 @@ const style = StyleSheet.create({
         },
         inputView:{
         width:"80%",
-        backgroundColor:"#3AB4BA",
+        backgroundColor:"#EFEFEF",
         borderRadius:25,
         height:50,
         marginBottom:20,
@@ -84,7 +91,7 @@ const style = StyleSheet.create({
         },
         inputText:{
         height:50,
-        color:"white"
+        color:"black"
         },
         forgotAndSignUpText:{
         color:"white",

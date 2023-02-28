@@ -2,8 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Switch, Alert } from 'react-native';
 
-
-
 export default function SettingsScreen ({navigation}){
     const [shouldshow, setshouldShow] = useState(false);
     //const [darkMode, setDarkMode] = useState(false);
@@ -12,7 +10,12 @@ export default function SettingsScreen ({navigation}){
     const [isOn , setIsOn] = React.useState(false);
     const onToggleSwitch = () => setIsOn(!isOn);
 
-    
+    const handleLogout = () => {
+        navigation.navigate("Login");
+        // Alert.alert('Account has been deleted',
+        // [ {text: 'Okay'} ],
+        //   { cancelable: false })
+    }
 
     return (
         <View style = {styles.container}>
@@ -70,10 +73,13 @@ export default function SettingsScreen ({navigation}){
               placeholderTextColor="#003f5c"
               />
         </View>
-        <TouchableOpacity style={styles.SubmitBtn}>
-            <Text style={styles.SubmitText}>Submit</Text> 
-        </TouchableOpacity> 
         
+        <View style = {{alignItems:'center'}}>
+        <TouchableOpacity style={styles.SubmitBtn}>
+            <Text style={styles.SubmitText}>Save Changes</Text> 
+        </TouchableOpacity> 
+        </View>
+
         </View>
         ) :null } 
 
@@ -105,21 +111,32 @@ export default function SettingsScreen ({navigation}){
                     'Are you sure you want to delete your account?',
                     [
                       {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-                      {text: 'Confirm ',},
+                      {text: 'Confirm ',onPress: (handleLogout) },
                     ],
                     { cancelable: false }
                   )}>
                 <Text style = {styles.deleteText}>Delete Account ?</Text>
             </TouchableOpacity>
         </View>
-        
+        <View style = {{flexDirection: 'row', justifyContent:'space-evenly'}} >
+        <TouchableOpacity >
+            <View style = {styles.button}>
+                <Text style = {styles.button_label}>Sign out</Text>           
+            </View>
+        </TouchableOpacity>
+        <TouchableOpacity >
+            <View style = {styles.button}>
+                <Text style = {styles.button_Delete}>Delete Account</Text>           
+            </View>
+        </TouchableOpacity>
+        </View>
         </View>
     );
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f0f8ff',
+        backgroundColor: 'white',
         
         },
     title:{
@@ -130,7 +147,7 @@ const styles = StyleSheet.create({
         textAlign:'center',
         },
     inputView:{
-        backgroundColor:"white",
+        backgroundColor:"#EFEFEF",
         borderRadius:25,
         height:50,
         marginBottom:20,
@@ -140,7 +157,7 @@ const styles = StyleSheet.create({
         },
     inputText:{
         height:50,
-        color:"white"
+        color:"black"
         },
     SubmitBtn:{
         backgroundColor:"#7fff00",
@@ -149,7 +166,8 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center",
         marginTop:40,
-        marginBottom:10
+        marginBottom:10,
+        width:'20%'
         },
     SubmitText: {
         fontWeight: 'bold',
@@ -161,18 +179,34 @@ const styles = StyleSheet.create({
         alignItems:'center',
         textAlign:'center',
         alignSelf:'center'
-    },
+        },
     headerText:{
         fontSize: 20,
         fontWeight:'bold'
-    },
+        },
     deleteText: {
         fontSize: 20,
         color: 'red',
         fontWeight: 'bold',
-        alignSelf:'flex-start',
         alignItems:'flex-end',
-        
-
-    }
+        },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 44,
+        backgroundColor:"#7fff00",
+        borderRadius: 50,
+        width:'150%'
+      },
+    button_label: {
+        color: 'black',
+        fontSize: 15,
+        fontWeight:'bold'
+      },
+    button_Delete: {
+        color: 'red',
+        fontSize: 15,
+        fontWeight:'bold'
+      },
+    
 });
