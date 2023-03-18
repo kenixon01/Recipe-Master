@@ -1,28 +1,79 @@
-import React, { Component } from 'react'
-import { Text, View, StyleSheet, TextInput, Keyboard,Button } from 'react-native';
+import React, { Component, useState } from 'react'
+// import { useQuery } from '@tanstack/react-query'
+import { Text, View, StyleSheet, TextInput, ActivityIndicator, Keyboard,Button } from 'react-native';
+// import axios from 'axios'
+
+export default function MainScreen ({navigation}) {
+  const [search, setSearch] = useState('');
+
+  const [responseData, setResponseData] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
 
- export default function MainScreen ({navigation}) {
+  
+
+  const getRecipes = async (search) => {
+    setSearch(search)
+  const ID = '641facf1';
+  const KEY = '3bd1c423730ce9650260fd3d5cdabe98';
+
+  const URL = `https://api.edamam.com/search?q=${search}&
+  app_id=${ID}&app_key=${KEY}`
+    fetch(URL).then(response => {
+      return response.json();
+    }).then(responseData => {
+      const source = responseData
+      console.log(`search: ${search}`)
+      console.log(`source: ${source.q}`);
+      // console.log(responseData.hits[0].recipe.label)
+      setResponseData(source)
+      console.log(responseData.hits.length)
+      
+    setLoading(false)
+    }).catch(error => {
+      console.error(error);
+    })
+  }
+
+
+  
+  // const source = responseData.hits[0].recipe.source;
+  // console.log(`search: ${search}`)
+  // console.log(`source: ${source}`);
+  // setResponseData(source)
+
+  // useEffect(() => {
+  //   getRecipes();
+  // }, [])
+
   return(
     <View style = {styles.container} >
       <Text style = {styles.title}>Welcome, User</Text>
 
+        {/* <App/> */}
       <View style = {styles.greenBox}>
         <View style = {styles.inputView}>
           <TextInput 
               style = {styles.inputText}
-              placeholder = "Search for a Recipe"
+              placeholder = "Search for a recipe by ingredient"
               placeholderTextColor="#003f5c"
+              onSubmitEditing={newSearch => {
+                getRecipes(newSearch.nativeEvent.text)
+              }}
+              defaultValue={search}
               />
+          
         </View>
-      </View>
-      <View style = {styles.whiteBox}>
-        <Text style = {styles.header}>Popular Searches</Text>
-        <Text style = {styles.SmallerTxt}>Try one of these!</Text>
-      </View>
 
-      <View style ={styles.greenBox}>
-        <Text style = {styles.header}>Recommend Recipes</Text>
+      </View>
+      <View>
+
+              {isLoading ? <Text>'no data'</Text> :
+                responseData.hits.map((e) => {
+                  console.log(e.recipe.label)
+                  return (<View><Text>{e.recipe.label}</Text></View>)
+                })
+              }
       </View>
     </View>
     )
