@@ -1,12 +1,32 @@
-import React, { Component } from 'react'
+import { gql } from '@apollo/client'
+import { useMutation } from '@apollo/client'
+import React, { Component, useState } from 'react'
 import { View, Button, Text, TextInput, StyleSheet,
     TouchableOpacity } from 'react-native'
 
-export class Login extends Component {
-  
+const [name, setName] = useState
+const [email, setEmail] = useState
+const [password, setPassowrd] = useState
+const [username, setUserName] = useState
+
+const [createUser] = useMutation(CreateUserMutation)
+
+const CreateUserMutation = gql`
+  mutation CreateUser ($input: RegisterInput!) {
+    createUser(input: $input){
+    name
+    email
+    password
+    userName
+    }
+    
+  }
+`
+
+export class Login extends Component { 
+
     constructor(props) {
         super(props);
-
         this.state = {
             email: '',
             password: '',
@@ -15,11 +35,11 @@ export class Login extends Component {
     }
 
   validateFields = () => {
-    const { email, password} = this.state;
-    if ( !email.trim() || !password.trim()){
-      alert('No fields can remain blank')
-      return;
-    }
+    // const { email, password} = this.state;
+    // if ( !email.trim() || !password.trim()){
+    //   alert('No fields can remain blank')
+    //   return;
+    // }
   }
 
   render() {

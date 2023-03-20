@@ -1,8 +1,20 @@
 import React from 'react';
 import { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Switch, Alert } from 'react-native';
+import { View, Text, StyleSheet, TextInput, 
+    TouchableOpacity, Switch, Alert } from 'react-native';
+import {gpl, useMutation} from '@apollo/client'
 
 export default function SettingsScreen ({navigation}){
+    const [name, setName] = useState
+    const [email, setEmail] = useState
+    const [password, setPassowrd] = useState
+    const [username, setUserName] = useState
+
+    const UPDATE_USER_MUTATION = gql`
+        mutation EditUser($input:  ) {
+        }
+    `
+
     const [shouldshow, setshouldShow] = useState(false);
     //const [darkMode, setDarkMode] = useState(false);
     const [isShowing, setIsShowing] = useState(false);

@@ -11,6 +11,9 @@ import LoginScreen from './components/auth/Screens/Login';
 import ForgotPasswordScreen from './components/auth/Screens/ForgotPassword';
 import NavigationBar from './components/auth/NavigationBar';
 
+import client from './apolloClient';
+import { ApolloProvider } from '@apollo/client';
+
 const Stack = createStackNavigator();
 
 const Auth = () => {
@@ -26,6 +29,7 @@ const Auth = () => {
 
 const App = () => {
   return(  
+    <ApolloProvider client={client}>
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Auth">
         {/* Auth Navigator: Include Login and Signup */}
@@ -35,7 +39,7 @@ const App = () => {
        
       </Stack.Navigator>
     </NavigationContainer>
-  
+    </ApolloProvider>
   )
 }
 
