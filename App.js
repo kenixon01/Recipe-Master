@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import dataReducer from './redux/dataReducer';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -12,8 +10,8 @@ import RegisterScreen from './components/auth/Screens/Register';
 import LoginScreen from './components/auth/Screens/Login';
 import ForgotPasswordScreen from './components/auth/Screens/ForgotPassword';
 import NavigationBar from './components/auth/NavigationBar';
+import { store } from './redux/store'
 
-const store = createStore(dataReducer);
 const Stack = createStackNavigator();
 
 const Auth = () => {

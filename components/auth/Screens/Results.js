@@ -2,18 +2,49 @@ import * as React from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { IconButton } from "@react-native-material/core";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { useSelector } from 'react-redux';
 
 export default function Results({navigation}){
+    const data = useSelector((store) => store.data);
+    // console.log(dat)
+
+    /*
+    {
+        "data": 
+            {
+                "count": 7000, 
+                "from": 0, 
+                "hits": [[Object], [Object], [Object], [Object], [Object], [Object], [Object], [Object], [Object], [Object]], 
+                "more": true, 
+                "q": 
+                "Rice", 
+                "to": 10
+            }
+        }  
+    }
+
+    */
+    // console.log(typeof data)
+    // data.hits.map((e) => {
+    //     console.log(e.recipe.label);})
+
     return (
         <View style = {styles.container}>
             <Text style = {styles.Title}>Results</Text>
 
-        <IconButton
-            icon = {props => <Icon name = "account-settings"{...props} />}
-            onPress = {() => navigation.navigate("Settings")}
-            style= {styles.AccountBtn}
-            />
-
+            <IconButton
+                icon = {props => <Icon name = "account-settings"{...props} />}
+                onPress = {() => navigation.navigate("Settings")}
+                style= {styles.AccountBtn}
+                />
+            <View>
+                {
+                    (data.hits.length === 0 ? <Text>No results found</Text> :
+                    data.hits.map((e, index) => {
+                      return (<Text key = {index}>{e.recipe.label}</Text>)
+                    }))
+                }
+            </View>
         </View>
     );
 }

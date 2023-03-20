@@ -8,8 +8,9 @@ export default function MainScreen ({navigation}) {
   const [responseData, setResponseData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
+  const data = useSelector((store) => store.data);
+
   const dispatch = useDispatch();
-  // const data = useSelector((store) => store.data.data);
 
   const handleDataChange = (data) => {
     dispatch(setData(data))
@@ -27,10 +28,7 @@ export default function MainScreen ({navigation}) {
       return response.json();
     }).then(responseData => {
       const source = responseData
-      console.log(`search: ${search}`)
-      console.log(`source: ${source.q}`);
       setResponseData(source)
-      console.log(responseData.hits.length)
       
       handleDataChange(source)
       
@@ -52,7 +50,8 @@ export default function MainScreen ({navigation}) {
               placeholder = "Search for a recipe by ingredient"
               placeholderTextColor="#003f5c"
               onSubmitEditing={newSearch => {
-                getRecipes(newSearch.nativeEvent.text)
+                getRecipes(newSearch.nativeEvent.text);
+                navigation.navigate("Result");
               }}
               defaultValue={search}
               />
@@ -63,7 +62,6 @@ export default function MainScreen ({navigation}) {
       <View>
           {isLoading ? <Text>Loading...</Text> : (responseData.hits.length === 0 ? <Text>No results found</Text> :
             responseData.hits.map((e, index) => {
-              console.log(e.recipe.label)
               return (<Text key = {index}>{e.recipe.label}</Text>)
             }))
           }

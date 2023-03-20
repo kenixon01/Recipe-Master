@@ -17,6 +17,7 @@ function HomeStackScreen (){
     return(
         <Stack.Navigator>
             <Stack.Screen name = 'Home' component={HomeScreen} />
+            <Stack.Screen name = 'Result' component={Results} />
         </Stack.Navigator>
     )
 }
