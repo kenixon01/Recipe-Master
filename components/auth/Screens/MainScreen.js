@@ -1,50 +1,44 @@
-import React, { Component, useState } from 'react'
-// import { useQuery } from '@tanstack/react-query'
-import { Text, View, StyleSheet, TextInput, ActivityIndicator, Keyboard,Button } from 'react-native';
-// import axios from 'axios'
+import React, { useState } from 'react'
+import { Text, View, StyleSheet, TextInput } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setData } from '../../../actions/index';
 
 export default function MainScreen ({navigation}) {
   const [search, setSearch] = useState('');
-
   const [responseData, setResponseData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
+  const dispatch = useDispatch();
+  // const data = useSelector((store) => store.data.data);
 
-  
+  const handleDataChange = (data) => {
+    dispatch(setData(data))
+  }
+
+    
 
   const getRecipes = async (search) => {
     setSearch(search)
-  const ID = '641facf1';
-  const KEY = '3bd1c423730ce9650260fd3d5cdabe98';
+    const ID = '641facf1';
+    const KEY = '3bd1c423730ce9650260fd3d5cdabe98';
+    const URL = `https://api.edamam.com/search?q=${search}&app_id=${ID}&app_key=${KEY}`
 
-  const URL = `https://api.edamam.com/search?q=${search}&
-  app_id=${ID}&app_key=${KEY}`
     fetch(URL).then(response => {
       return response.json();
     }).then(responseData => {
       const source = responseData
       console.log(`search: ${search}`)
       console.log(`source: ${source.q}`);
-      // console.log(responseData.hits[0].recipe.label)
       setResponseData(source)
       console.log(responseData.hits.length)
+      
+      handleDataChange(source)
       
     setLoading(false)
     }).catch(error => {
       console.error(error);
     })
   }
-
-
-  
-  // const source = responseData.hits[0].recipe.source;
-  // console.log(`search: ${search}`)
-  // console.log(`source: ${source}`);
-  // setResponseData(source)
-
-  // useEffect(() => {
-  //   getRecipes();
-  // }, [])
 
   return(
     <View style = {styles.container} >
@@ -67,13 +61,12 @@ export default function MainScreen ({navigation}) {
 
       </View>
       <View>
-
-              {isLoading ? <Text>'no data'</Text> :
-                responseData.hits.map((e) => {
-                  console.log(e.recipe.label)
-                  return (<View><Text>{e.recipe.label}</Text></View>)
-                })
-              }
+          {isLoading ? <Text>Loading...</Text> : (responseData.hits.length === 0 ? <Text>No results found</Text> :
+            responseData.hits.map((e, index) => {
+              console.log(e.recipe.label)
+              return (<Text key = {index}>{e.recipe.label}</Text>)
+            }))
+          }
       </View>
     </View>
     )

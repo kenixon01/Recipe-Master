@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-//import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import dataReducer from './redux/dataReducer';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -11,6 +13,7 @@ import LoginScreen from './components/auth/Screens/Login';
 import ForgotPasswordScreen from './components/auth/Screens/ForgotPassword';
 import NavigationBar from './components/auth/NavigationBar';
 
+const store = createStore(dataReducer);
 const Stack = createStackNavigator();
 
 const Auth = () => {
@@ -26,16 +29,17 @@ const Auth = () => {
 
 const App = () => {
   return(  
-    <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="Auth">
-        {/* Auth Navigator: Include Login and Signup */}
-        <Stack.Screen name="Auth" component={Auth} options={{headerShown: false}}/>
-        {/* Creates and establishes Home screen along with bottom navigation */}
-        <Stack.Screen name = "Main" component={NavigationBar} options = {{headerShown: false}} />
-       
-      </Stack.Navigator>
-    </NavigationContainer>
-  
+    <Provider store = {store}>
+      <NavigationContainer independent={true}>
+        <Stack.Navigator initialRouteName="Auth">
+          {/* Auth Navigator: Include Login and Signup */}
+          <Stack.Screen name="Auth" component={Auth} options={{headerShown: false}}/>
+          {/* Creates and establishes Home screen along with bottom navigation */}
+          <Stack.Screen name = "Main" component={NavigationBar} options = {{headerShown: false}} />
+        
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }
 
