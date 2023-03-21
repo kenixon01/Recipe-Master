@@ -6,27 +6,7 @@ import { useSelector } from 'react-redux';
 
 export default function Results({navigation}){
     const data = useSelector((store) => store.data);
-    // console.log(dat)
-
-    /*
-    {
-        "data": 
-            {
-                "count": 7000, 
-                "from": 0, 
-                "hits": [[Object], [Object], [Object], [Object], [Object], [Object], [Object], [Object], [Object], [Object]], 
-                "more": true, 
-                "q": 
-                "Rice", 
-                "to": 10
-            }
-        }  
-    }
-
-    */
-    // console.log(typeof data)
-    // data.hits.map((e) => {
-    //     console.log(e.recipe.label);})
+    console.log(isLoading);
 
     return (
         <View style = {styles.container}>

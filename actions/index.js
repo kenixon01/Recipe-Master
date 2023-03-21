@@ -5,3 +5,9 @@ export const setData = (payload) => {
     }
 };
   
+export const setAPICallLoading = (payload) => {
+  return {
+    type: 'API_CALL',
+    payload: payload,
+  }
+}

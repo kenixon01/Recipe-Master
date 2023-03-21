@@ -1,14 +1,10 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, TextInput } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setData } from '../../../actions/index';
+import { useDispatch } from 'react-redux';
+import { setAPICallLoading, setData } from '../../../actions/index';
 
 export default function MainScreen ({navigation}) {
   const [search, setSearch] = useState('');
-  const [responseData, setResponseData] = useState([]);
-  const [isLoading, setLoading] = useState(true);
-
-  const data = useSelector((store) => store.data);
 
   const dispatch = useDispatch();
 
@@ -27,12 +23,7 @@ export default function MainScreen ({navigation}) {
     fetch(URL).then(response => {
       return response.json();
     }).then(responseData => {
-      const source = responseData
-      setResponseData(source)
-      
-      handleDataChange(source)
-      
-    setLoading(false)
+      handleDataChange(responseData);
     }).catch(error => {
       console.error(error);
     })
@@ -47,7 +38,7 @@ export default function MainScreen ({navigation}) {
         <View style = {styles.inputView}>
           <TextInput 
               style = {styles.inputText}
-              placeholder = "Search for a recipe by ingredient"
+              placeholder = "Search for a recipe or ingredient"
               placeholderTextColor="#003f5c"
               onSubmitEditing={newSearch => {
                 getRecipes(newSearch.nativeEvent.text);
@@ -58,13 +49,6 @@ export default function MainScreen ({navigation}) {
           
         </View>
 
-      </View>
-      <View>
-          {isLoading ? <Text>Loading...</Text> : (responseData.hits.length === 0 ? <Text>No results found</Text> :
-            responseData.hits.map((e, index) => {
-              return (<Text key = {index}>{e.recipe.label}</Text>)
-            }))
-          }
       </View>
     </View>
     )
@@ -121,9 +105,4 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
   },
-      
-  
-
 });
-
-//export default MainScreen;
