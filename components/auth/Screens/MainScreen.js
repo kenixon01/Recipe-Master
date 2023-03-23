@@ -38,7 +38,6 @@ export default function MainScreen ({navigation}) {
     <View style = {styles.container} >
       <Text style = {styles.title}>Welcome, User</Text>
 
-        {/* <App/> */}
       <View style = {styles.greenBox}>
         <View style = {styles.inputView}>
           <TextInput 
@@ -50,11 +49,17 @@ export default function MainScreen ({navigation}) {
                 navigation.navigate("Result");
               }}
               defaultValue={search}
-              />
-          
+          />
+        </View>
+      </View>
+        <View style = {styles.whiteBox}>
+          <Text style = {styles.header}>Popular Searches</Text>
+          <Text style = {styles.SmallerTxt}>Try one of these!</Text>
         </View>
 
-      </View>
+        <View style ={styles.greenBox}>
+          <Text style = {styles.header}>Recommend Recipes</Text>
+        </View>
     </View>
     )
   
