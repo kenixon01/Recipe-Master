@@ -12,10 +12,15 @@ export default function MainScreen ({navigation}) {
     dispatch(setData(data))
   }
 
+  const handleAPICallLoading = () => {
+    dispatch(setAPICallLoading())
+  }
+
     
 
   const getRecipes = async (search) => {
     setSearch(search)
+    // const TO = 15;
     const ID = '641facf1';
     const KEY = '3bd1c423730ce9650260fd3d5cdabe98';
     const URL = `https://api.edamam.com/search?q=${search}&app_id=${ID}&app_key=${KEY}`
