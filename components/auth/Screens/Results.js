@@ -6,9 +6,11 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setAPICallLoading } from '../../../actions/index';
 import { useEffect } from 'react'
+import { CommonActions } from '@react-navigation/native';
 
 
 export default function Results({navigation}){
+    
     const data = useSelector((store) => store.data);
 
     return (
@@ -21,14 +23,13 @@ export default function Results({navigation}){
                 style= {styles.AccountBtn}
                 />
             <View>
-                {
+                { 
                     (data.hits.length === 0) ? 
                         <Text>No results found</Text>
                     :
                     data.hits.map((e, index) => {
                         return (<Text key = {index}>{e.recipe.label}</Text>)
-                    })
-
+                    }) 
                 }
             </View>
         </View>
