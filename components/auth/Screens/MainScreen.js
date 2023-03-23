@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setData } from '../../../actions/index';
-
+import { API_ID, API_KEY } from '@env'
 export default function MainScreen ({navigation}) {
   const [search, setSearch] = useState('');
   const [textInput, setTextInput] = useState('');
@@ -15,10 +15,7 @@ export default function MainScreen ({navigation}) {
  
   const getRecipes = async (search) => {
     setSearch(search)
-    const ID = '641facf1';
-    const KEY = '3bd1c423730ce9650260fd3d5cdabe98';
-    const URL = `https://api.edamam.com/search?q=${search}&app_id=${ID}&app_key=${KEY}`
-
+    const URL = `https://api.edamam.com/search?q=${search}&app_id=${API_ID}&app_key=${API_KEY}`
     fetch(URL).then(response => {
       return response.json();
     }).then(responseData => {

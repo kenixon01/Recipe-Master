@@ -3,10 +3,6 @@ import { View, Text, StyleSheet } from 'react-native';
 import { IconButton } from "@react-native-material/core";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { setAPICallLoading } from '../../../actions/index';
-import { useEffect } from 'react'
-import { CommonActions } from '@react-navigation/native';
 
 
 export default function Results({navigation}){
@@ -24,6 +20,7 @@ export default function Results({navigation}){
                 />
             <View>
                 { 
+                    (data === undefined) ? <Text>Loading...</Text> :
                     (data.hits.length === 0) ? 
                         <Text>No results found</Text>
                     :
