@@ -1,28 +1,59 @@
-import React, { Component } from 'react'
-import { Text, View, StyleSheet, TextInput, Keyboard,Button } from 'react-native';
+import React, { useState } from 'react'
+import { Text, View, StyleSheet, TextInput } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { setAPICallLoading, setData } from '../../../actions/index';
 
+export default function MainScreen ({navigation}) {
+  const [search, setSearch] = useState('');
 
- export default function MainScreen ({navigation}) {
+  const dispatch = useDispatch();
+
+  const handleDataChange = (data) => {
+    dispatch(setData(data))
+  }
+
+  const handleAPICallLoading = () => {
+    dispatch(setAPICallLoading())
+  }
+
+    
+
+  const getRecipes = async (search) => {
+    setSearch(search)
+    // const TO = 15;
+    const ID = '641facf1';
+    const KEY = '3bd1c423730ce9650260fd3d5cdabe98';
+    const URL = `https://api.edamam.com/search?q=${search}&app_id=${ID}&app_key=${KEY}`
+
+    fetch(URL).then(response => {
+      return response.json();
+    }).then(responseData => {
+      handleDataChange(responseData);
+    }).catch(error => {
+      console.error(error);
+    })
+  }
+
   return(
     <View style = {styles.container} >
       <Text style = {styles.title}>Welcome, User</Text>
 
+        {/* <App/> */}
       <View style = {styles.greenBox}>
         <View style = {styles.inputView}>
           <TextInput 
               style = {styles.inputText}
-              placeholder = "Search for a Recipe"
+              placeholder = "Search for a recipe or ingredient"
               placeholderTextColor="#003f5c"
+              onSubmitEditing={newSearch => {
+                getRecipes(newSearch.nativeEvent.text);
+                navigation.navigate("Result");
+              }}
+              defaultValue={search}
               />
+          
         </View>
-      </View>
-      <View style = {styles.whiteBox}>
-        <Text style = {styles.header}>Popular Searches</Text>
-        <Text style = {styles.SmallerTxt}>Try one of these!</Text>
-      </View>
 
-      <View style ={styles.greenBox}>
-        <Text style = {styles.header}>Recommend Recipes</Text>
       </View>
     </View>
     )
@@ -79,9 +110,4 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
   },
-      
-  
-
 });
-
-//export default MainScreen;
