@@ -1,6 +1,6 @@
-import React, { Component, useState } from 'react'
-import { View, Button, Text, TextInput, StyleSheet,
-    TouchableOpacity } from 'react-native'
+import React, { Component } from 'react'
+import { View, Button, Text, TextInput, TouchableOpacity } from 'react-native'
+import style from './style'
 
 export class Login extends Component {
 
@@ -67,52 +67,6 @@ export class Login extends Component {
     )
   }
 }
-const style = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-        },
-        title:{
-        fontWeight: "bold",
-        fontSize:50,
-        color:"black",
-        marginBottom: 40,
-        },
-        inputView:{
-        width:"80%",
-        backgroundColor:"#EFEFEF",
-        borderRadius:25,
-        height:50,
-        marginBottom:20,
-        justifyContent:"center",
-        padding:20
-        },
-        inputText:{
-        height:50,
-        color:"black"
-        },
-        forgotAndSignUpText:{
-        color:"white",
-        fontSize:11
-        },
-        loginBtn:{
-        width:"80%",
-        backgroundColor:"#7fff00",
-        borderRadius:25,
-        height:50,
-        alignItems:"center",
-        justifyContent:"center",
-        marginTop:40,
-        marginBottom:10
-        },
-        SignUpText: {
-          fontWeight: 'bold',
-          fontStyle: 'italic',
-          textDecorationLine: 'underline'
-        }
-});
 
 
 
