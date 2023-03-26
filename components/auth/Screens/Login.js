@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { View, Button, Text, TextInput, StyleSheet,
     TouchableOpacity } from 'react-native'
 
 export class Login extends Component {
-  
+
     constructor(props) {
         super(props);
 

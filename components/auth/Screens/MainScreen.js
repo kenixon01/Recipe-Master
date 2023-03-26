@@ -1,30 +1,21 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { setAPICallLoading, setData } from '../../../actions/index';
-
+import { setData } from '../../../actions/index';
+import { API_ID, API_KEY } from '@env'
 export default function MainScreen ({navigation}) {
   const [search, setSearch] = useState('');
+  const [textInput, setTextInput] = useState('');
 
   const dispatch = useDispatch();
 
   const handleDataChange = (data) => {
     dispatch(setData(data))
   }
-
-  const handleAPICallLoading = () => {
-    dispatch(setAPICallLoading())
-  }
-
-    
-
+ 
   const getRecipes = async (search) => {
     setSearch(search)
-    // const TO = 15;
-    const ID = '641facf1';
-    const KEY = '3bd1c423730ce9650260fd3d5cdabe98';
-    const URL = `https://api.edamam.com/search?q=${search}&app_id=${ID}&app_key=${KEY}`
-
+    const URL = `https://api.edamam.com/search?q=${search}&app_id=${API_ID}&app_key=${API_KEY}`
     fetch(URL).then(response => {
       return response.json();
     }).then(responseData => {
@@ -47,8 +38,12 @@ export default function MainScreen ({navigation}) {
               onSubmitEditing={newSearch => {
                 getRecipes(newSearch.nativeEvent.text);
                 navigation.navigate("Result");
+                setTextInput('');
               }}
+              onChangeText={text => setTextInput(text)}
               defaultValue={search}
+              clearButtonMode='always'
+              value={textInput}
           />
         </View>
       </View>
