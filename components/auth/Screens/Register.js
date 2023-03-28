@@ -1,42 +1,11 @@
-import React, { Component, useState } from 'react'
+import React, {useState } from 'react'
 import { View, Button, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground, Image, Alert } from 'react-native'
 
 
   
-export class Register extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-            firstName: '',
-            lastname: '',
-            userName: '',
-        };
-    }
-
-    componentDidMount(){
-
-    }
+export function Register ({navigation}) {
   
-    // SetStates() {
-    //   const [firstName, setFirstName] = useState('')
-    // }
-    
-    checkInput = () =>{
-      const {firstName, password, lastname, email, userName} = this.state;
-      if (!firstName.trim() || !lastname.trim() || !email.trim() || !userName.trim() || !password.trim()){
-        Alert.alert('Field Error','No fields can remain blank')
-        return;
-      }
-      else if (password.length <= 8){
-        Alert.alert('Password Error','Password must be at least 8 characters')
-      }
-
-    }
-  render() {
-    const {navigation} = this.props;
-  
+   
     return (
       <View style = {style.container}>
          
@@ -103,7 +72,7 @@ export class Register extends Component {
       </View>
     )
   }
-}
+
 const style = StyleSheet.create({
   container: {
       flex: 1,

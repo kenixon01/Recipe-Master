@@ -1,48 +1,52 @@
-import { gql } from '@apollo/client'
-import { useMutation } from '@apollo/client'
-import React, { Component, useState } from 'react'
+import { gql, useMutation } from '@apollo/client'
+import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import React, {useState, useEffect } from 'react'
 import { View, Button, Text, TextInput, StyleSheet,
-    TouchableOpacity } from 'react-native'
+    TouchableOpacity,Alert } from 'react-native'
 
-const [name, setName] = useState
-const [email, setEmail] = useState
-const [password, setPassowrd] = useState
-const [username, setUserName] = useState
-
-const [createUser] = useMutation(CreateUserMutation)
-
-const CreateUserMutation = gql`
-  mutation CreateUser ($input: RegisterInput!) {
-    createUser(input: $input){
-    name
-    email
-    password
-    userName
+const SIGN_IN_MUTATION = gql`
+mutation signIn($email: String!, $password: String!) {
+  signIn(input: { email: $email, password: $password}) {
+    token
+    user {
+      id
+      name
+      email
     }
-    
   }
-`
+  }
+  `;
 
-export class Login extends Component { 
+export function Login ({navigation}) {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-        }
-        
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigations = useNavigation();
+ 
+  const [signIn, {data, error, loading}] = useMutation(SIGN_IN_MUTATION);
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert('Invalid credentials, try again');
+      console.log("hell this "+error)
     }
+  }, [error])
 
-  validateFields = () => {
-    // const { email, password} = this.state;
-    // if ( !email.trim() || !password.trim()){
-    //   alert('No fields can remain blank')
-    //   return;
-    // }
+  if (data) {
+    // save token
+    AsyncStorage
+      .setItem('token', data.signIn.token)
+      .then(() => {
+        // redirect home
+        navigation.navigate('Main')
+      })
   }
-
-  render() {
+  
+  const onSubmit = () => {
+    signIn({ variables: { email, password }})
+  }
     return ( 
       <View style = {style.container}> 
       <Text style={style.title}> Login Screen</Text>
@@ -51,7 +55,8 @@ export class Login extends Component {
             style = {style.inputText}
             placeholder = "Username or Email"
             placeholderTextColor="#003f5c"
-            onChangeText = {(email) => this.setState({email})}
+            value={email}
+            onChangeText = {setEmail}
             />
       </View> 
       <View style = {style.inputView}>
@@ -59,34 +64,34 @@ export class Login extends Component {
             style = {StyleSheet.TextInput}
             placeholder = "Password"
             placeholderTextColor="#003f5c"
-            onChangeText = {(password) => this.setState({password})}
+            value={password}
+            onChangeText = {setPassword}
             />
       </View> 
 
       <View>
           <Button
             title='Forgot Password'
-            onPress={() => this.props.navigation.navigate("ForgotPassword")}
+            onPress={() => navigation.navigate("ForgotPassword")}
             titleStyle = {{color: '#039BE5', }}
             type = 'clear'
           />
       </View>
 
         <TouchableOpacity style={style.loginBtn} 
-          onPress = {() => this.props.navigation.navigate("Main")}>
+          onPress = {onSubmit} disabled = {loading} >
             <Text style={style.loginText}>LOGIN</Text> 
         </TouchableOpacity>
 
         <View style = {{flexDirection: 'row'}}>
           <Text >No Account </Text>
-          <Text onPress={() => this.props.navigation.navigate("Register")} style = {style.SignUpText}> Sign up </Text>
+          <Text onPress={() => navigation.navigate("Register")} style = {style.SignUpText}> Sign up </Text>
           
         </View>
 
       </View>
     )
   }
-}
 const style = StyleSheet.create({
     container: {
         flex: 1,

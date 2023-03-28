@@ -26,7 +26,7 @@ input SignUpInput{
     userName: String!
 }
 type AuthUser {
-    user: User
+    user: User!
     token: String!
   }
 type User{
