@@ -5,11 +5,12 @@ const httpLink = createHttpLink({
     uri: "http://localhost:5000/"
 });
 
-const authLink = setContext((_, {header }) => {
+const authLink = setContext((_, {headers }) => {
+    const token = localStorage.getItem('token');
     return{
         headers: {
             ...headers,
-            authorization: localStorage.getItem("token") || ""
+            authorization: token ? `Bearer ${token}` : "",
         }
     }
 });
