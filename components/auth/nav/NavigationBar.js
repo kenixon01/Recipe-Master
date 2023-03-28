@@ -5,11 +5,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 //Screens
-import HomeScreen from './Screens/MainScreen';
-import SettingsScreen from './Screens/Setting';
-import ListScreen from './Screens/ListEditor';
-import Results from './Screens/Results';
-import Login from './Screens/Login';
+import HomeScreen from '../Screens/main/MainScreen';
+import SettingsScreen from '../Screens/settings/Setting';
+import ListScreen from '../Screens/listEditor/ListEditor';
+import Results from '../Screens/results/Results';
+import Login from '../Screens/login/Login';
 
 const Stack = createStackNavigator()
 
