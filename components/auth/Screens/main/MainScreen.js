@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, TextInput, Image, SafeAreaView, ScrollView } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setData } from '../../../../actions/index';
 import { API_ID, API_KEY } from '@env'
+import { useFonts } from 'expo-font';
 import styles from './style'
 
 export default function MainScreen ({navigation}) {
+  
   const [search, setSearch] = useState('');
   const [textInput, setTextInput] = useState('');
+
+  const [loaded] = useFonts({
+    CairoPlay: require('../../../../assets/fonts/CairoPlay-ExtraBold.ttf'),
+  });
 
   const dispatch = useDispatch();
 
@@ -26,38 +32,47 @@ export default function MainScreen ({navigation}) {
       console.error(error);
     })
   }
+  
+  if (!loaded) {
+    return null;
+  }
 
   return(
-    <View style = {styles.container} >
-      <Text style = {styles.title}>Welcome, User</Text>
-
-      <View style = {styles.greenBox}>
-        <View style = {styles.inputView}>
-          <TextInput 
-              style = {styles.inputText}
-              placeholder = "Search for a recipe or ingredient"
-              placeholderTextColor="#003f5c"
-              onSubmitEditing={newSearch => {
-                getRecipes(newSearch.nativeEvent.text);
-                navigation.navigate("Result");
-                setTextInput('');
-              }}
-              onChangeText={text => setTextInput(text)}
-              defaultValue={search}
-              clearButtonMode='always'
-              value={textInput}
-          />
+    <SafeAreaView>
+      <ScrollView>
+        <View style = {styles.container} >
+        <Image source={require('../../../../assets/20220901_133028_HDR.jpg')} style={styles.image}/>
+        <Text style = {{...styles.title, fontFamily: 'CairoPlay' }}>Welcome, User</Text>
+        <View style = {styles.greenBox}>
+          <View style = {styles.inputView}>
+            <TextInput 
+                style = {styles.inputText}
+                placeholder = "Search for a recipe or ingredient"
+                placeholderTextColor="#003f5c"
+                onSubmitEditing={newSearch => {
+                  getRecipes(newSearch.nativeEvent.text);
+                  navigation.navigate("Result");
+                  setTextInput('');
+                }}
+                onChangeText={text => setTextInput(text)}
+                defaultValue={search}
+                clearButtonMode='always'
+                value={textInput}
+            />
+          </View>
         </View>
+          <View style = {styles.whiteBox}>
+            <Text style = {styles.header}>Popular Searches</Text>
+            <Text style = {styles.SmallerTxt}>Try one of these!</Text>
+          </View>
+
+          <View style ={styles.greenBox}>
+            <Text style = {styles.header}>Recommended Recipes</Text>
+          </View>
       </View>
-        <View style = {styles.whiteBox}>
-          <Text style = {styles.header}>Popular Searches</Text>
-          <Text style = {styles.SmallerTxt}>Try one of these!</Text>
-        </View>
-
-        <View style ={styles.greenBox}>
-          <Text style = {styles.header}>Recommend Recipes</Text>
-        </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
+    
     )
   
 }

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
  
 export default styles = StyleSheet.create({
     container: {
@@ -7,11 +7,18 @@ export default styles = StyleSheet.create({
       backgroundColor: 'white',
       },
     title:{
-      fontWeight: "bold",
-      fontSize:50,
-      color:'black',
-      marginBottom: 40,
-      textAlign:'center'
+      fontSize: Dimensions.get('window').width * 0.1,
+      color:"black",
+      marginTop: 40,
+      textAlign:'center',
+      fontSize:40,
+      },
+      image: {
+          alignSelf:'center',
+          width: Dimensions.get('window').width * 1.3,
+          height: Dimensions.get('window').width * .75,
+          borderBottomLeftRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
+          borderBottomRightRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
       },
     inputView:{
       width:"80%",

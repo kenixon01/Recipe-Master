@@ -19,7 +19,7 @@ const Auth = () => {
     <Stack.Navigator initialRouteName='Login'>
       <Stack.Screen name = "Login" component = {LoginScreen} options= {{headerShown: false}}/>
       <Stack.Screen name = "Register" component = {RegisterScreen} options= {{headerShown: false}}/>
-      <Stack.Screen name = "ForgotPassword" component = {ForgotPasswordScreen}/>
+      <Stack.Screen name = "ForgotPassword" component = {ForgotPasswordScreen} options= {{headerShown: false}}/>
     </Stack.Navigator>
   )
 } 
@@ -28,7 +28,7 @@ const App = () => {
   return(  
     <Provider store = {store}>
       <NavigationContainer independent={true}>
-        <Stack.Navigator initialRouteName="Auth">
+        <Stack.Navigator initialRouteName="Auth" screenOptions={{headerShown: false}}>
           {/* Auth Navigator: Include Login and Signup */}
           <Stack.Screen name="Auth" component={Auth} options={{headerShown: false}}/>
           {/* Creates and establishes Home screen along with bottom navigation */}
