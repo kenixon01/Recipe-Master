@@ -2,11 +2,12 @@ import { Dimensions, StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
     container: {
-        padding: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * .03,
+        paddingHorizontal: Dimensions.get('window').width * .1,
+        paddingTop: Dimensions.get('window').height * .1,
         flex: 1,
-        backgroundColor: 'blue',
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
+        justifyContent: 'space-between'
     },
     title:{
         fontSize: 40,
@@ -17,49 +18,54 @@ export default styles = StyleSheet.create({
         backgroundColor:"#EFEFEF",
         borderRadius:25,
         height:50,
-        marginBottom:20,
+        marginBottom:10,
+        marginTop:20,
         justifyContent:"center",
         padding:20,
         borderWidth: 1,
         borderColor: "#ddd",
         borderStyle: 'solid',
-        alignItems:'center'
     },
     inputText:{
         height:50,
-        color:"black"
+        color: "black",
+    },
+    accessibilityContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     SubmitBtn:{
-        backgroundColor:"#7fff00",
+        backgroundColor:"#4db800",
         borderRadius:25,
         height:50,
         alignItems:"center",
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor:'#00a506',
+        marginBottom:20,
+        marginTop:10,
         justifyContent:"center",
-        marginTop:40,
-        marginBottom:10,
-        width:'20%'
+        width: 150
     },
     SubmitText: {
         fontWeight: 'bold',
     },
     darkModeText: {
         fontSize: 20,
-        fontWeight: 'bold',
-        justifyContent:'center',
-        alignItems:'center',
-        textAlign:'center',
-        alignSelf:'center'
     },
     headerText:{
-        fontSize: 20,
+        fontSize: 25,
         fontWeight:'bold'
     },
     deleteText: {
-        position: "absolute",
+        // position: "absolute",
         fontSize: 20,
         color: 'red',
         fontWeight: 'bold',
         marginBottom: 30
+        // top: Dimensions.get('window').height * .65
     },
     button: {
         alignItems: 'center',

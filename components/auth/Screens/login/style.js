@@ -55,7 +55,6 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor:'#00b806',
-    borderRadius:25,
     height:50,
     width: Dimensions.get('window').width * 0.8,
     alignItems:"center",

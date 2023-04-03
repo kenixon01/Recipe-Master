@@ -3,17 +3,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import App from '../../../App';
-import { useDispatch } from 'react-redux';
-import { setData, setDeleteAcct } from '../../../actions/index';
+import { setDeleteAcct } from '../../../actions/index';
 
 
 //Screens
 import HomeScreen from '../Screens/main/MainScreen';
 import SettingsScreen from '../Screens/settings/Setting';
 import ListScreen from '../Screens/listEditor/ListEditor';
-// import ForgotPassword from '../Screens/forgotPassword/ForgotPassword';
 import Results from '../Screens/results/Results';
 import { useEffect } from 'react';
 // import Login from '../Screens/login/Login';
@@ -23,7 +21,7 @@ const Stack = createStackNavigator()
 function HomeStackScreen (){
     return(
         <Stack.Navigator>
-            <Stack.Screen name = 'Home' component={HomeScreen}  options= {{headerShown: false}}/>
+            <Stack.Screen name = 'HomePage' component={HomeScreen}  options= {{headerShown: false}}/>
             <Stack.Screen name = 'Result' component={Results}  options= {{headerShown: false}}/>
         </Stack.Navigator>
     )
