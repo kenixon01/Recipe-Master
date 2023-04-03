@@ -4,7 +4,7 @@
     "slug": "RecipeMaster",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/recipeIcon.png",
+    "icon": "./assets/recipeIcon.jpg",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/cookingPot.jpg",
@@ -22,12 +22,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/recipeIcon.jpg",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/cookingPot.jpg"
     }
   }
 }

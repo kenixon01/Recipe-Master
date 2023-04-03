@@ -16,7 +16,7 @@ export default styles = StyleSheet.create({
       image: {
           alignSelf:'center',
           width: Dimensions.get('window').width * 1.3,
-          height: Dimensions.get('window').width * .75,
+          height: Dimensions.get('window').width * .7,
           borderBottomLeftRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
           borderBottomRightRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
       },
@@ -25,14 +25,15 @@ export default styles = StyleSheet.create({
       backgroundColor:"white",
       borderRadius:25,
       height:50,
-      marginBottom:20,
       padding:20,
       justifyContent:"center",
-      alignItems:'center',
+      borderColor: "#ddd",
+      borderWidth: 1,
       },
     inputText:{
         height:50,
-        color:"black"
+        color:"black",
+        textAlign: "center"
       },
     header:{
       fontSize: 25,

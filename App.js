@@ -13,7 +13,7 @@ import { store } from './redux/store'
 
 const Stack = createStackNavigator();
 
-const Auth = () => {
+export const Auth = () => {
   //Stack Nav for Login and Sign up from Splash 
   return (
     <Stack.Navigator initialRouteName='Login'>

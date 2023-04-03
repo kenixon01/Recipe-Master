@@ -41,7 +41,7 @@ export default function MainScreen ({navigation}) {
     <SafeAreaView>
       <ScrollView>
         <View style = {styles.container} >
-        <Image source={require('../../../../assets/20220901_133028_HDR.jpg')} style={styles.image}/>
+        <Image source={require('../../../../assets/20220901_133028_HDR2.jpg')} style={styles.image}/>
         <Text style = {{...styles.title, fontFamily: 'CairoPlay' }}>Welcome, User</Text>
         <View style = {styles.greenBox}>
           <View style = {styles.inputView}>

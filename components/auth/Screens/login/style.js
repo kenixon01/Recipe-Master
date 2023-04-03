@@ -1,5 +1,4 @@
 import { Dimensions, StyleSheet } from "react-native";
-import background from '../../../../assets/recipeIcon.jpg'
 
 export default StyleSheet.create({
   containerBottom: {
