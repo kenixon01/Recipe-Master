@@ -25,6 +25,7 @@ export const Auth = () => {
 } 
 
 const App = () => {
+  
   return(  
     <Provider store = {store}>
       <NavigationContainer independent={true}>

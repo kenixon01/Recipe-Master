@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Switch, Alert, ScrollView, SafeAreaView } from 'react-native';
 import styles from './style';
 import { useFonts } from 'expo-font';
-import App from '../../../../App';
+import { useDispatch } from 'react-redux';
+import { setDeleteAcct } from '../../../../actions/index';
 
 export default function SettingsScreen ({navigation}){
     const [loaded] = useFonts({
@@ -13,23 +14,26 @@ export default function SettingsScreen ({navigation}){
     const [shouldshow, setshouldShow] = useState(false);
     //const [darkMode, setDarkMode] = useState(false);
     const [isShowing, setIsShowing] = useState(false);
-    const [deleteAcct, setDeleteAcct] = useState(false);
 
     const [isOn , setIsOn] = useState(false);
     const onToggleSwitch = () => setIsOn(!isOn);
 
+    const dispatch = useDispatch();
+
+    const handleDeleteAcct = (data) => {
+      dispatch(setDeleteAcct(data))
+    }
+
     const handleLogout = () => {
-        navigation.navigate("Login");
+        handleDeleteAcct(true);
+        // navigation.navigate("Login");
         // Alert.alert('Account has been deleted',
         // [ {text: 'Okay'} ],
         //   { cancelable: false })
     }
+    
     if(!loaded) {
         return null;
-    }
-
-    if(deleteAcct) {
-        return <App/>
     }
 
     return (
@@ -110,7 +114,7 @@ export default function SettingsScreen ({navigation}){
                                     'Are you sure you want to delete your account?',
                                     [
                                         {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-                                        {text: 'Confirm', onPress: setDeleteAcct(true) },
+                                        {text: 'Confirm', onPress: () => handleLogout() },
                                     ],
                                     { cancelable: false }
                                 )}>

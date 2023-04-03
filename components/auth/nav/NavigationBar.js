@@ -3,7 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import App from '../../../App'
+import { useSelector } from 'react-redux';
+import App from '../../../App';
+import { useDispatch } from 'react-redux';
+import { setData, setDeleteAcct } from '../../../actions/index';
+
 
 //Screens
 import HomeScreen from '../Screens/main/MainScreen';
@@ -11,6 +15,7 @@ import SettingsScreen from '../Screens/settings/Setting';
 import ListScreen from '../Screens/listEditor/ListEditor';
 // import ForgotPassword from '../Screens/forgotPassword/ForgotPassword';
 import Results from '../Screens/results/Results';
+import { useEffect } from 'react';
 // import Login from '../Screens/login/Login';
 
 const Stack = createStackNavigator()
@@ -27,7 +32,7 @@ function HomeStackScreen (){
 function SettingStackScreen (){
     return(
         <Stack.Navigator>
-            <Stack.Screen name = 'Settings' component={SettingsScreen}  options= {{headerShown: false}}/>
+            <Stack.Screen name = 'Setting' component={SettingsScreen}  options= {{headerShown: false}}/>
             {/* <Stack.Screen name = 'Login' component={App} options= {{headerShown: false}}/> */}
         </Stack.Navigator>
     )
@@ -44,6 +49,21 @@ function ListEditorStackScreen (){
 
 const Tab = createBottomTabNavigator();
 export default function NavigationBar() {
+    const data = useSelector((store) => store.deleted);
+    const dispatch = useDispatch();
+  
+    const handleDeleteAcct = (data) => {
+      dispatch(setDeleteAcct(data))
+    }
+
+    useEffect(() => {
+        handleDeleteAcct(false)
+    }, [])
+
+    if(data)  {
+        return <App/>
+    }
+
     return(
         <NavigationContainer independent={true}>
             <Tab.Navigator initialRouteName={'Home'} screenOptions = {({route}) => ({
@@ -54,7 +74,7 @@ export default function NavigationBar() {
                     if (rn === 'Home'){
                         iconName = focused ? 'home' : 'home-outline'
                     }
-                    else if (rn === 'Setting'){
+                    else if (rn === 'Settings'){
                         iconName = focused ? 'settings' : 'settings-outline'
                     }
                     else if (rn === 'List Editor'){
@@ -73,7 +93,7 @@ export default function NavigationBar() {
             >
                 <Tab.Screen name = 'List Editor' component={ListEditorStackScreen} options={{headerShown: false}}/>
                 <Tab.Screen name = 'Home' component={HomeStackScreen} options={{headerShown: false}}/>
-                <Stack.Screen name = 'Setting' component={SettingStackScreen} options={{headerShown: false}}/>
+                <Stack.Screen name = 'Settings' component={SettingStackScreen} options={{headerShown: false}}/>
             </Tab.Navigator>
         </NavigationContainer>
     )    

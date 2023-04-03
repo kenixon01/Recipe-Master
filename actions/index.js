@@ -11,3 +11,10 @@ export const setAPICallLoading = (payload) => {
     payload: payload,
   }
 }
+  
+export const setDeleteAcct = (payload) => {
+  return {
+    type: 'HANDLE_DELETE_ACCT',
+    payload: payload,
+  }
+}
