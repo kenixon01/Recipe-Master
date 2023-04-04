@@ -11,7 +11,7 @@ export default styles = StyleSheet.create({
     },
     title:{
         fontSize: 40,
-        color:'black',
+        color:'#BFA600',
     },
     backgroundImg:{
         width: Dimensions.get('window').width,
@@ -41,11 +41,11 @@ export default styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     SubmitBtn:{
-        backgroundColor:"#B42306",
+        backgroundColor:"#D6BA00",
         borderRadius:25,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor:'#8A1B05',
+        borderColor:'#BFA600',
         height:50,
         width: Dimensions.get('window').width * 0.8,
         alignItems:"center",

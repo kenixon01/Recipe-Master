@@ -9,7 +9,7 @@ export default style = StyleSheet.create({
     title:{
       fontSize: 60,
       marginBottom: 30,
-      color:'#B42306',
+      color:'#4F5200',
       padding: 15,
       textAlign: 'center'
     },
@@ -51,11 +51,11 @@ export default style = StyleSheet.create({
         color: 'white'
     },
     SignupBtn:{
-        backgroundColor:"#B42306",
+        backgroundColor:"#D6BA00",
         borderRadius:25,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor:'#8A1B05',
+        borderColor:'#BFA600',
         height:50,
         width: Dimensions.get('window').width * 0.8,
         alignItems:"center",

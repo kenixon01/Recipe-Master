@@ -66,11 +66,11 @@ export default StyleSheet.create({
     fontSize:15
   },
   loginBtn:{
-    backgroundColor:"#B42306",
+    backgroundColor:"#D6BA00",
     borderRadius:25,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor:'#8A1B05',
+    borderColor:'#BFA600',
     height:50,
     width: Dimensions.get('window').width * 0.8,
     alignItems:"center",

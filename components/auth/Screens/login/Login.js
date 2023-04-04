@@ -72,7 +72,7 @@ export class Login extends Component {
                   onPress={() => this.props.navigation.navigate("ForgotPassword")}
                   // titleStyle = {{color: '#039BE5', }}
                   type = 'clear'
-                  color={'#ADC2D4'}
+                  color={'#4F5200'}
                 />
             </View>
           </View>

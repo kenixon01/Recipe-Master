@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
     title:{
       fontSize: 40,
       marginBottom: 30,
-      color:'black',
+      color:'#BFA600',
       padding: 15,
       textAlign: 'center'
     },
@@ -43,10 +43,10 @@ export default styles = StyleSheet.create({
       fontSize: 15,
       fontStyle:'italic',
       textAlign:'center',
-      color:'#ADC2D4',
+      color:'#BFA600',
     },
     greenBox:{
-      backgroundColor:'#B42306',
+      backgroundColor:'#4F5200',
       height: 150,
       justifyContent:'center',
       alignItems:'center',
