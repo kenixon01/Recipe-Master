@@ -41,20 +41,22 @@ export default styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     SubmitBtn:{
-        backgroundColor:"#4db800",
+        backgroundColor:"#B42306",
         borderRadius:25,
-        height:50,
-        alignItems:"center",
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor:'#00a506',
-        marginBottom:20,
-        marginTop:10,
+        borderColor:'#8A1B05',
+        height:50,
+        width: Dimensions.get('window').width * 0.8,
+        alignItems:"center",
         justifyContent:"center",
-        width: 150
+        marginTop:40,
+        marginBottom:10
     },
     SubmitText: {
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontWeight: '400',
+        color: 'white'
     },
     darkModeText: {
         fontSize: 20,

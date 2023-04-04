@@ -7,18 +7,17 @@ export default styles = StyleSheet.create({
       backgroundColor: 'white',
     },
     title:{
-      fontSize: Dimensions.get('window').width * 0.1,
-      color:"black",
-      marginTop: 40,
-      textAlign:'center',
-      fontSize:40,
+      fontSize: 40,
+      marginBottom: 30,
+      color:'black',
+      padding: 15,
+      textAlign: 'center'
     },
     image: {
-      alignSelf:'center',
-      width: Dimensions.get('window').width * 1.3,
-      height: Dimensions.get('window').width * .7,
-      borderBottomLeftRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
-      borderBottomRightRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
+      alignSelf:'flex-end',
+      width: Dimensions.get('window').width * 1,
+      height: Dimensions.get('window').width * 1,
+      borderRadius: Dimensions.get('window').width
     },
     inputView:{
       width:"80%",
@@ -44,10 +43,10 @@ export default styles = StyleSheet.create({
       fontSize: 15,
       fontStyle:'italic',
       textAlign:'center',
-      color:'#228b22',
+      color:'#ADC2D4',
     },
     greenBox:{
-      backgroundColor:'#D6E4CD',
+      backgroundColor:'#B42306',
       height: 150,
       justifyContent:'center',
       alignItems:'center',

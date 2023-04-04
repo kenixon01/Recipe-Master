@@ -8,8 +8,10 @@ import { setDeleteAcct } from '../../../../actions/index';
 
 export default function SettingsScreen ({navigation}){
     const [loaded] = useFonts({
-        CairoPlay: require('../../../../assets/fonts/CairoPlay-ExtraBold.ttf'),
+        PTSansNarrow: require('../../../../assets/fonts/PTSansNarrow-Bold.ttf'),
+        PTSansNarrowThin: require('../../../../assets/fonts/PTSansNarrow-Regular.ttf'),
     });
+
 
     const [shouldshow, setshouldShow] = useState(false);
     //const [darkMode, setDarkMode] = useState(false);
@@ -34,21 +36,21 @@ export default function SettingsScreen ({navigation}){
 
     while (!loaded) {
         return (
-          <View>
-            <ActivityIndicator/>
+          <View style={style.activityIndicator}>
+            <ActivityIndicator size={"large"}/>
           </View>
         )
     }
 
     return (
-        <ImageBackground style={styles.backgroundImg} source={require('../../../../assets/background.jpg')}>
-            <SafeAreaView>
-                <ScrollView>
+        <SafeAreaView>
+            <ScrollView>
+                <ImageBackground style={styles.backgroundImg} source={require('../../../../assets/background.jpg')}>
                     <View style = {styles.container}>
                         <View>
-                            <Text style = {{...styles.title, fontFamily: "CairoPlay"}}>Settings</Text>
+                            <Text style = {{...styles.title, fontFamily: "PTSansNarrow"}}>Settings</Text>
                             <TouchableOpacity onPress={() => setshouldShow(!shouldshow)}> 
-                                <Text style = {styles.headerText}>Update User Information</Text>
+                                <Text style = {{...styles.headerText, fontFamily: 'PTSansNarrowThin'}}>Update User Information</Text>
                             </TouchableOpacity>
 
                             {shouldshow ? (
@@ -97,7 +99,7 @@ export default function SettingsScreen ({navigation}){
                                 </View>
                             ) : null } 
                             <TouchableOpacity onPress={() => setIsShowing(!isShowing)}> 
-                                <Text style = {styles.headerText}>Accessibility</Text>
+                                <Text style = {{...styles.headerText, fontFamily: 'PTSansNarrowThin'}}>Accessibility</Text>
                             </TouchableOpacity>
 
                             {isShowing ? (
@@ -117,7 +119,7 @@ export default function SettingsScreen ({navigation}){
                         <View>
                             <TouchableOpacity
                                 onPress={() => Alert.alert(
-                                    'Delete Account ?!?',
+                                    'Delete Account?',
                                     'Are you sure you want to delete your account?',
                                     [
                                         {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
@@ -140,9 +142,9 @@ export default function SettingsScreen ({navigation}){
                             </View>
                         </TouchableOpacity> */}
                         {/* </View> */}
-                    </View>
-                </ScrollView>
-            </SafeAreaView>
-        </ImageBackground>
+                </View>
+            </ImageBackground>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
