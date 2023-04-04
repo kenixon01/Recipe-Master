@@ -1,62 +1,74 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
     container: {
+        paddingHorizontal: Dimensions.get('window').width * .1,
+        paddingTop: Dimensions.get('window').height * .1,
         flex: 1,
-        backgroundColor: 'white',
-         
-        },
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        justifyContent: 'space-between',
+    },
     title:{
-        fontWeight: "bold",
-        fontSize:50,
+        fontSize: 40,
         color:'black',
-        marginBottom: 40,
-        textAlign:'center',
-        },
+    },
+    backgroundImg:{
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+    },
     inputView:{
-        backgroundColor:"#EFEFEF",
+        width: Dimensions.get('window').width * 0.8,
+        backgroundColor:"#fafafa",
         borderRadius:25,
         height:50,
-        marginBottom:20,
+        marginBottom:10,
+        marginTop:20,
         justifyContent:"center",
         padding:20,
-        alignItems:'center'
-        },
+        borderWidth: 1,
+        borderColor: "#ddd",
+        borderStyle: 'solid',
+    },
     inputText:{
         height:50,
-        color:"black"
-        },
+        color: "black",
+    },
+    accessibilityContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
     SubmitBtn:{
-        backgroundColor:"#7fff00",
+        backgroundColor:"#4db800",
         borderRadius:25,
         height:50,
         alignItems:"center",
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor:'#00a506',
+        marginBottom:20,
+        marginTop:10,
         justifyContent:"center",
-        marginTop:40,
-        marginBottom:10,
-        width:'20%'
-        },
+        width: 150
+    },
     SubmitText: {
         fontWeight: 'bold',
-        },
+    },
     darkModeText: {
         fontSize: 20,
-        fontWeight: 'bold',
-        justifyContent:'center',
-        alignItems:'center',
-        textAlign:'center',
-        alignSelf:'center'
-        },
+    },
     headerText:{
-        fontSize: 20,
+        fontSize: 25,
         fontWeight:'bold'
-        },
+    },
     deleteText: {
         fontSize: 20,
         color: 'red',
         fontWeight: 'bold',
-        alignItems:'flex-end',
-        },
+        marginBottom: 30
+    },
     button: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -64,16 +76,16 @@ export default styles = StyleSheet.create({
         backgroundColor:"#7fff00",
         borderRadius: 50,
         width:'150%'
-      },
+    },
     button_label: {
         color: 'black',
         fontSize: 15,
         fontWeight:'bold'
-      },
+    },
     button_Delete: {
         color: 'red',
         fontSize: 15,
         fontWeight:'bold'
-      },
+    },
     
 });

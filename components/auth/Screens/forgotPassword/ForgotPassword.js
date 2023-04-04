@@ -1,12 +1,38 @@
 import React, {Component} from "react";
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, Image, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
 import style from './style'
+import * as Font from 'expo-font';
 
 class ForgotPassword extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            fontsLoaded: false
+        }
+        
+    }
+
+    async loadFonts() {
+      await Font.loadAsync({
+        CairoPlay: require('../../../../assets/fonts/CairoPlay-ExtraBold.ttf'),
+      });
+      this.setState({ fontsLoaded: true });
+    }
+
     render() {
+        while(!this.state.fontsLoaded) {
+            this.loadFonts()
+            return (
+              <View>
+                <ActivityIndicator/>
+              </View>
+            )
+        }
         return (
             <View style = {style.container}>
-                <Text style={style.title}> Forgot Password</Text>
+                <Image source={require('../../../../assets/20221230_1452122.jpg')} style={styles.image}/>
+                <Text style={{...style.title, fontFamily: 'CairoPlay'}}> Forgot Password</Text>
                 <View style = {style.inputView}>
                     <TextInput 
                         style = {style.inputText}

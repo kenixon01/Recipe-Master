@@ -1,40 +1,53 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 export default style = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#4FD3DA',
+        backgroundColor: 'white',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
     },
-        title:{
-        fontWeight: "bold",
-        fontSize:50,
-        color:'black',
-        marginBottom: 40,
+    image: {
+        alignSelf:'center',
+        width: Dimensions.get('window').width * 1.3,
+        height: Dimensions.get('window').width * .7,
+        borderBottomLeftRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
+        borderBottomRightRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
     },
-        inputView:{
+    title:{
+        fontSize: Dimensions.get('window').width * 0.1,
+        color:"black",
+        marginTop: 40,
+        textAlign:'center',
+        fontSize:40,
+    },
+    inputView:{
         width:"80%",
-        backgroundColor:"#3AB4BA",
+        backgroundColor:"#eaeaea",
         borderRadius:25,
         height:50,
-        marginBottom:20,
+        padding:20,
         justifyContent:"center",
-        padding:20
+        borderColor: "#ddd",
+        borderWidth: 1,
+        marginVertical: 20
     },
-        inputText:{
+    inputText:{
         height:50,
         color:"white"
     },
-        forgotAndSignUpText:{
+    forgotAndSignUpText:{
         color:"white",
         fontSize:11
     },
     SignupBtn:{
-        width:"80%",
-        backgroundColor:"#7fff00",
+        backgroundColor:"#4db800",
         borderRadius:25,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor:'#00b806',
         height:50,
+        width: Dimensions.get('window').width * 0.8,
         alignItems:"center",
         justifyContent:"center",
         marginTop:40,
