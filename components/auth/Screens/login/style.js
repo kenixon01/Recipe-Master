@@ -27,7 +27,7 @@ export default StyleSheet.create({
   },
   inputView:{
     width: Dimensions.get('window').width * 0.8,
-    backgroundColor:"#EFEFEF",
+    backgroundColor:"#eaeaea",
     borderRadius:25,
     height:50,
     borderWidth: 1,

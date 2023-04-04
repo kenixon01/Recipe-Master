@@ -5,21 +5,21 @@ export default styles = StyleSheet.create({
       flex: 1,
       flexDirection:'column',
       backgroundColor: 'white',
-      },
+    },
     title:{
       fontSize: Dimensions.get('window').width * 0.1,
       color:"black",
       marginTop: 40,
       textAlign:'center',
       fontSize:40,
-      },
-      image: {
-          alignSelf:'center',
-          width: Dimensions.get('window').width * 1.3,
-          height: Dimensions.get('window').width * .7,
-          borderBottomLeftRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
-          borderBottomRightRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
-      },
+    },
+    image: {
+      alignSelf:'center',
+      width: Dimensions.get('window').width * 1.3,
+      height: Dimensions.get('window').width * .7,
+      borderBottomLeftRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
+      borderBottomRightRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) * 3,
+    },
     inputView:{
       width:"80%",
       backgroundColor:"white",
@@ -29,12 +29,12 @@ export default styles = StyleSheet.create({
       justifyContent:"center",
       borderColor: "#ddd",
       borderWidth: 1,
-      },
+    },
     inputText:{
         height:50,
         color:"black",
         textAlign: "center"
-      },
+    },
     header:{
       fontSize: 25,
       fontWeight: 'bold',
