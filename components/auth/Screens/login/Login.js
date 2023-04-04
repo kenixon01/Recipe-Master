@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Button, Text, TextInput, TouchableOpacity, ImageBackground } from 'react-native'
+import { View, Button, Text, TextInput, TouchableOpacity, ImageBackground, ActivityIndicator} from 'react-native'
 import style from './style'
 import * as Font from 'expo-font';
 
@@ -32,8 +32,14 @@ export class Login extends Component {
   }
 
   render() {
-    if(!this.state.fontsLoaded) {this.loadFonts()}
-    else {
+    while(!this.state.fontsLoaded) {
+      this.loadFonts()
+      return (
+        <View>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
     return ( 
       <View style = {style.container}>
         <ImageBackground source={require('../../../../assets/20221230_143041_212.jpg')} style={style.image} resizeMode="cover">
@@ -82,7 +88,7 @@ export class Login extends Component {
         </ImageBackground>
         
       </View>
-    )}
+    )
   }
 }
 

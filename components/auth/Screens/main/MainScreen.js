@@ -43,14 +43,13 @@ export default function MainScreen ({navigation}) {
     handleAPILoadingStateChange(false)
   }
   
-  const loadingConditions = !loaded || apiLoading;
-  // while (loadingConditions) {
-  //   return (
-  //     <View>
-  //       <ActivityIndicator/>
-  //     </View>
-  //   )
-  // }
+  while (!loaded) {
+    return (
+      <View>
+        <ActivityIndicator/>
+      </View>
+    )
+  }
 
   return(
     <SafeAreaView>

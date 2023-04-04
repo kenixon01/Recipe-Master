@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Switch, Alert, ScrollView, SafeAreaView, ImageBackground } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Switch, Alert, ScrollView, SafeAreaView, ImageBackground, ActivityIndicator } from 'react-native';
 import styles from './style';
 import { useFonts } from 'expo-font';
 import { useDispatch } from 'react-redux';
@@ -32,8 +32,12 @@ export default function SettingsScreen ({navigation}){
         //   { cancelable: false })
     }
 
-    if(!loaded) {
-        return null;
+    while (!loaded) {
+        return (
+          <View>
+            <ActivityIndicator/>
+          </View>
+        )
     }
 
     return (
