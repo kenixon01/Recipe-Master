@@ -7,11 +7,15 @@ export default styles = StyleSheet.create({
         flex: 1,
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     title:{
         fontSize: 40,
         color:'black',
+    },
+    backgroundImg:{
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
     },
     inputView:{
         width: Dimensions.get('window').width * 0.8,
@@ -60,12 +64,10 @@ export default styles = StyleSheet.create({
         fontWeight:'bold'
     },
     deleteText: {
-        // position: "absolute",
         fontSize: 20,
         color: 'red',
         fontWeight: 'bold',
         marginBottom: 30
-        // top: Dimensions.get('window').height * .65
     },
     button: {
         alignItems: 'center',

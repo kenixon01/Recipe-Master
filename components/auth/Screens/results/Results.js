@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { IconButton } from "@react-native-material/core";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useSelector } from 'react-redux';
@@ -7,12 +7,21 @@ import styles from './style'
 
 export default function Results({navigation}){
     
-    const data = useSelector((store) => store.data);
+    const apiData = useSelector((store) => store.data);
+    const apiDataLoading = useSelector((store) => store.isLoaded);
+
+    const loadingConditions = apiData.hits === undefined || apiDataLoading;
+    while (loadingConditions) {
+        return (
+          <View style={styles.activityIndicator}>
+            <ActivityIndicator size={"large"}/>
+          </View>
+        )
+    }
 
     return (
         <View style = {styles.container}>
             <Text style = {styles.Title}>Results</Text>
-
             <IconButton
                 icon = {props => <Icon name = "account-settings"{...props} />}
                 onPress = {() => navigation.navigate("Settings")}
@@ -20,11 +29,11 @@ export default function Results({navigation}){
                 />
             <View>
                 { 
-                    (data === undefined) ? <Text>Loading...</Text> :
-                    (data.hits.length === 0) ? 
+                    (apiData === undefined) ? <Text>Loading...</Text> :
+                    (apiData.hits.length === 0) ? 
                         <Text>No results found</Text>
                     :
-                    data.hits.map((e, index) => {
+                    apiData.hits.map((e, index) => {
                         return (<Text key = {index}>{e.recipe.label}</Text>)
                     }) 
                 }

@@ -6,6 +6,11 @@ export default styles = StyleSheet.create({
         paddingVertical:10,
         flex:1
     },
+    activityIndicator: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"  
+    },
     Title: {
         fontSize: 40,
         justifyContent:'center',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Switch, Alert, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Switch, Alert, ScrollView, SafeAreaView, ImageBackground } from 'react-native';
 import styles from './style';
 import { useFonts } from 'expo-font';
 import { useDispatch } from 'react-redux';
@@ -37,106 +37,108 @@ export default function SettingsScreen ({navigation}){
     }
 
     return (
-        <SafeAreaView>
-            <ScrollView>
-                <View style = {styles.container}>
-                    <View>
-                        <Text style = {{...styles.title, fontFamily: "CairoPlay"}}>Settings</Text>
-                        <TouchableOpacity onPress={() => setshouldShow(!shouldshow)}> 
-                            <Text style = {styles.headerText}>Update User Information</Text>
-                        </TouchableOpacity>
+        <ImageBackground style={styles.backgroundImg} source={require('../../../../assets/background.jpg')}>
+            <SafeAreaView>
+                <ScrollView>
+                    <View style = {styles.container}>
+                        <View>
+                            <Text style = {{...styles.title, fontFamily: "CairoPlay"}}>Settings</Text>
+                            <TouchableOpacity onPress={() => setshouldShow(!shouldshow)}> 
+                                <Text style = {styles.headerText}>Update User Information</Text>
+                            </TouchableOpacity>
 
-                        {shouldshow ? (
-                            <View>
-                                <View style = {styles.inputView}>
-                                    <TextInput 
-                                        style = {styles.inputText}
-                                        placeholder = "First Name"
-                                        placeholderTextColor="#003f5c"
-                                        />
-                                </View>
-                                <View style = {styles.inputView}>
-                                    <TextInput 
-                                        style = {styles.inputText}
-                                        placeholder = "Last Name"
-                                        placeholderTextColor="#003f5c"
-                                        />
-                                </View>
-                                <View style = {styles.inputView}>
-                                <TextInput 
-                                    style = {styles.inputText}
-                                    placeholder = "Email Address"
-                                    placeholderTextColor="#003f5c"
-                                    />
-                                </View>
-                                <View style = {styles.inputView}>
-                                    <TextInput 
-                                        style = {styles.inputText}
-                                        placeholder = "Username"
-                                        placeholderTextColor="#003f5c"
-                                        />
-                                </View>
-                                <View style = {styles.inputView}>
-                                    <TextInput 
-                                        style = {styles.inputText}
-                                        placeholder = "Password"
-                                        placeholderTextColor="#003f5c"
-                                        />
-                                </View>
+                            {shouldshow ? (
                                 <View>
-                                    <TouchableOpacity style={styles.SubmitBtn}>
-                                        <Text style={styles.SubmitText}>Save Changes</Text> 
-                                    </TouchableOpacity> 
-                                </View>
+                                    <View style = {styles.inputView}>
+                                        <TextInput 
+                                            style = {styles.inputText}
+                                            placeholder = "First Name"
+                                            placeholderTextColor="#003f5c"
+                                            />
+                                    </View>
+                                    <View style = {styles.inputView}>
+                                        <TextInput 
+                                            style = {styles.inputText}
+                                            placeholder = "Last Name"
+                                            placeholderTextColor="#003f5c"
+                                            />
+                                    </View>
+                                    <View style = {styles.inputView}>
+                                    <TextInput 
+                                        style = {styles.inputText}
+                                        placeholder = "Email Address"
+                                        placeholderTextColor="#003f5c"
+                                        />
+                                    </View>
+                                    <View style = {styles.inputView}>
+                                        <TextInput 
+                                            style = {styles.inputText}
+                                            placeholder = "Username"
+                                            placeholderTextColor="#003f5c"
+                                            />
+                                    </View>
+                                    <View style = {styles.inputView}>
+                                        <TextInput 
+                                            style = {styles.inputText}
+                                            placeholder = "Password"
+                                            placeholderTextColor="#003f5c"
+                                            />
+                                    </View>
+                                    <View>
+                                        <TouchableOpacity style={styles.SubmitBtn}>
+                                            <Text style={styles.SubmitText}>Save Changes</Text> 
+                                        </TouchableOpacity> 
+                                    </View>
 
-                            </View>
-                        ) : null } 
-                        <TouchableOpacity onPress={() => setIsShowing(!isShowing)}> 
-                            <Text style = {styles.headerText}>Accessibility</Text>
-                        </TouchableOpacity>
-
-                        {isShowing ? (
-                            <View>
-                                <View style={styles.accessibilityContainer}>
-                                    <Text style={styles.darkModeText}>Dark Mode</Text>
-                                    <Switch
-                                        value = {isOn}
-                                        onValueChange = {onToggleSwitch}
-                                        trackColor ={{false:'black', true:'white'}}
-                                        thumbColor = {isOn ? "black": "white"}
-                                    />
                                 </View>
+                            ) : null } 
+                            <TouchableOpacity onPress={() => setIsShowing(!isShowing)}> 
+                                <Text style = {styles.headerText}>Accessibility</Text>
+                            </TouchableOpacity>
+
+                            {isShowing ? (
+                                <View>
+                                    <View style={styles.accessibilityContainer}>
+                                        <Text style={styles.darkModeText}>Dark Mode</Text>
+                                        <Switch
+                                            value = {isOn}
+                                            onValueChange = {onToggleSwitch}
+                                            trackColor ={{false:'black', true:'white'}}
+                                            thumbColor = {isOn ? "black": "white"}
+                                        />
+                                    </View>
+                                </View>
+                            ) :null } 
+                        </View>
+                        <View>
+                            <TouchableOpacity
+                                onPress={() => Alert.alert(
+                                    'Delete Account ?!?',
+                                    'Are you sure you want to delete your account?',
+                                    [
+                                        {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
+                                        {text: 'Confirm', onPress: () => handleLogout() },
+                                    ],
+                                    { cancelable: false }
+                                )}>
+                                <Text style = {styles.deleteText}>Delete Account?</Text>
+                            </TouchableOpacity>
+                        </View>
+                        {/* <View style = {{flexDirection: 'row', justifyContent:'space-evenly'}} > */}
+                        {/* <TouchableOpacity >
+                            <View style = {styles.button}>
+                                <Text style = {styles.button_label}>Sign out</Text>           
                             </View>
-                        ) :null } 
+                        </TouchableOpacity> */}
+                        {/* <TouchableOpacity >
+                            <View style = {styles.button}>
+                                <Text style = {styles.button_Delete}>Delete Account</Text>           
+                            </View>
+                        </TouchableOpacity> */}
+                        {/* </View> */}
                     </View>
-                    <View>
-                        <TouchableOpacity
-                            onPress={() => Alert.alert(
-                                'Delete Account ?!?',
-                                'Are you sure you want to delete your account?',
-                                [
-                                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-                                    {text: 'Confirm', onPress: () => handleLogout() },
-                                ],
-                                { cancelable: false }
-                            )}>
-                            <Text style = {styles.deleteText}>Delete Account?</Text>
-                        </TouchableOpacity>
-                    </View>
-                    {/* <View style = {{flexDirection: 'row', justifyContent:'space-evenly'}} > */}
-                    {/* <TouchableOpacity >
-                        <View style = {styles.button}>
-                            <Text style = {styles.button_label}>Sign out</Text>           
-                        </View>
-                    </TouchableOpacity> */}
-                    {/* <TouchableOpacity >
-                        <View style = {styles.button}>
-                            <Text style = {styles.button_Delete}>Delete Account</Text>           
-                        </View>
-                    </TouchableOpacity> */}
-                    {/* </View> */}
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+                </ScrollView>
+            </SafeAreaView>
+        </ImageBackground>
     );
 }

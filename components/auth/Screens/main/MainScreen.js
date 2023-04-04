@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Text, View, TextInput, Image, SafeAreaView, ScrollView } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { setData } from '../../../../actions/index';
+import { Text, View, TextInput, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setData, setAPICallLoading } from '../../../../actions/index';
 import { API_ID, API_KEY } from '@env'
 import { useFonts } from 'expo-font';
 import styles from './style'
+
 
 export default function MainScreen ({navigation}) {
   
@@ -15,13 +16,21 @@ export default function MainScreen ({navigation}) {
     CairoPlay: require('../../../../assets/fonts/CairoPlay-ExtraBold.ttf'),
   });
 
+  
+  const apiLoading = useSelector((store) => store.isLoading);
+
   const dispatch = useDispatch();
 
   const handleDataChange = (data) => {
     dispatch(setData(data))
   }
+
+  const handleAPILoadingStateChange = (data) => {
+    dispatch(setAPICallLoading(data))
+  }
  
   const getRecipes = async (search) => {
+    handleAPILoadingStateChange(true)
     setSearch(search)
     const URL = `https://api.edamam.com/search?q=${search}&app_id=${API_ID}&app_key=${API_KEY}`
     fetch(URL).then(response => {
@@ -31,11 +40,17 @@ export default function MainScreen ({navigation}) {
     }).catch(error => {
       console.error(error);
     })
+    handleAPILoadingStateChange(false)
   }
   
-  if (!loaded) {
-    return null;
-  }
+  const loadingConditions = !loaded || apiLoading;
+  // while (loadingConditions) {
+  //   return (
+  //     <View>
+  //       <ActivityIndicator/>
+  //     </View>
+  //   )
+  // }
 
   return(
     <SafeAreaView>
@@ -72,7 +87,5 @@ export default function MainScreen ({navigation}) {
       </View>
       </ScrollView>
     </SafeAreaView>
-    
-    )
-  
+  )
 }
