@@ -2,32 +2,32 @@ import { Dimensions, StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   containerBottom: {
-    flex: 1,
+    flexGrow: 2,
     justifyContent:'space-between',
     alignItems:'center',
-    marginBottom:30,
-    marginTop:Dimensions.get('window').height * .2,
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    padding: '5%',
+    backgroundColor: '#fffe',
+    borderTopLeftRadius: Dimensions.get('window').width / 2,
+    borderTopRightRadius: Dimensions.get('window').width / 2,
+    paddingTop: 100
   },
   container: {
     flex: 1,
-    justifyContent:'space-between',
     alignItems:'center',
-  },
-  loginContainer: {
-    display:'flex',
-    
+    backgroundColor: "white",
+    width: Dimensions.get('window').width,
+    paddingTop: 200
   },
   title:{
-    fontSize: Dimensions.get('window').width * 0.1,
-    color:"white",
-    marginTop: 40,
-    fontSize: 50
+    fontSize: 60,
+    marginBottom: 30,
+    color:'white',
+    padding: 15,
   },
   inputView:{
     width: Dimensions.get('window').width * 0.8,
-    backgroundColor:"#eaeaea",
+    backgroundColor:"white",
     borderRadius:25,
     height:50,
     borderWidth: 1,
@@ -37,24 +37,40 @@ export default StyleSheet.create({
     justifyContent:"center",
     padding:20,
   },
+  image: {
+    // position: 'absolute',
+    width: 120,
+    height: 160,    
+    // alignSelf: 'center',
+    // margin: "10%",
+  },
+  // background: {
+  //   backgroundColor: 'white'
+  // },
   inputText:{
     height:50,
-    color:"ddd"
+    color: "#ddd"
   },
   loginText:{
     fontSize: 20,
-    fontWeight: '400'
+    fontWeight: '400',
+    color: 'white'
+  },
+  activityIndicator: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center"  
   },
   forgotAndSignUpText:{
-    color:"white",
-    fontSize:11
+    // color:"white",
+    fontSize:15
   },
   loginBtn:{
-    backgroundColor:"#4db800",
+    backgroundColor:"#B42306",
     borderRadius:25,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor:'#00b806',
+    borderColor:'#8A1B05',
     height:50,
     width: Dimensions.get('window').width * 0.8,
     alignItems:"center",
@@ -66,6 +82,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontStyle: 'italic',
     textDecorationLine: 'underline',
-    color:'white'
+    fontSize: 15
+    // color:'white'
   }
 });

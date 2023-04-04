@@ -5,23 +5,23 @@ import * as Font from 'expo-font';
 
 export class Login extends Component {
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+      super(props);
 
-        this.state = {
-            email: '',
-            password: '',
-            fontsLoaded: false
-        }
-        
-    }
+      this.state = {
+          email: '',
+          password: '',
+          fontsLoaded: false
+      }
+      
+  }
 
-    async loadFonts() {
-      await Font.loadAsync({
-        CairoPlay: require('../../../../assets/fonts/CairoPlay-ExtraBold.ttf'),
-      });
-      this.setState({ fontsLoaded: true });
-    }
+  async loadFonts() {
+    await Font.loadAsync({
+      PTSansNarrow: require('../../../../assets/fonts/PTSansNarrow-Bold.ttf'),
+    });
+    this.setState({ fontsLoaded: true });
+  }
 
   validateFields = () => {
     const { email, password} = this.state;
@@ -35,16 +35,16 @@ export class Login extends Component {
     while(!this.state.fontsLoaded) {
       this.loadFonts()
       return (
-        <View>
-          <ActivityIndicator/>
+        <View style={style.activityIndicator}>
+          <ActivityIndicator size={"large"}/>
         </View>
       )
     }
     return ( 
-      <View style = {style.container}>
-        <ImageBackground source={require('../../../../assets/20221230_143041_212.jpg')} style={style.image} resizeMode="cover">
-        <View style = {style.containerBottom}> 
-          <Text style={{...style.title, fontFamily: 'CairoPlay' }}>Recipe Master</Text>
+      <ImageBackground style = {style.container} resizeMode={'cover'} source={require('../../../../assets/20221210_101358_HDR.jpg' )}>
+        {/* <Image style={style.image} source={require('../../../../assets/cookingPot.jpg')}></Image> */}
+        <Text style={{...style.title, fontFamily: 'PTSansNarrow' }}>Recipe Master</Text>
+          <View style = {style.containerBottom}> 
           <View style= {style.loginContainer}>
             <View style = {style.inputView}>
               <TextInput 
@@ -72,6 +72,7 @@ export class Login extends Component {
                   onPress={() => this.props.navigation.navigate("ForgotPassword")}
                   // titleStyle = {{color: '#039BE5', }}
                   type = 'clear'
+                  color={'#ADC2D4'}
                 />
             </View>
           </View>
@@ -81,13 +82,12 @@ export class Login extends Component {
           </TouchableOpacity>
 
           <View style = {{flexDirection: 'row'}}>
-            <Text style = {{color:'white'}}>No Account </Text>
-            <Text onPress={() => this.props.navigation.navigate("Register")} style = {style.SignUpText}> Sign up </Text>
+            <Text style = {style.forgotAndSignUpText}>No Account?</Text>
+            <Text style = {style.SignUpText} onPress={() => this.props.navigation.navigate("Register")}> Sign up </Text>
           </View>
         </View>
-        </ImageBackground>
         
-      </View>
+      </ImageBackground>
     )
   }
 }

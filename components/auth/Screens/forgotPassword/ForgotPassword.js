@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Text, View, Image, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
+import { Text, View, Image, TextInput, TouchableOpacity, ActivityIndicator, ImageBackground } from "react-native";
 import style from './style'
 import * as Font from 'expo-font';
 
@@ -15,7 +15,7 @@ class ForgotPassword extends Component {
 
     async loadFonts() {
       await Font.loadAsync({
-        CairoPlay: require('../../../../assets/fonts/CairoPlay-ExtraBold.ttf'),
+        PTSansNarrow: require('../../../../assets/fonts/PTSansNarrow-Bold.ttf'),
       });
       this.setState({ fontsLoaded: true });
     }
@@ -24,27 +24,31 @@ class ForgotPassword extends Component {
         while(!this.state.fontsLoaded) {
             this.loadFonts()
             return (
-              <View>
-                <ActivityIndicator/>
+              <View style={style.activityIndicator}>
+                <ActivityIndicator size={"large"}/>
               </View>
             )
         }
         return (
-            <View style = {style.container}>
-                <Image source={require('../../../../assets/20221230_1452122.jpg')} style={styles.image}/>
-                <Text style={{...style.title, fontFamily: 'CairoPlay'}}> Forgot Password</Text>
-                <View style = {style.inputView}>
-                    <TextInput 
-                        style = {style.inputText}
-                        placeholder = "Email"
-                        placeholderTextColor="#003f5c"
-                        onChangeText = {(email) => this.setState({email})}
-                    />
+            <ImageBackground
+                style = {style.image}
+                source={require('../../../../assets/20221230_143041_2122.jpg')}>
+                <View style = {style.container}>
+                    {/* <Image source={require('../../../../assets/20221230_1452122.jpg')} style={style.image}/> */}
+                    <Text style={{...style.title, fontFamily: 'PTSansNarrow'}}> Forgot Password</Text>
+                    <View style = {style.inputView}>
+                        <TextInput 
+                            style = {style.inputText}
+                            placeholder = "Email"
+                            placeholderTextColor="#003f5c"
+                            onChangeText = {(email) => this.setState({email})}
+                        />
+                    </View>
+                    <TouchableOpacity style={style.SignupBtn}>
+                        <Text style={style.loginText}>Submit</Text> 
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={style.SignupBtn}>
-                    <Text style={style.loginText}>Submit</Text> 
-                </TouchableOpacity>
-            </View>
+            </ImageBackground>
         )
     }
 }

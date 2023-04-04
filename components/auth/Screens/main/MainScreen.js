@@ -11,14 +11,7 @@ export default function MainScreen ({navigation}) {
   
   const [search, setSearch] = useState('');
   const [textInput, setTextInput] = useState('');
-
-  const [loaded] = useFonts({
-    CairoPlay: require('../../../../assets/fonts/CairoPlay-ExtraBold.ttf'),
-  });
-
   
-  const apiLoading = useSelector((store) => store.isLoading);
-
   const dispatch = useDispatch();
 
   const handleDataChange = (data) => {
@@ -42,21 +35,13 @@ export default function MainScreen ({navigation}) {
     })
     handleAPILoadingStateChange(false)
   }
-  
-  while (!loaded) {
-    return (
-      <View>
-        <ActivityIndicator/>
-      </View>
-    )
-  }
 
   return(
     <SafeAreaView>
       <ScrollView>
         <View style = {styles.container} >
           <Image source={require('../../../../assets/20220901_133028_HDR2.jpg')} style={styles.image}/>
-          <Text style = {{...styles.title, fontFamily: 'CairoPlay' }}>Welcome, User</Text>
+          <Text style = {{...styles.title, fontFamily: 'PTSansNarrow' }}>Welcome, User</Text>
           <View style = {styles.greenBox}>
           <View style = {styles.inputView}>
             <TextInput 
