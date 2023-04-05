@@ -6,23 +6,22 @@ import { gql, useMutation } from '@apollo/client'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const SIGN_IN_MUTATION = gql`
-mutation signIn($email: String!, $password: String!) {
-  signIn(loginInput: { email: $email, password: $password}) {
-    name
-    id
+mutation SignIn($email: String!, $password: String!) {
+  signIn(input: { email: $email, password: $password}) {
     token
-    password
-    email
-    userName
+    user {
+      name
+      email
+    }
   }
-  }
-  `;
+}
+`;
 
 export function Login ({navigation}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signIn, {data, error, loading}] = useMutation(SIGN_IN_MUTATION);
+  const [signIn, {data, error, loading}] = useMutation(SIGN_IN_MUTATION)
 
   useEffect(() => {
     if (error) {
@@ -43,6 +42,12 @@ export function Login ({navigation}) {
   
   const onSubmit = () => {
     signIn({variables: { email, password }})
+      .then(response => {
+        console.log(`Response: ${response}`)
+      })
+      .catch(err => {
+        console.log(`Error: ${err}`)
+      })
   }
     return ( 
       <View style = {style.container}> 

@@ -122,7 +122,10 @@ const resolvers = {
       if (!user || !isPasswordCorrect) {
         throw new Error('Invalid credentials!');
       }
-
+      console.log({
+        user,
+        token: getToken(user),
+      })
       return {
         user,
         token: getToken(user),

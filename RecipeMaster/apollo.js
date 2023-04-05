@@ -1,12 +1,9 @@
-import { ApolloClient, InMemoryCache, createHttpLink, HttpLink } from '@apollo/client';
+import { ApolloClient, HttpLink, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const URI = 'http://localhost:4000/';
+const URI = 'http://10.0.0.244:4000/';
 
-const link = new HttpLink({
-  uri: 'http://localhost:4000/'
-})
 
 const httpLink = createHttpLink({
   uri: URI,
@@ -23,9 +20,8 @@ const authLink = setContext(async (_, { headers }) => {
     }
   }
 });
-
 const client = new ApolloClient({
-  link: authLink.concat(link),
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 });
 
