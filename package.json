@@ -11,21 +11,33 @@
   "dependencies": {
     "@expo/webpack-config": "^0.17.2",
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-material/core": "^1.3.7",
     "@react-navigation/bottom-tabs": "^6.5.4",
     "@react-navigation/drawer": "^6.5.8",
     "@react-navigation/native": "^6.1.3",
     "@react-navigation/stack": "^6.3.12",
+    "@reduxjs/toolkit": "^1.9.3",
+    "@tanstack/react-query": "^4.27.0",
+    "@types/react-native": "~0.70.6",
     "expo": "~47.0.12",
+    "expo-font": "~11.0.1",
     "expo-status-bar": "~1.4.2",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
+    "react-native-dotenv": "^3.4.8",
     "react-native-gesture-handler": "~2.8.0",
+    "react-native-reanimated": "~2.12.0",
     "react-native-screens": "~3.18.0",
-    "react-native-web": "~0.18.9"
+    "react-native-searchable-dropdown": "^1.1.3",
+    "react-native-web": "~0.18.9",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1",
+    "typescript": "^4.6.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@types/react-query": "^1.2.9"
   },
   "private": true
 }
