@@ -1,10 +1,13 @@
 import { Dimensions, StyleSheet } from "react-native";
  
+
 export default styles = StyleSheet.create({
     container: {
       flex: 1,
       flexDirection:'column',
       backgroundColor: 'white',
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height
     },
     title:{
       fontSize: 40,
@@ -47,14 +50,30 @@ export default styles = StyleSheet.create({
     },
     greenBox:{
       backgroundColor:'#4F5200',
-      height: 150,
       justifyContent:'center',
       alignItems:'center',
+      padding: 10
+    },
+    recentSearches:{
+      padding: 7,
+      margin: 5,
+      borderRadius: 100,
+    },
+    recentSearchText:{
+      fontSize: 15,
+    },
+    allRecentSearches:{
+      flexDirection: 'row',
+      justifyContent:'center',
+      alignItems: 'center',
+      flexWrap:'wrap',
+      rowGap: '10',
+      
     },
     whiteBox:{
       backgroundColor:'white',
-      height: 150,
       justifyContent:'center',
-      alignItems:'center',
+      alignContent:'center',
+      padding: 10
     },
   });

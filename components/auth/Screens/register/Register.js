@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, ActivityIndicator, TouchableOpacity, ImageBackground, Image, Alert } from 'react-native'
 import style from './style'
-import * as Font from 'expo-font';
 
   
 export class Register extends Component {
@@ -13,17 +12,8 @@ export class Register extends Component {
             firstName: '',
             lastname: '',
             userName: '',
-            fontsLoaded: false
         };
     }
-
-    
-  async loadFonts() {
-    await Font.loadAsync({
-      PTSansNarrow: require('../../../../assets/fonts/PTSansNarrow-Bold.ttf'),
-    });
-    this.setState({ fontsLoaded: true });
-  }
     
   checkInput = () =>{
     const {firstName, password, lastname, email, userName} = this.state;
@@ -40,14 +30,14 @@ export class Register extends Component {
   render() {
     const {navigation} = this.props;
   
-    while(!this.state.fontsLoaded) {
-      this.loadFonts()
-      return (
-        <View style={style.activityIndicator}>
-          <ActivityIndicator size={"large"}/>
-        </View>
-      )
-    }
+    // while(!this.state.fontsLoaded) {
+    //   this.loadFonts()
+    //   return (
+    //     <View style={style.activityIndicator}>
+    //       <ActivityIndicator size={"large"}/>
+    //     </View>
+    //   )
+    // }
 
     return (
       <ImageBackground 

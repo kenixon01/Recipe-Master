@@ -13,10 +13,21 @@ import { store } from './redux/store'
 
 const Stack = createStackNavigator();
 
+
 export const Auth = () => {
   //Stack Nav for Login and Sign up from Splash 
   return (
     <Stack.Navigator initialRouteName='Login'>
+      <Stack.Screen name = "Login" component = {LoginScreen} options= {{headerShown: false}}/>
+      <Stack.Screen name = "Register" component = {RegisterScreen} options= {{headerShown: false}}/>
+      <Stack.Screen name = "ForgotPassword" component = {ForgotPasswordScreen} options= {{headerShown: false}}/>
+    </Stack.Navigator>
+  )
+} 
+
+export const PwdReset = () => {
+  return (
+    <Stack.Navigator initialRouteName='ForgotPassword'>
       <Stack.Screen name = "Login" component = {LoginScreen} options= {{headerShown: false}}/>
       <Stack.Screen name = "Register" component = {RegisterScreen} options= {{headerShown: false}}/>
       <Stack.Screen name = "ForgotPassword" component = {ForgotPasswordScreen} options= {{headerShown: false}}/>

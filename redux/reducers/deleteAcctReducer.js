@@ -1,7 +1,7 @@
-export default (state = [], action) => {
+export default (state = true, action) => {
     switch (action.type) {
         case 'HANDLE_DELETE_ACCT':
-            return action.payload
+            return !state
         default:
             return state
     }

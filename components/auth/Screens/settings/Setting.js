@@ -22,12 +22,12 @@ export default function SettingsScreen ({navigation}){
 
     const dispatch = useDispatch();
 
-    const handleDeleteAcct = (data) => {
-      dispatch(setDeleteAcct(data))
+    const handleDeleteAcct = () => {
+      dispatch(setDeleteAcct())
     }
 
     const handleLogout = () => {
-        handleDeleteAcct(true);
+        handleDeleteAcct();
         // navigation.navigate("Login");
         // Alert.alert('Account has been deleted',
         // [ {text: 'Okay'} ],

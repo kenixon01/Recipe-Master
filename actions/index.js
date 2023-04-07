@@ -18,3 +18,11 @@ export const setDeleteAcct = (payload) => {
     payload: payload,
   }
 }
+  
+export const setRecentSearches = (payload, limit) => {
+  return {
+    type: 'HANDLE_RECENT_SEARCHES',
+    payload: payload,
+    limit: limit
+  }
+}
