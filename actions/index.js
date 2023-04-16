@@ -25,4 +25,18 @@ export const setRecentSearches = (payload, limit) => {
     payload: payload,
     limit: limit
   }
+}  
+
+export const setUser = (payload) => {
+  return {
+    type: 'HANDLE_USER_STATE',
+    payload: payload,
+  }
+}
+
+export const setVerifcationCode = (payload) => {
+  return {
+    type: 'HANDLE_VERIFICATION_CODE',
+    payload: payload,
+  }
 }
