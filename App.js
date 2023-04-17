@@ -9,9 +9,12 @@ import RegisterScreen from './components/auth/Screens/register/Register';
 import LoginScreen from './components/auth/Screens/login/Login';
 import ForgotPasswordScreen from './components/auth/Screens/forgotPassword/ForgotPassword';
 import NavigationBar from './components/auth/nav/NavigationBar';
+import ResetPasswordScreen from "./components/auth/Screens/resetPassword/ResetPassword"
+import VerifyCodeScreen from "./components/auth/Screens/codeEntry/VerifyCode"
 import { store } from './redux/store'
 
 const Stack = createStackNavigator();
+
 
 export const Auth = () => {
   //Stack Nav for Login and Sign up from Splash 
@@ -20,6 +23,8 @@ export const Auth = () => {
       <Stack.Screen name = "Login" component = {LoginScreen} options= {{headerShown: false}}/>
       <Stack.Screen name = "Register" component = {RegisterScreen} options= {{headerShown: false}}/>
       <Stack.Screen name = "ForgotPassword" component = {ForgotPasswordScreen} options= {{headerShown: false}}/>
+      <Stack.Screen name = "ResetPassword" component = {ResetPasswordScreen} options= {{headerShown: false}}/>
+      <Stack.Screen name = "CodeEntry" component = {VerifyCodeScreen} options= {{headerShown: false}}/>
     </Stack.Navigator>
   )
 } 

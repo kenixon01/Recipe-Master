@@ -11,10 +11,11 @@ export default function Results({navigation}){
     const apiDataLoading = useSelector((store) => store.isLoaded);
 
     const loadingConditions = apiData.hits === undefined || apiDataLoading;
+    
     while (loadingConditions) {
         return (
           <View style={styles.activityIndicator}>
-            <ActivityIndicator size={"large"}/>
+            <ActivityIndicator size={"large"} color='#BFA600'/>
           </View>
         )
     }

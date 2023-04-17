@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { Text, View, TextInput, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setData, setAPICallLoading } from '../../../../actions/index';
+import { setData, setAPICallLoading, setRecentSearches } from '../../../../actions/index';
 import { API_ID, API_KEY } from '@env'
-import { useFonts } from 'expo-font';
 import styles from './style'
 
 
@@ -18,10 +17,18 @@ export default function MainScreen ({navigation}) {
     dispatch(setData(data))
   }
 
+  const MAX_SEARCH_RESULTS = 10;
+
   const handleAPILoadingStateChange = (data) => {
     dispatch(setAPICallLoading(data))
   }
- 
+
+  const handleRecentSearches = (data) => {
+    dispatch(setRecentSearches(data, MAX_SEARCH_RESULTS))
+  }
+
+  const recentSearches = useSelector((store) => store.searches);
+
   const getRecipes = async (search) => {
     handleAPILoadingStateChange(true)
     setSearch(search)
@@ -30,10 +37,17 @@ export default function MainScreen ({navigation}) {
       return response.json();
     }).then(responseData => {
       handleDataChange(responseData);
+      if(responseData.hits.length) handleRecentSearches(search)
     }).catch(error => {
       console.error(error);
     })
     handleAPILoadingStateChange(false)
+  }
+
+  const queryResultsNav = (query) => {
+    getRecipes(query)
+    navigation.navigate("Result")
+    setTextInput('')
   }
 
   return(
@@ -47,11 +61,8 @@ export default function MainScreen ({navigation}) {
             <TextInput 
                 style = {styles.inputText}
                 placeholder = "Search for a recipe or ingredient"
-                placeholderTextColor="#003f5c"
                 onSubmitEditing={newSearch => {
-                  getRecipes(newSearch.nativeEvent.text);
-                  navigation.navigate("Result");
-                  setTextInput('');
+                  queryResultsNav(newSearch.nativeEvent.text)
                 }}
                 onChangeText={text => setTextInput(text)}
                 defaultValue={search}
@@ -61,12 +72,38 @@ export default function MainScreen ({navigation}) {
           </View>
         </View>
           <View style = {styles.whiteBox}>
-            <Text style = {styles.header}>Popular Searches</Text>
-            <Text style = {styles.SmallerTxt}>Try one of these!</Text>
+            <View>
+              {
+                !recentSearches.length ? 
+                  <Text style = {styles.SmallerTxt}>Start searching for recipes!</Text> :
+                  <View>
+                    <Text style = {styles.header}>Recent Searches</Text>
+                    <Text style = {styles.SmallerTxt}>Try one of these!</Text>
+                    { <View style = {styles.allRecentSearches}>
+                        {
+                          recentSearches.slice(0, 10).map((element, index) => {
+                            const randColor = `rgb(${Math.random() * 56 + 200},${Math.random() * 156 + 100},${Math.random() * 100})`
+                            return (
+                              <View 
+                                onPress={() => queryResultsNav(element)} 
+                                key={index} 
+                                style = {{...styles.recentSearches, backgroundColor: randColor}}>
+                                <Text style={styles.recentSearchText}>{element}</Text>
+                              </View>
+                            )
+                        })}
+                      </View>
+                    }
+                  </View>
+              }
+            </View>
           </View>
 
           <View style ={styles.greenBox}>
-            <Text style = {styles.header}>Recommended Recipes</Text>
+            <Text style = {styles.header}>Favorite Recipes</Text>
+          </View>
+          <View style = {styles.whiteBox}>
+            <Text style = {styles.header}>Explore</Text>
           </View>
       </View>
       </ScrollView>

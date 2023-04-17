@@ -2,12 +2,14 @@ import { StyleSheet, Dimensions } from "react-native";
 
 export default style = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#fffe',
+        justifyContent: 'center',
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('screen').height,
     },
     title:{
-      fontSize: 60,
+      fontSize: 40,
       marginBottom: 30,
       color:'#4F5200',
       padding: 15,
@@ -26,20 +28,12 @@ export default style = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#ddd",
         borderStyle: 'solid',
-        marginBottom:20,
         justifyContent:"center",
         padding:20,
     },
-    image: {
-      width: '100%',
-      height: '100%',
-      resizeMode: 'cover',
-      justifyContent: 'center',
-      alignItems:'center',
-    },
     inputText:{
         height:50,
-        color:"white"
+        color:"black"
     },
     forgotAndSignUpText:{
         color:"white",
@@ -61,6 +55,5 @@ export default style = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center",
         marginTop:40,
-        marginBottom:10
     },
 })
