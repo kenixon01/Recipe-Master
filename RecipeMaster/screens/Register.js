@@ -115,7 +115,7 @@ const style = StyleSheet.create({
       },
   title:{
     fontWeight: "bold",
-    fontSize:50,
+    fontSize: 50,
     color:'black',
     marginBottom: 40,
     },
@@ -134,7 +134,7 @@ const style = StyleSheet.create({
     },
   forgotAndSignUpText:{
     color:"white",
-    fontSize:11
+    fontSize: 11
     },
   SignupBtn:{
     width:"80%",
@@ -150,7 +150,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    fontSize: '10'
+    fontSize: 10
     },
   LoginText: {
     fontWeight: 'bold',

@@ -136,11 +136,6 @@ export default function SettingsScreen ({navigation}){
                 <Text style = {styles.button_label}>Sign out</Text>           
             </View>
         </TouchableOpacity>
-        <TouchableOpacity >
-            <View style = {styles.button}>
-                <Text style = {styles.button_Delete}>Delete Account</Text>           
-            </View>
-        </TouchableOpacity>
         </View>
         </View>
     );
