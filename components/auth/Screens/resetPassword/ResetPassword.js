@@ -18,35 +18,29 @@ export default function ResetPassword({navigation}) {
     }
 
     return (
-        <ImageBackground
-            style = {style.image}
-            source={require('../../../../assets/20221230_143041_213.jpg')}>
-            <View style = {style.container}>
-                <Text style={{...style.title, fontFamily: 'PTSansNarrow'}}>Reset Password</Text>
-                <View style = {style.inputView}>
-                    <TextInput 
-                        style = {style.inputText}
-                        placeholder = "Password"
-                        keyboardType="password"
-                        placeholderTextColor="#003f5c"
-                        onChangeText = {(text) => setPassword(text)}
-                    />
-                </View>
-                <View style = {style.inputView}>
-                    <TextInput 
-                        style = {style.inputText}
-                        placeholder = "Confirm Password"
-                        keyboardType="password"
-                        placeholderTextColor="#003f5c"
-                        onChangeText = {(text) =>setPasswordConfirm(text)}
-                    />
-                </View>
-                <TouchableOpacity 
-                    style={style.SignupBtn} 
-                    onPress={() => { validatePassword() }}>
-                    <Text style={style.loginText}>Submit</Text> 
-                </TouchableOpacity>
+        <View style = {style.container}>
+            <Text style={{...style.title, fontFamily: 'PTSansNarrow'}}>Reset Password</Text>
+            <View style = {style.inputView}>
+                <TextInput 
+                    style = {style.inputText}
+                    placeholder = "Password"
+                    keyboardType="password"
+                    onChangeText = {(text) => setPassword(text)}
+                />
             </View>
-        </ImageBackground>
+            <View style = {style.inputView}>
+                <TextInput 
+                    style = {style.inputText}
+                    placeholder = "Confirm Password"
+                    keyboardType="password"
+                    onChangeText = {(text) =>setPasswordConfirm(text)}
+                />
+            </View>
+            <TouchableOpacity 
+                style={style.SignupBtn} 
+                onPress={() => { validatePassword() }}>
+                <Text style={style.loginText}>Submit</Text> 
+            </TouchableOpacity>
+        </View>
     )
 }

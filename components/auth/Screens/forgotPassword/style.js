@@ -4,9 +4,9 @@ export default style = StyleSheet.create({
     container: {
         alignItems: 'center',
         backgroundColor: '#fffe',
-        borderRadius: 50,
-        padding: 50,
-        width: Dimensions.get('window').width
+        justifyContent: 'center',
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('screen').height,
     },
     title:{
       fontSize: 40,
@@ -28,16 +28,8 @@ export default style = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#ddd",
         borderStyle: 'solid',
-        // marginBottom:20,
         justifyContent:"center",
         padding:20,
-    },
-    image: {
-      width: '100%',
-      height: '100%',
-      resizeMode: 'cover',
-      justifyContent: 'center',
-    //   alignItems:'center',
     },
     inputText:{
         height:50,
@@ -63,6 +55,5 @@ export default style = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center",
         marginTop:40,
-        // marginBottom:10
     },
 })

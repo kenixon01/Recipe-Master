@@ -18,6 +18,5 @@ export default sendEmail = (email) => {
       console.log('FAILED...', error);
     }
   );
-
   return validationCode
 }

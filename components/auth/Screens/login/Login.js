@@ -42,7 +42,6 @@ export class Login extends Component {
     }
     return ( 
       <ImageBackground style = {style.container} resizeMode={'cover'} source={require('../../../../assets/20221210_101358_HDR.jpg' )}>
-        {/* <Image style={style.image} source={require('../../../../assets/cookingPot.jpg')}></Image> */}
         <Text style={{...style.title, fontFamily: 'PTSansNarrow' }}>Recipe Master</Text>
           <View style = {style.containerBottom}> 
           <View style= {style.loginContainer}>
@@ -52,7 +51,6 @@ export class Login extends Component {
                   autoCapitalize={'none'}
                   keyboardType={'email-address'}
                   placeholder = "Username or Email"
-                  placeholderTextColor="#003f5c"
                   onChangeText = {(email) => this.setState({email})}
                   />
             </View> 
@@ -62,7 +60,6 @@ export class Login extends Component {
                   secureTextEntry = {true}
                   autoCapitalize={'none'}
                   placeholder = "Password"
-                  placeholderTextColor="#003f5c"
                   onChangeText = {(password) => this.setState({password})}
                   />
             </View> 

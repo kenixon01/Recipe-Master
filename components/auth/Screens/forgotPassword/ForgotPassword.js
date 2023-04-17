@@ -18,30 +18,33 @@ export default function ForgotPassword({navigation}) {
       dispatch(setVerifcationCode(data))
     }
 
+    const verify = () => {
+        if(email && email.includes('@')) {
+            handleVerificationCode(sendEmail(email))
+            Alert.alert("",'Reset password email successfully sent.  Allow a few minutes to recieve the verification code.')
+            navigation.navigate('CodeEntry')
+        }
+        else {
+            Alert.alert("","Invalid email address")
+        }
+    }
+
     return (
-        <ImageBackground
-            style = {style.image}
-            source={require('../../../../assets/20221230_143041_213.jpg')}>
-            <View style = {style.container}>
-                <Text style={{...style.title, fontFamily: 'PTSansNarrow'}}>Reset Password</Text>
-                <View style = {style.inputView}>
-                    <TextInput 
-                        style = {style.inputText}
-                        placeholder = "Email"
-                        keyboardType="email"
-                        placeholderTextColor="#003f5c"
-                        onChangeText = {(text) => setEmail(text)}
-                    />
-                </View>
-                <TouchableOpacity 
-                    style={style.SignupBtn} 
-                    onPress={() => {
-                        handleVerificationCode(sendEmail(email))
-                        alert('Reset password email successfully sent.')
-                        navigation.navigate('CodeEntry')}}>
-                    <Text style={style.loginText}>Submit</Text> 
-                </TouchableOpacity>
+        <View style = {style.container}>
+            <Text style={{...style.title, fontFamily: 'PTSansNarrow'}}>Forgot Password</Text>
+            <View style = {style.inputView}>
+                <TextInput 
+                    style = {style.inputText}
+                    placeholder = "Email"
+                    keyboardType={"email-address"}
+                    onChangeText = {(text) => setEmail(text)}
+                />
             </View>
-        </ImageBackground>
+            <TouchableOpacity 
+                style={style.SignupBtn} 
+                onPress={() => {verify()}}>
+                <Text style={style.loginText}>Submit</Text> 
+            </TouchableOpacity>
+        </View>
     )
 }
