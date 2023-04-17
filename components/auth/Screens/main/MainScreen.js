@@ -61,7 +61,6 @@ export default function MainScreen ({navigation}) {
             <TextInput 
                 style = {styles.inputText}
                 placeholder = "Search for a recipe or ingredient"
-                placeholderTextColor="#003f5c"
                 onSubmitEditing={newSearch => {
                   queryResultsNav(newSearch.nativeEvent.text)
                 }}
