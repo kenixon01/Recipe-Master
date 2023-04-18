@@ -1,56 +1,50 @@
-import React, {Component} from "react";
-import { Text, View, Image, TextInput, TouchableOpacity, ActivityIndicator, ImageBackground } from "react-native";
+import React, { useState } from "react";
+import { Text, View, TextInput, TouchableOpacity,  ImageBackground, Alert } from "react-native";
 import style from './style'
-import * as Font from 'expo-font';
+import sendEmail from "../../../../sendEmail";
+import { useDispatch } from "react-redux";
+import { setVerifcationCode } from "../../../../actions";
 
-class ForgotPassword extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            fontsLoaded: false
+//recipemaster@outlook.com
+//$ytkOpKHRW545*/sads*
+//1-1-1999
+export default function ForgotPassword({navigation}) {
+    const [email, setEmail] = useState('')
+    
+    const dispatch = useDispatch();
+  
+    const handleVerificationCode = (data) => {
+      dispatch(setVerifcationCode(data))
+    }
+
+    const verify = () => {
+        if(email && email.includes('@')) {
+            handleVerificationCode(sendEmail(email))
+            Alert.alert("",'Reset password email successfully sent.  Allow a few minutes to recieve the verification code.')
+            navigation.navigate('CodeEntry')
         }
-        
-    }
-
-    async loadFonts() {
-      await Font.loadAsync({
-        PTSansNarrow: require('../../../../assets/fonts/PTSansNarrow-Bold.ttf'),
-      });
-      this.setState({ fontsLoaded: true });
-    }
-
-    render() {
-        while(!this.state.fontsLoaded) {
-            this.loadFonts()
-            return (
-              <View style={style.activityIndicator}>
-                <ActivityIndicator size={"large"}/>
-              </View>
-            )
+        else {
+            Alert.alert("","Invalid email address")
         }
-        return (
-            <ImageBackground
-                style = {style.image}
-                source={require('../../../../assets/20221230_143041_2122.jpg')}>
-                <View style = {style.container}>
-                    {/* <Image source={require('../../../../assets/20221230_1452122.jpg')} style={style.image}/> */}
-                    <Text style={{...style.title, fontFamily: 'PTSansNarrow'}}> Forgot Password</Text>
-                    <View style = {style.inputView}>
-                        <TextInput 
-                            style = {style.inputText}
-                            placeholder = "Email"
-                            placeholderTextColor="#003f5c"
-                            onChangeText = {(email) => this.setState({email})}
-                        />
-                    </View>
-                    <TouchableOpacity style={style.SignupBtn}>
-                        <Text style={style.loginText}>Submit</Text> 
-                    </TouchableOpacity>
-                </View>
-            </ImageBackground>
-        )
     }
+
+    return (
+        <View style = {style.container}>
+            <Text style={{...style.title, fontFamily: 'PTSansNarrow'}}>Forgot Password</Text>
+            <View style = {style.inputView}>
+                <TextInput 
+                    style = {style.inputText}
+                    placeholder = "Email"
+                    keyboardType={"email-address"}
+                    onChangeText = {(text) => setEmail(text)}
+                />
+            </View>
+            <TouchableOpacity 
+                style={style.SignupBtn} 
+                onPress={() => {verify()}}>
+                <Text style={style.loginText}>Submit</Text> 
+            </TouchableOpacity>
+        </View>
+    )
 }
-
-export default ForgotPassword

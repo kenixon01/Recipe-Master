@@ -28,7 +28,7 @@ export default style = StyleSheet.create({
   },
   inputText:{
     height:50,
-    color:"ddd"
+    color:"#ddd"
   },
   forgotAndSignUpText:{
     fontSize: 15
@@ -57,7 +57,7 @@ export default style = StyleSheet.create({
     textAlign: 'center',
     fontSize: 12,
     marginHorizontal: '10%',
-    color: '#4F5200'
+    color: 'black'
   },
   LoginText: {
     fontWeight: 'bold',

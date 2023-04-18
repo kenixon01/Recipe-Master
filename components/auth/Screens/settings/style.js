@@ -11,7 +11,7 @@ export default styles = StyleSheet.create({
     },
     title:{
         fontSize: 40,
-        color:'#BFA600',
+        color:'white',
     },
     backgroundImg:{
         width: Dimensions.get('window').width,

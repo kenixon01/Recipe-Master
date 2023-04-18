@@ -14,7 +14,6 @@ import SettingsScreen from '../Screens/settings/Setting';
 import ListScreen from '../Screens/listEditor/ListEditor';
 import Results from '../Screens/results/Results';
 import { useEffect } from 'react';
-// import Login from '../Screens/login/Login';
 
 const Stack = createStackNavigator()
 
@@ -31,7 +30,6 @@ function SettingStackScreen (){
     return(
         <Stack.Navigator>
             <Stack.Screen name = 'Setting' component={SettingsScreen}  options= {{headerShown: false}}/>
-            {/* <Stack.Screen name = 'Login' component={App} options= {{headerShown: false}}/> */}
         </Stack.Navigator>
     )
 }
@@ -50,19 +48,19 @@ export default function NavigationBar() {
     const data = useSelector((store) => store.deleted);
     const dispatch = useDispatch();
   
-    const handleDeleteAcct = (data) => {
-      dispatch(setDeleteAcct(data))
+    const handleDeleteAcct = () => {
+      dispatch(setDeleteAcct())
     }
 
     useEffect(() => {
-        handleDeleteAcct(false)
+        handleDeleteAcct()
     }, [])
 
     if(data)  {
         return <App/>
     }
 
-    return(
+    return(        
         <NavigationContainer independent={true}>
             <Tab.Navigator initialRouteName={'Home'} screenOptions = {({route}) => ({
                 tabBarIcon: ({focused, color, size}) => {
@@ -81,18 +79,17 @@ export default function NavigationBar() {
 
                     return (<Ionicons name = {iconName} size = {size} color={color}/>);
                 },
+                tabBarActiveTintColor: '#4F5200',
+                tabBarInactiveTintColor: 'gray',
+                tabBarLabelStyle: { fontSize: 12},
+                tabBarStyle: { height: 60 },
+                tabBarItemStyle: { margin: 5 }
             })}
-            // tabBarOptions = {{
-            //     activeTintColor: 'lightseagreen',
-            //     inactiveTintColor: 'grey',
-            //     lableStyle: {fontSize: 16},
-                
-            // }}
             >
                 <Tab.Screen name = 'List Editor' component={ListEditorStackScreen} options={{headerShown: false}}/>
                 <Tab.Screen name = 'Home' component={HomeStackScreen} options={{headerShown: false}}/>
                 <Stack.Screen name = 'Settings' component={SettingStackScreen} options={{headerShown: false}}/>
             </Tab.Navigator>
-        </NavigationContainer>
+        </NavigationContainer> 
     )    
 }
