@@ -1,6 +1,7 @@
 import React, {useState} from "react";
-import { Text, View, TextInput, TouchableOpacity,  ImageBackground, Alert } from "react-native";
+import { View } from "react-native";
 import style from './style'
+import { Title, AppButton, InputBox } from "../../lib";
 
 export default function ResetPassword({navigation}) {
     const [password, setPassword] = useState('')
@@ -19,28 +20,23 @@ export default function ResetPassword({navigation}) {
 
     return (
         <View style = {style.container}>
-            <Text style={{...style.title, fontFamily: 'PTSansNarrow'}}>Reset Password</Text>
-            <View style = {style.inputView}>
-                <TextInput 
-                    style = {style.inputText}
-                    placeholder = "Password"
-                    keyboardType="password"
-                    onChangeText = {(text) => setPassword(text)}
-                />
-            </View>
-            <View style = {style.inputView}>
-                <TextInput 
-                    style = {style.inputText}
-                    placeholder = "Confirm Password"
-                    keyboardType="password"
-                    onChangeText = {(text) =>setPasswordConfirm(text)}
-                />
-            </View>
-            <TouchableOpacity 
-                style={style.SignupBtn} 
-                onPress={() => { validatePassword() }}>
-                <Text style={style.loginText}>Submit</Text> 
-            </TouchableOpacity>
+            <Title
+                color='#4F5200'
+                fontFamily='PTSansNarrow'
+                fontSize={40}>Reset Password</Title>
+            <InputBox
+                placeholder = "Password"
+                keyboardType="password"
+                secureTextEntry={true}
+                onChangeText = {(text) => setPassword(text)}
+            />
+            <InputBox
+                placeholder = "Confirm Password"
+                keyboardType="password"
+                onChangeText = {(text) =>setPasswordConfirm(text)}
+                secureTextEntry={true}
+            />
+            <AppButton onPress={() => { validatePassword() }}>Submit</AppButton>
         </View>
     )
 }

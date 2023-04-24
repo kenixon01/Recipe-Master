@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Text, View, TextInput, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
+import { Text, View, TextInput, Image, SafeAreaView, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData, setAPICallLoading, setRecentSearches } from '../../../../actions/index';
-import { API_ID, API_KEY } from '@env'
 import styles from './style'
-
+import {Section, Title, SearchBox, Tag} from '../../lib';
+import { API_ID, API_KEY, ENDPOINT } from '@env'
 
 export default function MainScreen ({navigation}) {
   
@@ -31,23 +31,50 @@ export default function MainScreen ({navigation}) {
 
   const getRecipes = async (search) => {
     handleAPILoadingStateChange(true)
+    search = 'cheese'
     setSearch(search)
-    const URL = `https://api.edamam.com/search?q=${search}&app_id=${API_ID}&app_key=${API_KEY}`
+    const URL = `${ENDPOINT}q=${search}&app_id=${API_ID}&app_key=${API_KEY}&to=${MAX_SEARCH_RESULTS}`
     fetch(URL).then(response => {
       return response.json();
     }).then(responseData => {
-      handleDataChange(responseData);
-      if(responseData.hits.length) handleRecentSearches(search)
+      handleDataChange(responseData)
+      if(responseData.hits.length) {
+        handleRecentSearches(search)
+      }
     }).catch(error => {
       console.error(error);
     })
     handleAPILoadingStateChange(false)
   }
 
-  const queryResultsNav = (query) => {
-    getRecipes(query)
+  const queryResultsNav = (search) => {
+    getRecipes(search)
     navigation.navigate("Result")
     setTextInput('')
+  }
+  const generateRecentSearches = () => {
+    if(recentSearches.length) { 
+      return <Text style = {styles.SmallerTxt}>Start searching for recipes!</Text>
+    }
+    return(
+      <View>
+        <Header>Recent Searches</Header>
+        <Text style = {styles.SmallerTxt}>Try one of these!</Text>
+          <View style = {styles.allRecentSearches}>
+            {
+              recentSearches.slice(0, 10).map((element, index) => {
+                const randColor = `rgb(${Math.random() * 56 + 200},${Math.random() * 156 + 100},${Math.random() * 100})`
+                return (
+                  <Tag
+                    onPress={() => queryResultsNav(element)} 
+                    key={index} 
+                    backgroundColor={randColor}
+                  >{element}</Tag>
+                )
+            })}
+          </View>
+      </View>
+    )
   }
 
   return(
@@ -55,56 +82,32 @@ export default function MainScreen ({navigation}) {
       <ScrollView>
         <View style = {styles.container} >
           <Image source={require('../../../../assets/20220901_133028_HDR2.jpg')} style={styles.image}/>
-          <Text style = {{...styles.title, fontFamily: 'PTSansNarrow' }}>Welcome, User</Text>
-          <View style = {styles.greenBox}>
-          <View style = {styles.inputView}>
-            <TextInput 
-                style = {styles.inputText}
-                placeholder = "Search for a recipe or ingredient"
-                onSubmitEditing={newSearch => {
-                  queryResultsNav(newSearch.nativeEvent.text)
-                }}
-                onChangeText={text => setTextInput(text)}
-                defaultValue={search}
-                clearButtonMode='always'
-                value={textInput}
-            />
-          </View>
-        </View>
-          <View style = {styles.whiteBox}>
-            <View>
-              {
-                !recentSearches.length ? 
-                  <Text style = {styles.SmallerTxt}>Start searching for recipes!</Text> :
-                  <View>
-                    <Text style = {styles.header}>Recent Searches</Text>
-                    <Text style = {styles.SmallerTxt}>Try one of these!</Text>
-                    { <View style = {styles.allRecentSearches}>
-                        {
-                          recentSearches.slice(0, 10).map((element, index) => {
-                            const randColor = `rgb(${Math.random() * 56 + 200},${Math.random() * 156 + 100},${Math.random() * 100})`
-                            return (
-                              <View 
-                                onPress={() => queryResultsNav(element)} 
-                                key={index} 
-                                style = {{...styles.recentSearches, backgroundColor: randColor}}>
-                                <Text style={styles.recentSearchText}>{element}</Text>
-                              </View>
-                            )
-                        })}
-                      </View>
-                    }
-                  </View>
-              }
-            </View>
-          </View>
-
-          <View style ={styles.greenBox}>
-            <Text style = {styles.header}>Favorite Recipes</Text>
-          </View>
-          <View style = {styles.whiteBox}>
-            <Text style = {styles.header}>Explore</Text>
-          </View>
+          <Title 
+            fontFamily={"PTSansNarrow" }
+            color={'#BFA600'}
+            fontSize={40}
+            textAlign={'center'}
+          >Welcome, User</Title>
+          <Section backgroundColor={'#4F5200'}>
+            <SearchBox
+              placeholder = "Search for a recipe or ingredient"
+              onSubmitEditing={newSearch => {
+                queryResultsNav(newSearch.nativeEvent.text)
+              }}
+              onChangeText={text => setTextInput(text)}
+              defaultValue={search}
+              clearButtonMode='always'
+              value={textInput}/>
+          </Section>
+          <Section backgroundColor={'white'}>
+            {generateRecentSearches()}
+          </Section>
+          <Section backgroundColor={'#4F5200'}>
+            <Header>Favorite Recipes</Header>
+          </Section>
+          <Section backgroundColor={'white'}>
+            <Header>Explore</Header>
+          </Section>
       </View>
       </ScrollView>
     </SafeAreaView>

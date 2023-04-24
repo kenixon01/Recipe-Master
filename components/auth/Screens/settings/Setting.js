@@ -2,15 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Switch, Alert, ScrollView, SafeAreaView, ImageBackground, ActivityIndicator } from 'react-native';
 import styles from './style';
-import { useFonts } from 'expo-font';
 import { useDispatch } from 'react-redux';
 import { setDeleteAcct } from '../../../../actions/index';
+import { Header, InputBox, AppButton, Title } from '../../lib';
 
 export default function SettingsScreen ({navigation}){
-    const [loaded] = useFonts({
-        PTSansNarrow: require('../../../../assets/fonts/PTSansNarrow-Bold.ttf'),
-        PTSansNarrowThin: require('../../../../assets/fonts/PTSansNarrow-Regular.ttf'),
-    });
 
 
     const [shouldshow, setshouldShow] = useState(false);
@@ -28,18 +24,6 @@ export default function SettingsScreen ({navigation}){
 
     const handleLogout = () => {
         handleDeleteAcct();
-        // navigation.navigate("Login");
-        // Alert.alert('Account has been deleted',
-        // [ {text: 'Okay'} ],
-        //   { cancelable: false })
-    }
-
-    while (!loaded) {
-        return (
-          <View style={style.activityIndicator}>
-            <ActivityIndicator size={"large"}/>
-          </View>
-        )
     }
 
     return (
@@ -48,58 +32,34 @@ export default function SettingsScreen ({navigation}){
                 <ImageBackground style={styles.backgroundImg} source={require('../../../../assets/background.jpg')}>
                     <View style = {styles.container}>
                         <View>
-                            <Text style = {{...styles.title, fontFamily: "PTSansNarrow"}}>Settings</Text>
+                            <Title fontFamily="PTSansNarrow" color='white' fontSize={40}>Settings</Title>
                             <TouchableOpacity onPress={() => setshouldShow(!shouldshow)}> 
-                                <Text style = {{...styles.headerText, fontFamily: 'PTSansNarrowThin'}}>Update User Information</Text>
+                                <Header textAlign={'left'}>Update User Information</Header>
                             </TouchableOpacity>
-
                             {shouldshow ? (
                                 <View>
-                                    <View style = {styles.inputView}>
-                                        <TextInput 
-                                            style = {styles.inputText}
-                                            placeholder = "First Name"
-                                            placeholderTextColor="#003f5c"
-                                            />
-                                    </View>
-                                    <View style = {styles.inputView}>
-                                        <TextInput 
-                                            style = {styles.inputText}
-                                            placeholder = "Last Name"
-                                            placeholderTextColor="#003f5c"
-                                            />
-                                    </View>
-                                    <View style = {styles.inputView}>
-                                    <TextInput 
-                                        style = {styles.inputText}
+                                    <InputBox
+                                        placeholder = "First Name"
+                                    />
+                                    <InputBox
+                                        placeholder = "Last Name"
+                                    />
+                                    <InputBox
                                         placeholder = "Email Address"
-                                        placeholderTextColor="#003f5c"
-                                        />
-                                    </View>
-                                    <View style = {styles.inputView}>
-                                        <TextInput 
-                                            style = {styles.inputText}
-                                            placeholder = "Username"
-                                            placeholderTextColor="#003f5c"
-                                            />
-                                    </View>
-                                    <View style = {styles.inputView}>
-                                        <TextInput 
-                                            style = {styles.inputText}
-                                            placeholder = "Password"
-                                            placeholderTextColor="#003f5c"
-                                            />
-                                    </View>
-                                    <View>
-                                        <TouchableOpacity style={styles.SubmitBtn}>
-                                            <Text style={styles.SubmitText}>Save Changes</Text> 
-                                        </TouchableOpacity> 
-                                    </View>
-
+                                        keyboardType={"email-address"}
+                                    />
+                                    <InputBox
+                                        placeholder = "Username"
+                                    />
+                                    <InputBox
+                                        placeholder = "Password"
+                                        secureTextEntry={true}
+                                    />
+                                    <AppButton>Save Changes</AppButton>
                                 </View>
                             ) : null } 
                             <TouchableOpacity onPress={() => setIsShowing(!isShowing)}> 
-                                <Text style = {{...styles.headerText, fontFamily: 'PTSansNarrowThin'}}>Accessibility</Text>
+                                <Header textAlign={'left'}>Accessibility</Header>
                             </TouchableOpacity>
 
                             {isShowing ? (
@@ -130,18 +90,6 @@ export default function SettingsScreen ({navigation}){
                                 <Text style = {styles.deleteText}>Delete Account?</Text>
                             </TouchableOpacity>
                         </View>
-                        {/* <View style = {{flexDirection: 'row', justifyContent:'space-evenly'}} > */}
-                        {/* <TouchableOpacity >
-                            <View style = {styles.button}>
-                                <Text style = {styles.button_label}>Sign out</Text>           
-                            </View>
-                        </TouchableOpacity> */}
-                        {/* <TouchableOpacity >
-                            <View style = {styles.button}>
-                                <Text style = {styles.button_Delete}>Delete Account</Text>           
-                            </View>
-                        </TouchableOpacity> */}
-                        {/* </View> */}
                 </View>
             </ImageBackground>
             </ScrollView>
