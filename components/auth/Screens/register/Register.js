@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, ActivityIndicator, TouchableOpacity, ImageBackground, Image, Alert } from 'react-native'
+import { View, Text, ImageBackground, Alert } from 'react-native'
+import { InputBox, AppButton, Title } from '../../lib';
 import style from './style'
 
   
@@ -28,64 +29,44 @@ export class Register extends Component {
   }
 
   render() {
-    const {navigation} = this.props;
     return (
       <ImageBackground 
           style = {style.image}
           source={require('../../../../assets/20221220_194217_32.jpg')}>
       <View style = {style.container}>
-        
-          <Text style={{...style.title, fontFamily: 'PTSansNarrow'}}>Sign Up</Text>
-          <View style = {style.inputView}>
-            <TextInput
-              style = {style.inputText}
-              placeholder = "First Name"
-              onChangeText = {(firstName) => this.setState({firstName})}
-            />
-          </View>
-          <View style = {style.inputView}>
-            <TextInput 
-              style = {style.inputText}
-              placeholder = "Last Name"
-              onChangeText = {(lastname) => this.setState({lastname})}
-            />
-          </View> 
-          <View style = {style.inputView}>
-            <TextInput 
-              style = {style.inputText}
-              keyboardType={'email-address'}
-              placeholder = "Email"
-              onChangeText = {(email) => this.setState({email})}
-            />
-          </View>
-          <View style = {style.inputView}>
-            <TextInput 
-              style = {style.inputText}
-              placeholder = "User Name"
-              onChangeText = {(userName) => this.setState({userName})}
-            />
-          </View>  
-          <View style = {style.inputView}>
-            <TextInput
-              style = {style.inputText}
-              placeholder = "Password"
-              secureTextEntry = {true}
-              autoCapitalize={'none'}
-              onChangeText = {(password) => this.setState({password})}
-            />
-          </View> 
+          <Title fontFamily="PTSansNarrow" color='#4F5200'>Sign Up</Title>
+          <InputBox
+            placeholder = "First Name"
+            onChangeText = {(firstName) => this.setState({firstName})}
+          />
+          <InputBox
+            placeholder = "Last Name"
+            onChangeText = {(lastname) => this.setState({lastname})}
+          />
+          <InputBox
+            keyboardType={'email-address'}
+            placeholder = "Email"
+            onChangeText = {(email) => this.setState({email})}
+          />
+          <InputBox
+            placeholder = "User Name"
+            onChangeText = {(userName) => this.setState({userName})}
+          />
+          <InputBox
+            placeholder = "Password"
+            secureTextEntry = {true}
+            onChangeText = {(password) => this.setState({password})}
+          />
           <View>
             <Text style = {style.text}>Must be at least 8 characters and include at least 1 special character</Text>
           </View>
-          <TouchableOpacity style={style.SignupBtn} onPress = {this.checkInput}>
-            <Text style={style.signUpText}>Sign Up</Text> 
-          </TouchableOpacity>
+          <AppButton onPress = {this.checkInput}>Sign Up</AppButton>
           <View style = {{flexDirection: 'row'}}>
             <Text style={style.forgotAndSignUpText}>Already have an account?</Text>
             <Text style = {style.LoginText} onPress={() => this.props.navigation.navigate("Login")}> Login </Text> 
           </View> 
       </View>
-        </ImageBackground>
+    </ImageBackground>
 )}}
 
 export default Register

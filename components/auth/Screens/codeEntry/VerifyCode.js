@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, SafeAreaView, TextInput, TouchableOpacity,  ImageBackground, Alert } from "react-native";
+import { Text, View, SafeAreaView, Alert } from "react-native";
 import style from './style'
 import {
     CodeField,
@@ -10,6 +10,7 @@ import {
 
 import { useSelector } from "react-redux";
 import { VALIDATE_ATTEMPT_MAX } from '@env';
+import { Title, AppButton } from "../../lib";
 
 
 var currentAttempt = 1
@@ -43,7 +44,10 @@ export default function VerifyCode({navigation}) {
 
     return (
         <View style = {style.container}>
-            <Text style={{...style.title, fontFamily: 'PTSansNarrow'}}>Enter Code</Text>
+            <Title 
+                fontFamily='PTSansNarrow' 
+                color='#4F5200'
+                fontSize={40}>Enter Code</Title>
             <SafeAreaView style={styles.root}>
             <CodeField
                 ref={ref}
@@ -70,11 +74,7 @@ export default function VerifyCode({navigation}) {
                 )}
             />
             </SafeAreaView>
-            <TouchableOpacity 
-                style={style.SignupBtn} 
-                onPress={() => validateCode()}>
-                <Text style={style.loginText}>Verify</Text> 
-            </TouchableOpacity>
+            <AppButton onPress={() => validateCode()}>Verify</AppButton>
         </View>
     )
 }

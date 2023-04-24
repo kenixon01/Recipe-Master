@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, TouchableOpacity,  ImageBackground, Alert } from "react-native";
+import { View, Alert } from "react-native";
 import style from './style'
-import sendEmail from "../../../../sendEmail";
+import sendEmail from "../../sendEmail";
 import { useDispatch } from "react-redux";
 import { setVerifcationCode } from "../../../../actions";
+import { Title, InputBox, AppButton } from "../../lib";
 
-
-//recipemaster@outlook.com
-//$ytkOpKHRW545*/sads*
-//1-1-1999
 export default function ForgotPassword({navigation}) {
     const [email, setEmail] = useState('')
     
@@ -31,20 +28,16 @@ export default function ForgotPassword({navigation}) {
 
     return (
         <View style = {style.container}>
-            <Text style={{...style.title, fontFamily: 'PTSansNarrow'}}>Forgot Password</Text>
-            <View style = {style.inputView}>
-                <TextInput 
-                    style = {style.inputText}
-                    placeholder = "Email"
-                    keyboardType={"email-address"}
-                    onChangeText = {(text) => setEmail(text)}
-                />
-            </View>
-            <TouchableOpacity 
-                style={style.SignupBtn} 
-                onPress={() => {verify()}}>
-                <Text style={style.loginText}>Submit</Text> 
-            </TouchableOpacity>
+            <Title 
+                fontFamily={'PTSansNarrow'}
+                fontSize={40}
+                color={'#4F5200'}>Forgot Password</Title>
+            <InputBox
+                placeholder = "Email"
+                keyboardType={"email-address"}
+                onChangeText = {(text) => setEmail(text)}
+            />
+            <AppButton onPress={() => {verify()}}>Submit</AppButton>
         </View>
     )
 }
