@@ -4,16 +4,31 @@ import { View, Text, StyleSheet, TextInput,
     TouchableOpacity, Switch, Alert } from 'react-native';
 import {gpl, useMutation} from '@apollo/client'
 
-export default function SettingsScreen ({navigation}){
-    const [name, setName] = useState
-    const [email, setEmail] = useState
-    const [password, setPassowrd] = useState
-    const [username, setUserName] = useState
-
-    const UPDATE_USER_MUTATION = gql`
-        mutation EditUser($input:  ) {
+const UPDATE_MUTATION = gql`
+    mutation updateUser($email: String, $name: String, $password: String){
+        updateUser(input: {email:$email, name:$name, password:$password}){
+            user{
+            name
+            email
+            password
+            }
         }
-    `
+    }
+`;
+
+const DELETE_MUTATION = gql`
+    mutation deleteUser ($id: ID!) {
+        deleteUser(id: $id){
+        id
+        }
+    }
+`
+
+export default function SettingsScreen ({navigation}){
+    const [name, setName] = useState()
+    const [email, setEmail] = useState()
+    const [password, setPassowrd] = useState()
+    const [username, setUserName] = useState()
 
     const [shouldshow, setshouldShow] = useState(false);
     //const [darkMode, setDarkMode] = useState(false);
@@ -21,6 +36,36 @@ export default function SettingsScreen ({navigation}){
 
     const [isOn , setIsOn] = React.useState(false);
     const onToggleSwitch = () => setIsOn(!isOn);
+
+    const [deleteUser, {data, error, loading}] = useMutation(DELETE_MUTATION);
+    const [updateUser, {data: updateUserData, error: updateUserError, loading: updateUserLoading}] = useMutation(UPDATE_MUTATION);
+
+    useEffect(() => {
+        if (error) {
+          Alert.alert('Could not delete Account');
+          
+        }
+      },[error])
+    
+      if (data) {
+        // save token
+        AsyncStorage
+          .setItem('token', data.signIn.token)
+          .then(() => {
+            // redirect home
+            navigation.navigate('Register')
+          })
+      }
+      
+      const onSubmit = () => {
+        deleteUser({variables: { id: id }})
+          .then(response => {
+            console.log(`Response: ${response}`)
+          })
+          .catch(err => {
+            console.log(`Error: ${err}`)
+          })
+      }
 
     const handleLogout = () => {
         navigation.navigate("Login");
