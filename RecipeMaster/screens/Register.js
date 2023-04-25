@@ -1,49 +1,51 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { View, Button, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground, Image, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-//import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 
-// const SIGN_UP_MUTATION = gql`
-// mutation signUp($email: String!, $password: String!, $name: String!) {
-//   signUp(input: {email: $email, password: $password, name: $name}){
-//     token
-//     user {
-//       id
-//       name
-//       email
-//     }
-//   }
-// }
-// `;
+const SIGN_UP_MUTATION = gql`
+mutation signUp($email: String!, $password: String!, $name: String!) {
+  signUp(input: {email: $email, password: $password, name: $name}){
+    token
+    user {
+      email
+    }
+  }
+}
+`;
   
 export function Register ({navigation}) {
+
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [userName , setUserName] = useState('');
   
- // const [signUp, { data, error, loading }] = useMutation(SIGN_UP_MUTATION);
+  const [signUp, { data, error, loading }] = useMutation(SIGN_UP_MUTATION);
 
-  // if (error) {
-  //   Alert.alert('Error signing up. Try again')
-  //   console.log(error)
-  // }
+  useEffect(() => {
+    if (error) {
+      Alert.alert('No fields can be left blank');
+    }
+  },[error])
 
-  // if (data) {
-  //   // save token
-  //   AsyncStorage
-  //     .setItem('token', data.signUp.token)
-  //     .then(() => {
-  //       // redirect home
-  //       navigation.navigate('Main')
-  //     })
-  // }
+  if (data){
+    AsyncStorage
+    .setItem('token', data.signUp.token)
+    .then(() => {
+      navigation.navigate('Main')
+    })
+  }
 
-  // const onSubmit = () => {
-  //   signUp({variables: { name, email, password, userName }})
-  // }
-
-   
+  const onSubmit = () => {
+    signUp({variables: {name, email, password, userName}})
+      .then(response => {
+        console.log(`Response: ${response}`)
+      })
+      .catch(err => {
+        console.log(`Error: ${err}`)
+      })
+  }  
     return (
       <View style = {style.container}>
          
@@ -93,7 +95,7 @@ export function Register ({navigation}) {
               character
             </Text>
           </View>
-        <TouchableOpacity style={style.SignupBtn} onPress = {() => navigation.navigate('Main')}>
+        <TouchableOpacity style={style.SignupBtn} onPress = {() => onSubmit()}>
             <Text>Sign Up</Text> 
         </TouchableOpacity>
         <View style = {{flexDirection: 'row'}}>
