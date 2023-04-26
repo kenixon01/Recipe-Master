@@ -12,6 +12,8 @@ import NavigationBar from './components/auth/nav/NavigationBar';
 import ResetPasswordScreen from "./components/auth/Screens/resetPassword/ResetPassword"
 import VerifyCodeScreen from "./components/auth/Screens/codeEntry/VerifyCode"
 import { store } from './redux/store'
+import { ApolloProvider } from '@apollo/client';
+import clients from './Apollo';
 
 const Stack = createStackNavigator();
 
@@ -32,7 +34,8 @@ export const Auth = () => {
 const App = () => {
   
   return(  
-    <Provider store = {store}>
+    <ApolloProvider client={clients}>
+      <Provider store = {store}>
       <NavigationContainer independent={true}>
         <Stack.Navigator initialRouteName="Auth" screenOptions={{headerShown: false}}>
           {/* Auth Navigator: Include Login and Signup */}
@@ -40,9 +43,10 @@ const App = () => {
           {/* Creates and establishes Home screen along with bottom navigation */}
           <Stack.Screen name = "Main" component={NavigationBar} options = {{headerShown: false}} />
         
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    </ApolloProvider>
   )
 }
 

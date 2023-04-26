@@ -27,7 +27,7 @@ const typeDefs = gql`
   type Mutation {
     signUp(input: SignUpInput!): AuthUser!
     signIn(input: SignInInput!): AuthUser!
-    updateUser(input: UpdateInput!):User
+    updateUser(input: UpdateInput!):User!
     deleteUser(input: DeleteInput!): Boolean!
   }
 
