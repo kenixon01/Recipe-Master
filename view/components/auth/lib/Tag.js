@@ -2,13 +2,10 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import style from './styles/tagStyle'
 
-export default Tag = ({backgroundColor, key, onPress, children}) => {
+export default Tag = ({backgroundColor, index, onPress, children}) => {
   return (
-    <View 
-        onPress={onPress} 
-        key={key} 
-        style = {{...style.tag, backgroundColor: backgroundColor}}>
-        <Text style={style.text}>{children}</Text>
+    <View style = {{...style.tag, backgroundColor: backgroundColor}}>
+         <Text key={index} style={style.text} onPress={onPress}>{children}</Text>
     </View> 
   )
 }

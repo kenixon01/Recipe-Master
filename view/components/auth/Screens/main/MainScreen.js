@@ -1,59 +1,30 @@
 import React, { useState } from 'react'
-import { Text, View, TextInput, Image, SafeAreaView, ScrollView } from 'react-native';
+import { Text, View, Image, SafeAreaView, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setData, setAPICallLoading, setRecentSearches } from '../../../../actions/index';
+import { setQuery } from '../../../../actions/index';
 import styles from './style'
 import {Section, Title, SearchBox, Tag} from '../../lib';
-import { API_ID, API_KEY, ENDPOINT } from '@env'
 
 export default function MainScreen ({navigation}) {
   
   const [search, setSearch] = useState('');
   const [textInput, setTextInput] = useState('');
   
-  const dispatch = useDispatch();
-
-  const handleDataChange = (data) => {
-    dispatch(setData(data))
-  }
-
-  const MAX_SEARCH_RESULTS = 10;
-
-  const handleAPILoadingStateChange = (data) => {
-    dispatch(setAPICallLoading(data))
-  }
-
-  const handleRecentSearches = (data) => {
-    dispatch(setRecentSearches(data, MAX_SEARCH_RESULTS))
-  }
-
   const recentSearches = useSelector((store) => store.searches);
 
-  const getRecipes = async (search) => {
-    handleAPILoadingStateChange(true)
-    search = 'cheese'
-    setSearch(search)
-    const URL = `${ENDPOINT}q=${search}&app_id=${API_ID}&app_key=${API_KEY}&to=${MAX_SEARCH_RESULTS}`
-    fetch(URL).then(response => {
-      return response.json();
-    }).then(responseData => {
-      handleDataChange(responseData)
-      if(responseData.hits.length) {
-        handleRecentSearches(search)
-      }
-    }).catch(error => {
-      console.error(error);
-    })
-    handleAPILoadingStateChange(false)
+  const dispatch = useDispatch();
+
+  const handleQuery = (data) => {
+    dispatch(setQuery(data))
   }
 
   const queryResultsNav = (search) => {
-    getRecipes(search)
+    handleQuery(search)
     navigation.navigate("Result")
     setTextInput('')
   }
   const generateRecentSearches = () => {
-    if(recentSearches.length) { 
+    if(!recentSearches.length) { 
       return <Text style = {styles.SmallerTxt}>Start searching for recipes!</Text>
     }
     return(
@@ -67,7 +38,7 @@ export default function MainScreen ({navigation}) {
                 return (
                   <Tag
                     onPress={() => queryResultsNav(element)} 
-                    key={index} 
+                    index={index} 
                     backgroundColor={randColor}
                   >{element}</Tag>
                 )
