@@ -1,34 +1,53 @@
-import React, { Component } from 'react'
+import React, { useEffect,useState } from 'react'
 import { View, Text, ImageBackground, Alert } from 'react-native'
 import { InputBox, AppButton, Title } from '../../lib';
 import style from './style'
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useMutation, gql } from '@apollo/client';
   
-export class Register extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-            firstName: '',
-            lastname: '',
-            userName: '',
-        };
+const SIGN_UP_MUTATION = gql`
+mutation signUp($email: String!, $password: String!, $name: String!) {
+  signUp(input: {email: $email, password: $password, name: $name}){
+    token
+    user {
+      email
     }
-    
-  checkInput = () =>{
-    const {firstName, password, lastname, email, userName} = this.state;
-    if (!firstName.trim() || !lastname.trim() || !email.trim() || !userName.trim() || !password.trim()){
-      Alert.alert('Field Error','No fields can remain blank')
-      return;
-    }
-    else if (password.length <= 8){
-      Alert.alert('Password Error','Password must be at least 8 characters')
-    }
+  }
+}
+`;
+  
+export function Register ({navigation}) {
 
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const [signUp, { data, error, loading }] = useMutation(SIGN_UP_MUTATION);
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert('No fields can be left blank');
+    }
+  },[error])
+
+  if (data){
+    AsyncStorage
+    .setItem('token', data.signUp.token)
+    .then(() => {
+      navigation.navigate('Main')
+    })
   }
 
-  render() {
+  const onSubmit = () => {
+    signUp({variables: {name, email, password, userName}})
+      .then(response => {
+        console.log(`Response: ${response}`)
+      })
+      .catch(err => {
+        console.log(`Error: ${err}`)
+      })
+  }  
+
     return (
       <ImageBackground 
           style = {style.image}
@@ -37,36 +56,30 @@ export class Register extends Component {
           <Title fontFamily="PTSansNarrow" color='#4F5200'>Sign Up</Title>
           <InputBox
             placeholder = "First Name"
-            onChangeText = {(firstName) => this.setState({firstName})}
-          />
-          <InputBox
-            placeholder = "Last Name"
-            onChangeText = {(lastname) => this.setState({lastname})}
+            value= {name}
+            onChangeText = {setName}
           />
           <InputBox
             keyboardType={'email-address'}
             placeholder = "Email"
-            onChangeText = {(email) => this.setState({email})}
-          />
-          <InputBox
-            placeholder = "User Name"
-            onChangeText = {(userName) => this.setState({userName})}
+            value={email}
+            onChangeText = {setEmail}
           />
           <InputBox
             placeholder = "Password"
-            secureTextEntry = {true}
-            onChangeText = {(password) => this.setState({password})}
-          />
+            value={password}
+            onChangeText = {setPassword}
+            />
           <View>
             <Text style = {style.text}>Must be at least 8 characters and include at least 1 special character</Text>
           </View>
-          <AppButton onPress = {this.checkInput}>Sign Up</AppButton>
+          <AppButton onPress = {() => onSubmit()}>Sign Up</AppButton>
           <View style = {{flexDirection: 'row'}}>
             <Text style={style.forgotAndSignUpText}>Already have an account?</Text>
-            <Text style = {style.LoginText} onPress={() => this.props.navigation.navigate("Login")}> Login </Text> 
+            <Text style = {style.LoginText} onPress={() => navigation.navigate("Login")}> Login </Text> 
           </View> 
       </View>
     </ImageBackground>
-)}}
+)}
 
 export default Register

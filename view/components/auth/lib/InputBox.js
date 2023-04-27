@@ -2,7 +2,7 @@ import React from 'react'
 import { View, TextInput } from 'react-native'
 import style from './styles/inputBoxStyle'
 
-export default InputBox = ({keyboardType, placeholder, secureTextEntry, onChangeText}) => {
+export default InputBox = ({keyboardType, placeholder, secureTextEntry, onChangeText,value}) => {
   return (
     <View style = {style.inputView}>
       <TextInput 
@@ -11,6 +11,7 @@ export default InputBox = ({keyboardType, placeholder, secureTextEntry, onChange
           keyboardType={keyboardType}
           placeholder = {placeholder}
           onChangeText = {onChangeText}
+          value={value}
           secureTextEntry = {secureTextEntry}
       />
     </View> 

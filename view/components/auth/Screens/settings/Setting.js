@@ -1,30 +1,93 @@
-import React from 'react';
-import { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Switch, Alert, ScrollView, SafeAreaView, ImageBackground, ActivityIndicator } from 'react-native';
+import React, { useEffect,useState } from 'react'
+import { View, Text, Button, TouchableOpacity, Switch, Alert, ScrollView, SafeAreaView, ImageBackground, ActivityIndicator } from 'react-native';
 import styles from './style';
 import { useDispatch } from 'react-redux';
 import { setDeleteAcct } from '../../../../actions/index';
 import { Header, InputBox, AppButton, Title } from '../../lib';
+import {gql, useMutation} from '@apollo/client'
+import Dialog from "react-native-dialog";
+
+const UPDATE_MUTATION = gql`
+    mutation updateUser($email: String, $name: String, $password: String){
+        updateUser(input: {email:$email, name:$name, password:$password}){
+            user{
+            name
+            email
+            }
+        }
+    }
+`;
+
+const DELETE_MUTATION = gql`
+    mutation deleteUser ($email: String) {
+        deleteUser(input: {email: $email})
+        
+    }
+`;
+
 
 export default function SettingsScreen ({navigation}){
-
+    const [name, setName] = useState()
+    const [email, setEmail] = useState()
+    const [deleteEmail, setDeleteEmail] = useState();
+    const [password, setPassword] = useState()
+    const [visible, setVisible] = useState(false);
 
     const [shouldshow, setshouldShow] = useState(false);
-    //const [darkMode, setDarkMode] = useState(false);
     const [isShowing, setIsShowing] = useState(false);
 
-    const [isOn , setIsOn] = useState(false);
+    const [isOn , setIsOn] = React.useState(false);
     const onToggleSwitch = () => setIsOn(!isOn);
 
-    const dispatch = useDispatch();
+    const [deleteUser, {data, error, loading}] = useMutation(DELETE_MUTATION);
+    const [updateUser, {data: updateUserData, error: updateUserError, loading: updateUserLoading}] = useMutation(UPDATE_MUTATION);
 
-    const handleDeleteAcct = () => {
-      dispatch(setDeleteAcct())
-    }
+    useEffect(() => {
+        if (error) {
+          Alert.alert('Could not delete Account');
+          
+        }
+        if (updateUserError) {
+            Alert.alert('Can not leave fields blank')
+        }
+      },[error], [updateUserError])
+    
+      if (data) {
+        navigation.navigate('Register');
+          }
+      if (updateUserData){
+        const newName = data.name
+        console.log(newName)
+      }
+      const onSubmitDelete = () => {
+        deleteUser({variables: { email: deleteEmail }})
+          .then(response => {
+            console.log(`Response: ${response}`)
+          })
+          .catch(err => {
+            console.log(`Error: ${err}`)
+          })
+          setVisible(false);
+      }
 
-    const handleLogout = () => {
-        handleDeleteAcct();
-    }
+      const onSubmitUpdate = () => {
+        updateUser({variables: {email, password, name}})
+        .then(response => {
+            console.log(`Response: ${response}`)
+          })
+          .catch(err => {
+            console.log(`Error: ${err}`)
+          })
+        
+      }
+      const showDialog = () => {
+        setVisible(true);
+      };
+    
+      const handleCancel = () => {
+        setVisible(false);
+      };
+
 
     return (
         <SafeAreaView>
@@ -41,16 +104,12 @@ export default function SettingsScreen ({navigation}){
                                     <InputBox
                                         placeholder = "First Name"
                                     />
-                                    <InputBox
-                                        placeholder = "Last Name"
-                                    />
+                                    
                                     <InputBox
                                         placeholder = "Email Address"
                                         keyboardType={"email-address"}
                                     />
-                                    <InputBox
-                                        placeholder = "Username"
-                                    />
+                                
                                     <InputBox
                                         placeholder = "Password"
                                         secureTextEntry={true}
@@ -76,20 +135,19 @@ export default function SettingsScreen ({navigation}){
                                 </View>
                             ) :null } 
                         </View>
-                        <View>
-                            <TouchableOpacity
-                                onPress={() => Alert.alert(
-                                    'Delete Account?',
-                                    'Are you sure you want to delete your account?',
-                                    [
-                                        {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-                                        {text: 'Confirm', onPress: () => handleLogout() },
-                                    ],
-                                    { cancelable: false }
-                                )}>
-                                <Text style = {styles.deleteText}>Delete Account?</Text>
-                            </TouchableOpacity>
-                        </View>
+                    <View style = {{bottom : 0, position : 'absolute' }}>
+                        <Button title='Delete Account ?!? ' onPress={showDialog}/>
+                        <Dialog.Container visible={visible}>
+                        <Dialog.Title>Account delete</Dialog.Title>
+                            <Dialog.Description>
+                            Do you want to delete this account? You cannot undo this action.
+                            Type your Email to delete Account
+                            </Dialog.Description>
+                        <Dialog.Input label ='Email' onChangeText={setDeleteEmail}></Dialog.Input>
+                        <Dialog.Button label="Cancel" onPress={handleCancel} />
+                        <Dialog.Button label="Delete" onPress={onSubmitDelete} />
+                        </Dialog.Container>
+                  </View>
                 </View>
             </ImageBackground>
             </ScrollView>
