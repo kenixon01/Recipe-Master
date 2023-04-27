@@ -33,6 +33,14 @@ export default styles = StyleSheet.create({
         top: 35,
         right: 0,
     },
+    itemStyle: {
+        padding: 10,
+    },
+    textInputStyle: {
+        height: 40,
+        borderWidth: 1,
+        backgroundColor: '#FFFFFF'
+    },
     
     
 });

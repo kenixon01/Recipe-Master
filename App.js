@@ -11,6 +11,8 @@ import ForgotPasswordScreen from './components/auth/Screens/forgotPassword/Forgo
 import NavigationBar from './components/auth/nav/NavigationBar';
 import { store } from './redux/store'
 
+
+
 const Stack = createStackNavigator();
 
 export const Auth = () => {
@@ -26,6 +28,7 @@ export const Auth = () => {
 
 const App = () => {
   
+
   return(  
     <Provider store = {store}>
       <NavigationContainer independent={true}>
@@ -37,8 +40,11 @@ const App = () => {
         
         </Stack.Navigator>
       </NavigationContainer>
+
+     
     </Provider>
   )
 }
+
 
 export default App;
