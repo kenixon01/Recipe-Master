@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react'
-import { View, Button, Text, ImageBackground, ActivityIndicator} from 'react-native'
+import { View, Button, Text, ImageBackground, ActivityIndicator, Alert} from 'react-native'
 import style from './style'
 import * as Font from 'expo-font';
 import {InputBox, AppButton, Title} from '../../lib/index'
@@ -42,7 +42,7 @@ export function Login ({navigation}) {
   }
   
   const onSubmit = () => {
-    signIn({variables: { email, password }})
+    signIn({variables: { email: 'knixon4@ggc.edu', password: 'abcd' }})
       .then(response => {
         console.log(`Response: ${response}`)
       })

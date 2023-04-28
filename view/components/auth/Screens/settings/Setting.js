@@ -19,7 +19,7 @@ const UPDATE_MUTATION = gql`
 `;
 
 const DELETE_MUTATION = gql`
-    mutation deleteUser ($email: String) {
+    mutation deleteUser ($email: String!) {
         deleteUser(input: {email: $email})
         
     }
@@ -27,10 +27,10 @@ const DELETE_MUTATION = gql`
 
 
 export default function SettingsScreen ({navigation}){
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [deleteEmail, setDeleteEmail] = useState();
-    const [password, setPassword] = useState()
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [deleteEmail, setDeleteEmail] = useState('');
+    const [password, setPassword] = useState('')
     const [visible, setVisible] = useState(false);
 
     const [shouldshow, setshouldShow] = useState(false);
@@ -41,6 +41,12 @@ export default function SettingsScreen ({navigation}){
 
     const [deleteUser, {data, error, loading}] = useMutation(DELETE_MUTATION);
     const [updateUser, {data: updateUserData, error: updateUserError, loading: updateUserLoading}] = useMutation(UPDATE_MUTATION);
+
+    const dispatch = useDispatch();
+    
+    const handleDeleteAcct = () => {
+        dispatch(setDeleteAcct())
+    }
 
     useEffect(() => {
         if (error) {
@@ -53,7 +59,7 @@ export default function SettingsScreen ({navigation}){
       },[error], [updateUserError])
     
       if (data) {
-        navigation.navigate('Register');
+        handleDeleteAcct()
           }
       if (updateUserData){
         const newName = data.name
@@ -143,7 +149,7 @@ export default function SettingsScreen ({navigation}){
                             Do you want to delete this account? You cannot undo this action.
                             Type your Email to delete Account
                             </Dialog.Description>
-                        <Dialog.Input label ='Email' onChangeText={setDeleteEmail}></Dialog.Input>
+                        <Dialog.Input label ='Email' value={deleteEmail} onChangeText={setDeleteEmail}></Dialog.Input>
                         <Dialog.Button label="Cancel" onPress={handleCancel} />
                         <Dialog.Button label="Delete" onPress={onSubmitDelete} />
                         </Dialog.Container>

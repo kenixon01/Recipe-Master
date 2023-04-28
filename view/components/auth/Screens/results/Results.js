@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, FlatList, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRecentSearches } from '../../../../actions/index';
 import styles from './style'
@@ -34,14 +34,14 @@ export default function Results({navigation}){
     }, [])
 
     return (
-        <View style = {styles.container}>
+        <SafeAreaView style = {styles.container}>
             <Text style = {styles.Title}>Results</Text>
-            <View>
-                {recipes.map((element, index) => {
-                    return (<Text key={index}>{element.recipe.label}</Text>)
-                })}
-                <Button title="Load More"/>
-            </View>
-        </View>
+            <FlatList
+                data={recipes}
+                renderItem={({item}) => <View><Text>{item.recipe.label}</Text></View>}
+                keyExtractor={item => item.recipe.uri}
+            />
+            <Button title="Load More"/>
+        </SafeAreaView>
     );
 }
