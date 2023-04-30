@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, FlatList, SafeAreaView } from 'react-native';
+import { View, Text, Button, FlatList, SafeAreaView, Modal, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRecentSearches } from '../../../../actions/index';
+
+import {Section, Title} from '../../lib';
 import styles from './style'
 import { API_ID, API_KEY, ENDPOINT, MAX_SEARCH_RESULTS } from '@env'
+import style from './style';
 
 export default function Results({navigation}){
     const [recipes, setRecipes] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0)
+    const [modalVisible, setModalVisible] = useState(false)
+    const [index, setIndex] = useState(0)
     const query = useSelector((store) => store.query);
 
     const dispatch = useDispatch();
@@ -38,10 +43,41 @@ export default function Results({navigation}){
             <Text style = {styles.Title}>Results</Text>
             <FlatList
                 data={recipes}
-                renderItem={({item}) => <View><Text>{item.recipe.label}</Text></View>}
+                renderItem={({item,index}) => <View><Text key={index} onPress={() => {
+                    setModalVisible(true)
+                    setIndex(index)}}>{item.recipe.label}</Text></View>}
                 keyExtractor={item => item.recipe.uri}
-            />
-            <Button title="Load More"/>
+                extraData={currentIndex}
+            /> 
+            <View style={style.modalContainer}>
+                <Modal
+                    animationType='slide'
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed')
+                        setModalVisible(!modalVisible)
+                    }}>
+                    {
+                        (modalVisible) ?
+                            <View style={style.modal}>
+                                <Text style={style.recipeLabel}>{recipes[index].recipe.label}</Text>
+                                <Text style={style.recipeInfo}>Cuisine: {recipes[index].recipe.cuisineType}</Text>
+                                <Text style={style.recipeInfo}>Cook Time {recipes[index].recipe.totalTime} minutes</Text>
+                                <Text style={style.recipeInfo}>Serves {recipes[index].recipe.yield}</Text>
+                                <Text style={style.recipeInfo}>{recipes[index].recipe.calories} calories</Text>
+                                <Text style={style.label}>{recipes[index].recipe.url}</Text>
+                        
+                                {recipes[index].recipe.ingredientLines.map((ingredient, index) => {
+                                    return <Text key={index} style={style.ingredient}>{ingredient}</Text>
+                                })}
+
+                                <Button title="Hide modal" onPress={() => setModalVisible(!modalVisible)}/> 
+                            </View>
+                        : <View></View>
+                    }
+                </Modal>
+            </View>
         </SafeAreaView>
     );
 }
