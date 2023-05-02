@@ -5,7 +5,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 dotenv.config();
 
-const { DB_URI, DB_NAME, JWT_SECRET } = process.env;
+const DB_URI ="mongodb+srv://admin:admins@cluster0.pxlcoah.mongodb.net/?retryWrites=true&w=majority"
+const DB_NAME = "recipe"
+const JWT_SECRET = 'ThisIsTheSecretKey'
 
 const getToken = (user) => jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '5 minutes' });
 
@@ -29,6 +31,7 @@ const typeDefs = gql`
     signIn(input: SignInInput!): AuthUser!
     updateUser(input: UpdateInput!):User!
     deleteUser(input: DeleteInput!): Boolean!
+    updatePassword(input: PasswordInput!): AuthUser!
   }
 
   input SignUpInput {
@@ -47,6 +50,10 @@ const typeDefs = gql`
     password: String!
   }
 
+  input PasswordInput{
+    email: String!
+    password: String!
+  }
 
   input DeleteInput{
     email: String!
@@ -135,6 +142,27 @@ const resolvers = {
     user
    }
 
+    },
+
+    updatePassword: async (_, {input}, {db} ) => {
+      const user =  await db.collection('Users').findOne({ email: input.email });
+      if (!user) {
+        throw new Error ('Authentication Error.');
+      }
+      if (user){
+        const encypt = bcrypt.hashSync(input.password);
+        await db.collection('Users').updateOne({email: input.email},
+        {
+          $set:{
+            email: input.email,
+            name: user.name,
+            password: encypt,
+        }})
+      }
+      return {
+        user,
+        token: getToken(user),
+      }
     },
 
     deleteUser: async(_, { input }, { db }) => {

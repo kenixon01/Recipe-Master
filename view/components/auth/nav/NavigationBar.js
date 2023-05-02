@@ -45,15 +45,17 @@ function ListEditorStackScreen (){
 
 const Tab = createBottomTabNavigator();
 export default function NavigationBar() {
-    const data = useSelector((store) => store.deleted);
     const dispatch = useDispatch();
   
     const handleDeleteAcct = () => {
       dispatch(setDeleteAcct())
     }
 
+    const data = useSelector((store) => store.deleted);
+    
     useEffect(() => {
         handleDeleteAcct()
+        console.log(data )
     }, [])
 
     if(data)  {

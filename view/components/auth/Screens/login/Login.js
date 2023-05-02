@@ -1,4 +1,3 @@
-import React, { useEffect,useState } from 'react'
 import { View, Button, Text, ImageBackground, ActivityIndicator, Alert} from 'react-native'
 import style from './style'
 import * as Font from 'expo-font';
@@ -42,7 +41,7 @@ export function Login ({navigation}) {
   }
   
   const onSubmit = () => {
-    signIn({variables: { email, password }})
+    signIn({variables: { email: 'milah2035@gmail.com', password: '12345678' }})
       .then(response => {
         console.log(`Response: ${response}`)
       })

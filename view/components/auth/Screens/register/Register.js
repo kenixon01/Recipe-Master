@@ -39,7 +39,7 @@ export function Register ({navigation}) {
   }
 
   const onSubmit = () => {
-    signUp({variables: {name, email, password, userName}})
+    signUp({variables: { email, password, name}})
       .then(response => {
         console.log(`Response: ${response}`)
       })

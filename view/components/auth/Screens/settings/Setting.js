@@ -43,7 +43,9 @@ export default function SettingsScreen ({navigation}){
     const [updateUser, {data: updateUserData, error: updateUserError, loading: updateUserLoading}] = useMutation(UPDATE_MUTATION);
 
     const dispatch = useDispatch();
-
+    
+    const handleDeleteAcct = () => {
+        dispatch(setDeleteAcct())
     const handleDeleteAcct = () => {
         dispatch (setDeleteAcct())
     }
@@ -57,7 +59,6 @@ export default function SettingsScreen ({navigation}){
     
       if (data) {
         handleDeleteAcct()
-        //navigation.navigate('');
           }
       if (updateUserData){
         const newName = data.name

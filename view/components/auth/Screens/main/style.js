@@ -14,12 +14,6 @@ export default styles = StyleSheet.create({
       height: Dimensions.get('window').width * 1,
       borderRadius: Dimensions.get('window').width
     },
-    SmallerTxt:{
-      fontSize: 15,
-      fontStyle:'italic',
-      textAlign:'center',
-      color:'#BFA600',
-    },
     allRecentSearches:{
       flexDirection: 'row',
       justifyContent:'center',
