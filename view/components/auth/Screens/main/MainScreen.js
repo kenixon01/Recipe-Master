@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Text, View, Image, SafeAreaView, ScrollView } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setQuery } from '../../../../actions/index';
 import styles from './style'
 import {Section, Title, SearchBox, Tag, Caption} from '../../lib';
@@ -10,9 +10,15 @@ export default function MainScreen ({navigation}) {
   const [search, setSearch] = useState('');
   const [textInput, setTextInput] = useState('');
   
+  const dispatch = useDispatch();
+
   const recentSearches = useSelector((store) => store.searches);
 
   const name = useSelector((store) => store.name);
+
+  const handleQuery = (data) => {
+    dispatch(setQuery(data))
+  }
 
   const queryResultsNav = (search) => {
     handleQuery(search)

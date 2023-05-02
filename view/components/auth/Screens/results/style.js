@@ -16,7 +16,7 @@ export default styles = StyleSheet.create({
     },
     ingredient: {
         marginBottom: 8,
-        fontSize: 15
+        fontSize: 15,
     },
     browser: {
         fontSize: 15,
@@ -27,11 +27,17 @@ export default styles = StyleSheet.create({
     scrollView: {
         margin: 15,
     },
+    information:{ 
+        marginVertical: 10,
+        borderColor: '#BFA600',
+        borderBottomWidth: 2,
+        borderTopWidth: 2,
+        paddingVertical: 10
+    },
     buttons: {
         display: 'flex',
         flexDirection: 'row',
-        marginBottom: 5,
-        paddingHorizontal: 50,
+        marginVertical: 5,
         justifyContent: 'space-between',
         width: '100%',
     },
@@ -39,10 +45,9 @@ export default styles = StyleSheet.create({
         margin: 20,
         backgroundColor: 'white',
         borderRadius: 20,
-        paddingVertical: 20,
-        alignItems: 'center',
+        paddingVertical: 50,
         justifyContent: 'center',
-        // height: '50%',
+        padding: 50,
         shadowColor: '#000',
             shadowOffset: {
             width: 0,

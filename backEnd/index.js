@@ -34,6 +34,11 @@ const typeDefs = gql`
     signIn(input: SignInInput!): AuthUser!
     updateUser(input: UpdateInput!):User!
     deleteUser(input: DeleteInput!): Boolean!
+    updatePassword(input: PasswordInput!): AuthUser!
+  }
+  input PasswordInput{
+    email: String!
+    password: String!
   }
 
   input SignUpInput {
@@ -88,26 +93,47 @@ const resolvers = {
   },
   Mutation: {
     signUp: async (_, { input }, { db }) => {
-      const old = await db.collection('Users').findOne({email: input.email})
-      if (old) {
-        throw new Error('Email is taken by existing user')
-      }
+    const old = await db.collection('Users').findOne({email: input.email})
+    if (old) {
+      throw new Error('Email is taken by existing user')
+    }
 
 
-      const hashedPassword = bcrypt.hashSync(input.password);
-      const newUser = {
-        email: input.email,
-       // ...input,
-        password: hashedPassword,
-        name: input.name,
-      }
-      // save to database
-      const user = await db.collection('Users').insertOne(newUser);
-      return {
-        user,
-        token: getToken(user),
-      }
-    },
+    const hashedPassword = bcrypt.hashSync(input.password);
+    const newUser = {
+      email: input.email,
+     // ...input,
+      password: hashedPassword,
+      name: input.name,
+    }
+    // save to database
+    const Saveuse = await db.collection('Users').insertOne(newUser);
+    const user = await db.collection('Users').findOne({email: input.email})
+    return {
+      user,
+      token: getToken(user),
+    }
+  },
+  updatePassword: async (_, {input}, {db} ) => {
+    const user =  await db.collection('Users').findOne({ email: input.email });
+    if (!user) {
+      throw new Error ('Authentication Error.');
+    }
+    if (user){
+      const encypt = bcrypt.hashSync(input.password);
+      await db.collection('Users').updateOne({email: input.email},
+      {
+        $set:{
+          email: input.email,
+          name: user.name,
+          password: encypt,
+      }})
+    }
+    return {
+      user,
+      token: getToken(user),
+    }
+  },
 
     signIn: async (_, { input }, { db }) => {
       const user = await db.collection('Users').findOne({ email: input.email });
@@ -121,6 +147,7 @@ const resolvers = {
         token: getToken(user),
       }
     },
+    
 
     updateUser: async (_, {input}, {db} ) => {
     const user =  await db.collection('Users').findOne({ email: input.email });

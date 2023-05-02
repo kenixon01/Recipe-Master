@@ -89,18 +89,20 @@ export default function Results({navigation}){
                         (modalVisible) ?
                             <View style={style.modal}>
                                 <Header>{recipes[index].recipe.label}</Header>
-                                <Caption>Cuisine: {recipes[index].recipe.cuisineType}</Caption>
-                                <Caption>Cook Time {recipes[index].recipe.totalTime} minutes</Caption>
-                                <Caption>Serves {recipes[index].recipe.yield}</Caption>
+                                <View style={style.information}>
+                                    <Caption>Cuisine: {recipes[index].recipe.cuisineType}</Caption>
+                                    <Caption>Cook Time {recipes[index].recipe.totalTime} minutes</Caption>
+                                    <Caption>Serves {recipes[index].recipe.yield}</Caption>
+                                </View>
 
                                 {recipes[index].recipe.ingredientLines.map((ingredient, index) => {
-                                    return <Text key={index} style={style.ingredient}>{ingredient}</Text>
+                                    return <Text key={index} style={style.ingredient}>- {ingredient}</Text>
                                 })}
 
-                                <Text style={style.label}>{recipes[index].recipe.url}</Text>
-
-                                <OpenURLButton url={recipes[index].recipe.url}>Open in browser</OpenURLButton>
-                                <Button title="Hide modal" color={'#4F5200'} onPress={() => setModalVisible(!modalVisible)}/> 
+                                <View style={style.buttons}>
+                                    <OpenURLButton url={recipes[index].recipe.url}>Open in browser</OpenURLButton>
+                                    <Button title="Hide modal" color={'#4F5200'} onPress={() => setModalVisible(!modalVisible)}/> 
+                                </View>
                             </View>
                         : <View></View>
                     }

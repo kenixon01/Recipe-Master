@@ -26,7 +26,6 @@ export function Register ({navigation}) {
 
   useEffect(() => {
     if (error) {
-      Alert.alert('No fields can be left blank');
     }
   },[error])
 
@@ -39,7 +38,7 @@ export function Register ({navigation}) {
   }
 
   const onSubmit = () => {
-    signUp({variables: {name, email, password, userName}})
+    signUp({variables: {name, email, password}})
       .then(response => {
         console.log(`Response: ${response}`)
       })
