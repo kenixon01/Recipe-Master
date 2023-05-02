@@ -146,8 +146,8 @@ export default function SettingsScreen ({navigation}){
                                 </View>
                             ) :null } 
                         </View>
-                    <View style = {{bottom : 0, position : 'absolute' }}>
-                        <Button title='Delete Account ?!? ' onPress={showDialog}/>
+                    <View style = {{bottom : '5%', position : 'absolute' }}>
+                        <Button title='Delete Account ?!? '  color={'#4F5200'} onPress={showDialog}/>
                         <Dialog.Container visible={visible}>
                         <Dialog.Title>Account delete</Dialog.Title>
                             <Dialog.Description>

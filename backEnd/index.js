@@ -102,7 +102,8 @@ const resolvers = {
         name: input.name,
       }
       // save to database
-      const user = await db.collection('Users').insertOne(newUser);
+      const Saveuse = await db.collection('Users').insertOne(newUser);
+      const user = await db.collection('Users').findOne({email: input.email})
       return {
         user,
         token: getToken(user),

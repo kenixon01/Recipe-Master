@@ -6,6 +6,8 @@ import recentSearchesReducer from './reducers/recentSearchesReducer';
 import userReducer from './reducers/userReducer';
 import verificationCode from './reducers/verificationCode';
 import listReducer from './reducers/listReducer';
+import emailReducer from './reducers/emailReducer';
+
 
 const rootReducer = combineReducers({
     data: DataReducer,
@@ -14,7 +16,9 @@ const rootReducer = combineReducers({
     searches: recentSearchesReducer,
     user: userReducer,
     verificationCode: verificationCode,
-    list: listReducer
+    email: emailReducer,
+    list: listReducer,
+  
 })
 
 export const store = createStore(rootReducer);

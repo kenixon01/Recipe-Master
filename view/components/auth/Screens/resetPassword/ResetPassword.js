@@ -1,42 +1,48 @@
-import React, {useState} from "react";
-import { View } from "react-native";
+import React, { useState } from "react";
+import { View, Alert } from "react-native";
 import style from './style'
-import { Title, AppButton, InputBox } from "../../lib";
+import sendEmail from "../../sendEmail";
+import { useDispatch } from "react-redux";
+import { setVerifcationCode, setUserEmail } from "../../../../actions";
+import { Title, InputBox, AppButton } from "../../lib";
 
-export default function ResetPassword({navigation}) {
-    const [password, setPassword] = useState('')
-    const [passwordConfirm, setPasswordConfirm] = useState('')
+export default function ForgotPassword({navigation}) {
+    const [email, setEmail] = useState('')
 
-    const validatePassword = () => {
-        if(password.length <= 8) {
-            alert("Password must be at least 8 characters")
-        } else if(password === passwordConfirm) {
-            alert("Password successfully changed")
-            navigation.navigate('Login')
-        } else if (password != passwordConfirm) {
-            alert('Passwords do not match')
+    const dispatch = useDispatch();
+
+    const handleVerificationCode = (data) => {
+      dispatch(setVerifcationCode(data))
+    }
+
+    const handleUserEmail = (data) => {
+        dispatch(setUserEmail(data))
+      }
+
+    const verify = () => {
+        if(email && email.includes('@')) {
+            handleVerificationCode(sendEmail(email))
+            handleUserEmail(email)
+            Alert.alert("",'Reset password email successfully sent.  Allow a few minutes to recieve the verification code.')
+            navigation.navigate('CodeEntry')
+        }
+        else {
+            Alert.alert("","Invalid email address")
         }
     }
 
     return (
         <View style = {style.container}>
-            <Title
-                color='#4F5200'
-                fontFamily='PTSansNarrow'
-                fontSize={40}>Reset Password</Title>
+            <Title 
+                fontFamily={'PTSansNarrow'}
+                fontSize={40}
+                color={'#4F5200'}>Forgot Password</Title>
             <InputBox
-                placeholder = "Password"
-                keyboardType="password"
-                secureTextEntry={true}
-                onChangeText = {(text) => setPassword(text)}
+                placeholder = "Email"
+                keyboardType={"email-address"}
+                onChangeText = {(text) => setEmail(text)}
             />
-            <InputBox
-                placeholder = "Confirm Password"
-                keyboardType="password"
-                onChangeText = {(text) =>setPasswordConfirm(text)}
-                secureTextEntry={true}
-            />
-            <AppButton onPress={() => { validatePassword() }}>Submit</AppButton>
+            <AppButton onPress={() => {verify()}}>Submit</AppButton>
         </View>
     )
 }
