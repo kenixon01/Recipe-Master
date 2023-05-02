@@ -8,24 +8,20 @@ import {
   SafeAreaView,
   Image,
   FlatList,
-  Dimensions,
-  TouchableOpacity,
   Modal,
 } from "react-native";
 import { IconButton } from "@react-native-material/core";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useSelector } from "react-redux";
 import style from "./style";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { Card } from "react-native-paper";
 import { white } from "../../../../themes/colors";
 import { ScrollView } from "react-native-gesture-handler";
-import { LinearGradient } from "expo-linear-gradient";
+import OpenURLButton from "./Url";
 
 export default function Results({ navigation }) {
   const apiData = useSelector((store) => store.data);
   const apiDataLoading = useSelector((store) => store.isLoaded);
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
   const loadingConditions = apiData.hits === undefined || apiDataLoading;
@@ -36,16 +32,6 @@ export default function Results({ navigation }) {
       </View>
     );
   }
-
-  // const Card = ({item}) => {
-  //   return (
-  //     <View style={style.card}>
-  //       <View style={{alignItems: 'flex-end'}}>
-  //         <Ionicons name="star" color="#ffd700" size={20}></Ionicons>
-  //       </View>
-  //     </View>
-  //   )
-  // }
 
   return (
     <ScrollView>
@@ -72,106 +58,55 @@ export default function Results({ navigation }) {
             ) : apiData.hits.length === 0 ? (
               <Text>No results found</Text>
             ) : (
-              apiData.hits.map((e, index) => {
-                return (
-                  // <View
-                  //   style={{
-                  //     height: 125,
-                  //     width: 150,
-                  //     borderRadius: 7,
-                  //     borderColor: "#B42306",
-                  //     borderWidth: 0.5,
-                  //     padding: 15,
-                  //     margin: 10,
-                  //     justifyContent: "center",
-                  //   }}
-                  //   key={index}
-                  // >
-                  //   <View
-                  //     style={{
-                  //       //backgroundColor: "#B42306",
-                  //       padding: 2,
-                  //       width: "100%",
-                  //       alignContent: "center",
-                  //     }}
-                  //   >
-                  //     {/* <Ionicons name="star" color="#ffd700" size={20}></Ionicons> */}
-                  //     <Image
-                  //       style={{
-                  //         aspectRatio: 2 / 3,
-                  //         height: 240,
-                  //         borderRadius: 6,
-                  //       }}
-                  //       source={{ uri: e.recipe.image }}
-                  //     />
-                  //     <Text
-                  //       style={{
-                  //         textAlign: "center",
-                  //         color: "white",
-                  //         fontSize: 16,
-                  //         fontWeight: "600",
-                  //       }}
-                  //     >
-                  //       {e.recipe.label}
-                  //     </Text>
-                  //   </View>
-                  // </View>
-                  <FlatList
-                    numColumns={2}
-                    columnWrapperStyle={{ justifyContent: "space-between" }}
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{
-                      marginTop: 10,
-                      paddingBottom: 50,
+              <FlatList
+                numColumns={2}
+                columnWrapperStyle={{ justifyContent: "space-between" }}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                  marginTop: 10,
+                  paddingBottom: 50,
+                }}
+                data={apiData.hits}
+                renderItem={({ item, index }) => (
+                  <Pressable
+                    key={index}
+                    style={{ margin: 1, marginLeft: 15, flex: 1 }}
+                    onPress={() => {
+                      setIndex(index);
+                      setModalVisible(true);
                     }}
-                    data={apiData.hits}
-                    renderItem={({ item, index }) => (
-                      <Pressable
-                        key={index}
-                        style={{ margin: 1, marginLeft: 15, flex: 1 }}
-                        onPress={() => {
-                          setModalVisible(true);
-                        }}
-                      >
-                        <View>
-                          <Ionicons name="star" color="#ffd700" size={20} />
+                  >
+                    <View style={{}}>
+                      {/* <View style={{ alignItems: "flex-end" }}>
+                              <Ionicons name="star" color="#ffd700" size={20} />
+                            </View> */}
 
-                          <Image
-                            style={{
-                              //aspectRatio: 2 / 3,
-                              height: 160,
-                              width: 160,
-                              borderRadius: 6,
-                            }}
-                            source={{ uri: e.recipe.image }}
-                          />
-                        </View>
-                        <Text
-                          style={{
-                            textAlign: "center",
-                            margin: 10,
-                            fontWeight: "bold",
-                            fontSize: "18",
-                          }}
-                        >
-                          {item.recipe.label}
-                        </Text>
-                        <Text
-                          style={{
-                            textAlign: "center",
-                            marginTop: 10,
-                            fontWeight: "semi-bold",
-                            fontSize: "16",
-                          }}
-                        >
-                          {item.recipe.mealType}
-                        </Text>
-                      </Pressable>
-                    )}
-                    // keyExtractor={item => item.recipe.uri}
-                  />
-                );
-              })
+                      <Image
+                        style={{
+                          //aspectRatio: 2 / 3,
+                          height: 160,
+                          width: 160,
+                          borderRadius: 6,
+                        }}
+                        source={{ uri: item.recipe.image }}
+                      />
+                    </View>
+                    <Text
+                      style={{
+                        textAlign: "center",
+                        margin: 10,
+                        fontWeight: "bold",
+                        fontSize: "18",
+                      }}
+                    >
+                      {item.recipe.label}
+                    </Text>
+                  </Pressable>
+                )}
+                // keyExtractor={item => item.recipe.uri}
+              />
+              // );
+              // })
             )}
           </View>
         </View>
@@ -183,7 +118,6 @@ export default function Results({ navigation }) {
             onRequestClose={() => {
               Alert.alert("Modal has been closed.");
               setModalVisible(!modalVisible);
-              setIndex(index)
             }}
           >
             <View style={style.centeredView}>
@@ -193,13 +127,51 @@ export default function Results({ navigation }) {
                     style={{ flex: 1, height: 1, backgroundColor: "black" }}
                   />
                   <View>
-                    <Text style={{ width: 200, textAlign: "center", }}>
+                    <Text
+                      style={{
+                        width: 200,
+                        textAlign: "center",
+                        fontWeight: "bold",
+                        color: "#B42306",
+                      }}
+                    >
                       {apiData.hits[index].recipe.label}
                     </Text>
                   </View>
                   <View
                     style={{ flex: 1, height: 1, backgroundColor: "black" }}
                   />
+                </View>
+                <View
+                  style={{
+                    height: 430,
+                    width: 380,
+                    borderRadius: 7,
+                    borderColor: "#B42306",
+                    borderWidth: 0.5,
+                    padding: 15,
+                    margin: 10,
+                  }}
+                >
+                  <Text style={style.modalText}>
+                    Recipe Details {"\n"}Calories {"\n"}{" "}
+                    {Math.round(apiData.hits[index].recipe.calories)}
+                  </Text>
+                  <Text style={style.modalText}>
+                    Serving Size {"\n"} {apiData.hits[index].recipe.yield}
+                  </Text>
+                  <Text style={style.modalText}>Ingredients</Text>
+
+                  {apiData.hits[index].recipe.ingredients.map((i, index) => {
+                    return <Text>{`\u2023 ${i.text}`}</Text>;
+                  })}
+
+                  <Text style={style.modalText}>
+                    {"\n"}Directions {"\n"}
+                    <OpenURLButton url={apiData.hits[index].recipe.url}>
+                      {apiData.hits[index].recipe.url}
+                    </OpenURLButton>
+                  </Text>
                 </View>
 
                 <Pressable
@@ -216,4 +188,3 @@ export default function Results({ navigation }) {
     </ScrollView>
   );
 }
-

@@ -48,30 +48,20 @@ export default style = StyleSheet.create({
     right: 0,
   },
 
-  // card: {
-  //   height: 225,
-  //   backgroundColor: 'white',
-  //   width,
-  //   marginHorizontal: 2,
-  //   borderRadius: 10,
-  //   marginBottom: 20,
-  //   padding: 15
-  // },
-
-  gridItem: {
-    // flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    margin: 5,
-    height: 50,
-    borderRadius: 8,
-    backgroundColor: 'blue',
-    elevation: 4,
-    shadowColor: 'black',
-    shadowOpacity: 0.25,
-    shadowOffset: {width: 0, height: 2},
-    shadowRadius: 8,
-  },
+//   gridItem: {
+//     // flex: 1,
+//     flexDirection: 'row',
+//     flexWrap: 'wrap',
+//     margin: 5,
+//     height: 50,
+//     borderRadius: 8,
+//     backgroundColor: 'blue',
+//     elevation: 4,
+//     shadowColor: 'black',
+//     shadowOpacity: 0.25,
+//     shadowOffset: {width: 0, height: 2},
+//     shadowRadius: 8,
+//   },
 
   centeredView: {
     flex: 1,
@@ -103,7 +93,7 @@ export default style = StyleSheet.create({
     backgroundColor: '#F194FF',
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#B42306',
   },
   textStyle: {
     color: 'white',
@@ -111,8 +101,9 @@ export default style = StyleSheet.create({
     textAlign: 'center',
   },
   modalText: {	
-    marginBottom: 15,
+    marginBottom: 5,
     textAlign: 'center',
+    fontWeight: "400"
   },
 
 
