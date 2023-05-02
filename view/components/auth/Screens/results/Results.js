@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, FlatList, SafeAreaView, Modal, ScrollView } from 'react-native';
+import React, { useEffect, useState, useCallback} from 'react';
+import { View, Text, Button, FlatList, SafeAreaView, Modal, Linking } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRecentSearches } from '../../../../actions/index';
 import { Tile } from '@rneui/themed';
 
-import {Title} from '../../lib';
+import {Title, Header, Caption} from '../../lib';
 import styles from './style'
 import { API_ID, API_KEY, ENDPOINT, MAX_SEARCH_RESULTS } from '@env'
 import style from './style';
@@ -34,6 +34,24 @@ export default function Results({navigation}){
             return []
         }
     }
+
+    const OpenURLButton = ({url, children}) => {
+        const handlePress = useCallback(async () => {
+          // Checking if the link is supported for links with custom URL scheme.
+          const supported = await Linking.canOpenURL(url);
+      
+          if (supported) {
+            // Opening the link with some app, if the URL scheme is "http" the web link should be opened
+            // by some browser in the mobile
+            await Linking.openURL(url);
+          } else {
+            Alert.alert(`Don't know how to open this URL: ${url}`);
+          }
+        }, [url]);
+      
+        return <Button title={children}
+        color={'#4F5200'} onPress={handlePress} />
+      };
 
     useEffect(() => {
         fetchRecipes(currentIndex).then(data => setRecipes(data))
@@ -70,18 +88,19 @@ export default function Results({navigation}){
                     {
                         (modalVisible) ?
                             <View style={style.modal}>
-                                <Text style={style.recipeLabel}>{recipes[index].recipe.label}</Text>
-                                <Text style={style.recipeInfo}>Cuisine: {recipes[index].recipe.cuisineType}</Text>
-                                <Text style={style.recipeInfo}>Cook Time {recipes[index].recipe.totalTime} minutes</Text>
-                                <Text style={style.recipeInfo}>Serves {recipes[index].recipe.yield}</Text>
-                                <Text style={style.recipeInfo}>{recipes[index].recipe.calories} calories</Text>
-                                <Text style={style.label}>{recipes[index].recipe.url}</Text>
+                                <Header>{recipes[index].recipe.label}</Header>
+                                <Caption>Cuisine: {recipes[index].recipe.cuisineType}</Caption>
+                                <Caption>Cook Time {recipes[index].recipe.totalTime} minutes</Caption>
+                                <Caption>Serves {recipes[index].recipe.yield}</Caption>
 
                                 {recipes[index].recipe.ingredientLines.map((ingredient, index) => {
                                     return <Text key={index} style={style.ingredient}>{ingredient}</Text>
                                 })}
 
-                                <Button title="Hide modal" onPress={() => setModalVisible(!modalVisible)}/> 
+                                <Text style={style.label}>{recipes[index].recipe.url}</Text>
+
+                                <OpenURLButton url={recipes[index].recipe.url}>Open in browser</OpenURLButton>
+                                <Button title="Hide modal" color={'#4F5200'} onPress={() => setModalVisible(!modalVisible)}/> 
                             </View>
                         : <View></View>
                     }

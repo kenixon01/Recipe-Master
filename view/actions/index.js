@@ -33,3 +33,10 @@ export const setUserEmail = (payload) => {
     payload: payload,
   }
 }
+
+export const setUserName = (payload) => {
+  return {
+    type: 'HANDLE_NAME',
+    payload: payload,
+  }
+}

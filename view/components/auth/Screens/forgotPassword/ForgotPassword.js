@@ -3,7 +3,7 @@ import { View, Alert } from "react-native";
 import style from './style'
 import sendEmail from "../../sendEmail";
 import { useDispatch } from "react-redux";
-import { setVerifcationCode } from "../../../../actions";
+import { setVerifcationCode, setUserEmail } from "../../../../actions";
 import { Title, InputBox, AppButton } from "../../lib";
 
 export default function ForgotPassword({navigation}) {
@@ -15,9 +15,14 @@ export default function ForgotPassword({navigation}) {
       dispatch(setVerifcationCode(data))
     }
 
+    const handleUserEmail = (data) => {
+        dispatch(setUserEmail(data))
+      }
+
     const verify = () => {
         if(email && email.includes('@')) {
             handleVerificationCode(sendEmail(email))
+            handleUserEmail(email)
             Alert.alert("",'Reset password email successfully sent.  Allow a few minutes to recieve the verification code.')
             navigation.navigate('CodeEntry')
         }

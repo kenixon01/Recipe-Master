@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Text, View, Image, SafeAreaView, ScrollView } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { setQuery } from '../../../../actions/index';
 import styles from './style'
-import {Section, Title, SearchBox, Tag} from '../../lib';
+import {Section, Title, SearchBox, Tag, Caption} from '../../lib';
 
 export default function MainScreen ({navigation}) {
   
@@ -12,11 +12,7 @@ export default function MainScreen ({navigation}) {
   
   const recentSearches = useSelector((store) => store.searches);
 
-  const dispatch = useDispatch();
-
-  const handleQuery = (data) => {
-    dispatch(setQuery(data))
-  }
+  const name = useSelector((store) => store.name);
 
   const queryResultsNav = (search) => {
     handleQuery(search)
@@ -25,12 +21,12 @@ export default function MainScreen ({navigation}) {
   }
   const generateRecentSearches = () => {
     if(!recentSearches.length) { 
-      return <Text style = {styles.SmallerTxt}>Start searching for recipes!</Text>
+      return <Caption>Start searching for recipes!</Caption>
     }
     return(
       <View>
         <Header>Recent Searches</Header>
-        <Text style = {styles.SmallerTxt}>Try one of these!</Text>
+        <Caption>Try one of these!</Caption>
           <View style = {styles.allRecentSearches}>
             {
               recentSearches.slice(0, 10).map((element, index) => {
@@ -58,7 +54,7 @@ export default function MainScreen ({navigation}) {
             color={'#BFA600'}
             fontSize={40}
             textAlign={'center'}
-          >Welcome, User</Title>
+          >Welcome, {name}</Title>
           <Section backgroundColor={'#4F5200'}>
             <SearchBox
               placeholder = "Search for a recipe or ingredient"
@@ -75,9 +71,6 @@ export default function MainScreen ({navigation}) {
           </Section>
           <Section backgroundColor={'#4F5200'}>
             <Header>Favorite Recipes</Header>
-          </Section>
-          <Section backgroundColor={'white'}>
-            <Header>Explore</Header>
           </Section>
       </View>
       </ScrollView>

@@ -2,9 +2,11 @@ import React, { useEffect,useState } from 'react'
 import { View, Button, Text, ImageBackground, ActivityIndicator, Alert} from 'react-native'
 import style from './style'
 import * as Font from 'expo-font';
+import { useDispatch } from 'react-redux';
 import {InputBox, AppButton, Title} from '../../lib/index'
 import { gql, useMutation } from '@apollo/client'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { setUserName } from '../../../../actions';
 
 const SIGN_IN_MUTATION = gql`
 mutation SignIn($email: String!, $password: String!) {
@@ -24,6 +26,12 @@ export function Login ({navigation}) {
   const [password, setPassword] = useState("");
   const [signIn, {data, error, loading}] = useMutation(SIGN_IN_MUTATION)
 
+  const dispatch = useDispatch();
+
+  const handleUserName = (data) => {
+    dispatch(setUserName(data))
+  }
+
   useEffect(() => {
     if (error) {
       Alert.alert('Invalid credentials, try again');
@@ -37,12 +45,13 @@ export function Login ({navigation}) {
       .setItem('token', data.signIn.token)
       .then(() => {
         // redirect home
+        handleUserName(data.signIn.user.name)
         navigation.navigate('Main')
       })
   }
   
   const onSubmit = () => {
-    signIn({variables: { email, password }})
+    signIn({variables: { email: 'milah2035@gmail.com', password: "12345678" }})
       .then(response => {
         console.log(`Response: ${response}`)
       })
