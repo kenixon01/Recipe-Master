@@ -104,7 +104,7 @@ export function Login ({navigation}) {
             </View>
           </View>
           <AppButton
-            onPress = {() =>onSubmit()}
+            onPress = {() =>navigation.navigate("Main")}
           >Login</AppButton>
           <View style = {{flexDirection: 'row'}}>
             <Text style = {style.forgotAndSignUpText}>No Account?</Text>
