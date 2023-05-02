@@ -40,3 +40,25 @@ export const setUserName = (payload) => {
     payload: payload,
   }
 }
+
+
+export const sethandleAddItem = (payload) => {
+  return {
+    type: 'ADD_ITEM',
+    payload: payload,
+  }
+}
+
+export const sethandleEdit = (payload) => {
+  return {
+    type: 'EDIT_ITEM',
+    payload: payload,
+  }
+}
+
+export const setdeleteItem = (payload) => {
+  return {
+    type: 'DELETE_ITEM',
+    payload: payload,
+  }
+}

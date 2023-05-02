@@ -35,7 +35,6 @@ export default function ListEditor({navigation}){
         </View>
     );
 
-
     return (
 
         <SafeAreaView style = {style.container}>
