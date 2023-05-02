@@ -33,3 +33,24 @@ export const setUserEmail = (payload) => {
     payload: payload,
   }
 }
+
+export const handleAddItem = (payload) => {
+  return {
+    type: 'ADD_ITEM',
+    payload: payload,
+  }
+}
+
+export const handleEdit = (payload) => {
+  return {
+    type: 'EDIT_ITEM',
+    payload: payload,
+  }
+}
+
+export const deleteItem = (payload) => {
+  return {
+    type: 'DELET_ITEM',
+    payload: payload,
+  }
+}
