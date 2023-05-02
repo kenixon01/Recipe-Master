@@ -34,7 +34,6 @@ export default function Results({navigation}){
             return []
         }
     }
-
     useEffect(() => {
         fetchRecipes(currentIndex).then(data => setRecipes(data))
     }, [])
