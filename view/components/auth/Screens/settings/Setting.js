@@ -4,15 +4,15 @@ import styles from './style';
 import { useDispatch } from 'react-redux';
 import { setDeleteAcct } from '../../../../actions/index';
 import { Header, InputBox, AppButton, Title } from '../../lib';
-import {gql, useMutation} from '@apollo/client'
+import {gql, useMutation} from '@apollo/client';
 import Dialog from "react-native-dialog";
 
 const UPDATE_MUTATION = gql`
-    mutation updateUser($email: String, $name: String, $password: String){
+    mutation updateUser($email: String!, $name: String!, $password: String!){
         updateUser(input: {email:$email, name:$name, password:$password}){
             user{
-            name
-            email
+                name
+                email
             }
         }
     }
@@ -46,17 +46,16 @@ export default function SettingsScreen ({navigation}){
     
     const handleDeleteAcct = () => {
         dispatch(setDeleteAcct())
+    const handleDeleteAcct = () => {
+        dispatch (setDeleteAcct())
     }
 
     useEffect(() => {
-        if (error) {
-          Alert.alert('Could not delete Account');
-          
-        }
+       
         if (updateUserError) {
             Alert.alert('Can not leave fields blank')
         }
-      },[error], [updateUserError])
+      }, [updateUserError])
     
       if (data) {
         handleDeleteAcct()
@@ -66,7 +65,7 @@ export default function SettingsScreen ({navigation}){
         console.log(newName)
       }
       const onSubmitDelete = () => {
-        deleteUser({variables: { email: deleteEmail }})
+        deleteUser({variables: { deleteEmail }})
           .then(response => {
             console.log(`Response: ${response}`)
           })
@@ -109,18 +108,25 @@ export default function SettingsScreen ({navigation}){
                                 <View>
                                     <InputBox
                                         placeholder = "First Name"
+                                        value={name}
+                                        onChangeText={setName}
+                                        
                                     />
                                     
                                     <InputBox
                                         placeholder = "Email Address"
                                         keyboardType={"email-address"}
+                                        value={email}
+                                        onChangeText = {setEmail}
                                     />
                                 
                                     <InputBox
                                         placeholder = "Password"
                                         secureTextEntry={true}
+                                        value={password}
+                                        onChangeText = {setPassword}
                                     />
-                                    <AppButton>Save Changes</AppButton>
+                                    <AppButton onPress={() => onSubmitUpdate()}>Save Changes</AppButton>
                                 </View>
                             ) : null } 
                             <TouchableOpacity onPress={() => setIsShowing(!isShowing)}> 

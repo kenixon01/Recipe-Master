@@ -1,5 +1,4 @@
-import React, { useEffect,useState } from 'react'
-import { View, Button, Text, ImageBackground, Alert} from 'react-native'
+import { View, Button, Text, ImageBackground, ActivityIndicator, Alert} from 'react-native'
 import style from './style'
 import * as Font from 'expo-font';
 import {InputBox, AppButton, Title} from '../../lib/index'
