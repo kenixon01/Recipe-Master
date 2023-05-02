@@ -31,6 +31,7 @@ const typeDefs = gql`
     signIn(input: SignInInput!): AuthUser!
     updateUser(input: UpdateInput!):User!
     deleteUser(input: DeleteInput!): Boolean!
+    updatePassword(input: PasswordInput!): AuthUser!
   }
 
   input SignUpInput {
@@ -49,6 +50,10 @@ const typeDefs = gql`
     password: String!
   }
 
+  input PasswordInput{
+    email: String!
+    password: String!
+  }
 
   input DeleteInput{
     email: String!
@@ -137,6 +142,27 @@ const resolvers = {
     user
    }
 
+    },
+
+    updatePassword: async (_, {input}, {db} ) => {
+      const user =  await db.collection('Users').findOne({ email: input.email });
+      if (!user) {
+        throw new Error ('Authentication Error.');
+      }
+      if (user){
+        const encypt = bcrypt.hashSync(input.password);
+        await db.collection('Users').updateOne({email: input.email},
+        {
+          $set:{
+            email: input.email,
+            name: user.name,
+            password: encypt,
+        }})
+      }
+      return {
+        user,
+        token: getToken(user),
+      }
     },
 
     deleteUser: async(_, { input }, { db }) => {

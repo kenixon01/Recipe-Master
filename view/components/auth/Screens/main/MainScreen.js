@@ -76,9 +76,6 @@ export default function MainScreen ({navigation}) {
           <Section backgroundColor={'#4F5200'}>
             <Header>Favorite Recipes</Header>
           </Section>
-          <Section backgroundColor={'white'}>
-            <Header>Explore</Header>
-          </Section>
       </View>
       </ScrollView>
     </SafeAreaView>

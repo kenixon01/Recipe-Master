@@ -13,13 +13,6 @@ export const setRecentSearches = (payload, limit) => {
   }
 }  
 
-export const setUser = (payload) => {
-  return {
-    type: 'HANDLE_USER_STATE',
-    payload: payload,
-  }
-}
-
 export const setVerifcationCode = (payload) => {
   return {
     type: 'HANDLE_VERIFICATION_CODE',
@@ -30,6 +23,13 @@ export const setVerifcationCode = (payload) => {
 export const setQuery = (payload) => {
   return {
     type: 'HANDLE_SEARCH',
+    payload: payload,
+  }
+}
+
+export const setUserEmail = (payload) => {
+  return {
+    type: 'HANDLE_EMAIL',
     payload: payload,
   }
 }
