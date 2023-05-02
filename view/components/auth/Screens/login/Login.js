@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from 'react'
 import { View, Button, Text, ImageBackground, ActivityIndicator, Alert} from 'react-native'
 import style from './style'
 import * as Font from 'expo-font';
