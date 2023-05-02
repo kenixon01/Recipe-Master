@@ -3,7 +3,7 @@ import { Text, View, Image, SafeAreaView, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setQuery } from '../../../../actions/index';
 import styles from './style'
-import {Section, Title, SearchBox, Tag} from '../../lib';
+import {Section, Title, SearchBox, Tag, Caption} from '../../lib';
 
 export default function MainScreen ({navigation}) {
   
@@ -25,12 +25,12 @@ export default function MainScreen ({navigation}) {
   }
   const generateRecentSearches = () => {
     if(!recentSearches.length) { 
-      return <Text style = {styles.SmallerTxt}>Start searching for recipes!</Text>
+      return <Caption style = {styles.SmallerTxt}>Start searching for recipes!</Caption>
     }
     return(
       <View>
         <Header>Recent Searches</Header>
-        <Text style = {styles.SmallerTxt}>Try one of these!</Text>
+        <Caption style = {styles.SmallerTxt}>Try one of these!</Caption>
           <View style = {styles.allRecentSearches}>
             {
               recentSearches.slice(0, 10).map((element, index) => {

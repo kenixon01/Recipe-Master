@@ -165,4 +165,5 @@ export default function SettingsScreen ({navigation}){
             </ScrollView>
         </SafeAreaView>
     );
+                            }
 }
