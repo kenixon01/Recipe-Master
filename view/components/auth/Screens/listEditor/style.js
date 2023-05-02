@@ -33,6 +33,23 @@ export default styles = StyleSheet.create({
         top: 35,
         right: 0,
     },
-    
+    flatList:{
+        paddingVertical: 10,
+        padding: 30,
+    },
+    item: {
+        paddingVertical: 10,
+      },
+      rightAction: {
+        backgroundColor: '#4F5200',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        paddingHorizontal: 20,
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    actionText: {
+        color: '#fff',
+    },
     
 });
