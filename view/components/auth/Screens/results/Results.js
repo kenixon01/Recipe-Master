@@ -76,7 +76,7 @@ export default function Results({navigation}){
                                 <Text style={style.recipeInfo}>Serves {recipes[index].recipe.yield}</Text>
                                 <Text style={style.recipeInfo}>{recipes[index].recipe.calories} calories</Text>
                                 <Text style={style.label}>{recipes[index].recipe.url}</Text>
-                        
+
                                 {recipes[index].recipe.ingredientLines.map((ingredient, index) => {
                                     return <Text key={index} style={style.ingredient}>{ingredient}</Text>
                                 })}

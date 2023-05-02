@@ -5,7 +5,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 dotenv.config();
 
-const { DB_URI, DB_NAME, JWT_SECRET } = process.env;
+//const { DB_URI, DB_NAME, JWT_SECRET } = process.env;
+
+const DB_URI = "mongodb+srv://admin:admins@cluster0.pxlcoah.mongodb.net/?retryWrites=true&w=majority"
+const DB_NAME = "recipe"
+const JWT_SECRET = "ThisIsTheSecretKey"
+
 
 const getToken = (user) => jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '5 minutes' });
 
