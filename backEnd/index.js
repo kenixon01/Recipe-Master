@@ -32,7 +32,7 @@ const typeDefs = gql`
   type Mutation {
     signUp(input: SignUpInput!): AuthUser!
     signIn(input: SignInInput!): AuthUser!
-    updateUser(input: UpdateInput!):User!
+    updateUser(input: UpdateInput!):AuthUser!
     deleteUser(input: DeleteInput!): Boolean!
     updatePassword(input: PasswordInput!): AuthUser!
   }
@@ -125,7 +125,7 @@ const resolvers = {
       {
         $set:{
           email: input.email,
-          name: user.name,
+          name: input.name,
           password: encypt,
       }})
     }
@@ -164,7 +164,8 @@ const resolvers = {
       }})
     }
    return {
-    user
+    user,
+    token: getToken(user),
    }
 
     },

@@ -51,7 +51,7 @@ export function Login ({navigation}) {
   }
   
   const onSubmit = () => {
-    signIn({variables: { email: 'milah2035@gmail.com', password: "12345678" }})
+    signIn({variables: { email: email, password: password }})
       .then(response => {
         console.log(`Response: ${response}`)
       })

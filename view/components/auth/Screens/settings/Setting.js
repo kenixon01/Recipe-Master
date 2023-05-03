@@ -14,6 +14,7 @@ const UPDATE_MUTATION = gql`
                 name
                 email
             }
+            token
         }
     }
 `;
@@ -59,10 +60,6 @@ export default function SettingsScreen ({navigation}){
         handleDeleteAcct()
         //navigation.navigate('');
           }
-      if (updateUserData){
-        const newName = data.name
-        console.log(newName)
-      }
       const onSubmitDelete = () => {
         deleteUser({variables: { deleteEmail }})
           .then(response => {
