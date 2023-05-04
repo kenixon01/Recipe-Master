@@ -8,7 +8,7 @@ EMAILJS_TEMPLATE_ID=template_3rjrfo8 <br>
 EMAILJS_PUBLIC_KEY=RasD-SwAXlaTNJfxy<br> 
 VALIDATE_ATTEMPT_MAX=3 <br> 
 
-//////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////// <br> 
 In order to start the app Install Expo Go on a mobile device
 
 Have two different terminals open to launch the back end server and the actually expo app. to start either one type "npm start"
@@ -21,8 +21,8 @@ npm start
 
 if you have an iphone scan QR code with camera to open in Expo Go
 
-once launched in expo check expo ip and change the ip in the URL in Apollo.js to match expo IP in order to connect with backend
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+once launched in expo check expo ip and change the ip in the URL in Apollo.js to match expo IP in order to connect with backend <br> 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////<br> 
 
 if the app does not work then you may need to change your URL in the apollo.js file 
 
