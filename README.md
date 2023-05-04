@@ -1,16 +1,14 @@
-//////////////////////////////////////////////////////////////////////////////////
-create a .env file inside the view folder with this inside the env
-API_ID=641facf1
-API_KEY=3bd1c423730ce9650260fd3d5cdabe98
-ENDPOINT=https://api.edamam.com/search?
-MAX_SEARCH_RESULTS=15
-EMAILJS_SERVICE_ID=service_rxm5mz3
-EMAILJS_TEMPLATE_ID=template_3rjrfo8
-EMAILJS_PUBLIC_KEY=RasD-SwAXlaTNJfxy
-VALIDATE_ATTEMPT_MAX=3
+create a .env file inside the view folder with this inside the env <br> 
+API_ID=641facf1 <br> 
+API_KEY=3bd1c423730ce9650260fd3d5cdabe98 <br> 
+ENDPOINT=https://api.edamam.com/search? <br> 
+MAX_SEARCH_RESULTS=15 <br> 
+EMAILJS_SERVICE_ID=service_rxm5mz3 <br> 
+EMAILJS_TEMPLATE_ID=template_3rjrfo8 <br> 
+EMAILJS_PUBLIC_KEY=RasD-SwAXlaTNJfxy<br> 
+VALIDATE_ATTEMPT_MAX=3 <br> 
 
 //////////////////////////////////////////////////////////////////////////////////
-
 In order to start the app Install Expo Go on a mobile device
 
 Have two different terminals open to launch the back end server and the actually expo app. to start either one type "npm start"
